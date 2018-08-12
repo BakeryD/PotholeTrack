@@ -21,10 +21,25 @@ namespace WebApplication.Web.Models
         [MaxLength(50)]
         public string Username { get; set; }
 
-        /// <summary>
-        /// The user's password.
-        /// </summary>
-        [Required]
+	    /// <summary>
+	    /// The user's first name.
+	    /// </summary>
+	    [Required]
+	    [MaxLength(50)]
+	    public string FirstName { get; set; }
+
+	    /// <summary>
+	    /// The user's last name.
+	    /// </summary>
+	    [Required]
+	    [MaxLength(50)]
+	    public string LastName { get; set; }
+
+
+		/// <summary>
+		/// The user's password.
+		/// </summary>
+		[Required]
         public string Password { get; set; }
 
         /// <summary>
@@ -33,9 +48,16 @@ namespace WebApplication.Web.Models
         [Required]
         public string Salt { get; set; }
 
-        /// <summary>
-        /// The user's role.
-        /// </summary>
-        public string Role { get; set; }
-    }
+		/// <summary>
+		/// The user's role.
+		/// </summary>
+		[Required]
+		public string Role { get; set; }
+
+	    /// <summary>
+	    /// The user's phone number.
+	    /// </summary>
+	    [Required]
+	    public int PhoneNumber { get; set; }
+	}
 }

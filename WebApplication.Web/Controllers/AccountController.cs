@@ -66,7 +66,7 @@ namespace WebApplication.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Register them as a new user (and set default role)
-                authProvider.Register(registerViewModel.Email, registerViewModel.Password, "Role");
+                authProvider.Register(registerViewModel.Email, registerViewModel.Password, "user");
 
                 // Redirect the user where you want them to go after registering
                 return RedirectToAction("Index", "Home");

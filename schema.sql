@@ -22,6 +22,7 @@ CREATE TABLE users
 (
 	id				int			identity(1,1),
 	username		varchar(50)	not null,
+	email			varchar(50) not null,
 	password		varchar(50)	not null,
 	first_name		varchar(100) NOT NULL,
 	last_name		varchar(100) NOT NULL,

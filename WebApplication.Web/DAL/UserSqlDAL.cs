@@ -27,11 +27,14 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @password, @salt, @role);", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @password, @salt, @role, @phonenumber);", conn);
                     cmd.Parameters.AddWithValue("@username", user.Username);
+                    cmd.Parameters.AddWithValue("@firstname", user.FirstName);
+                    cmd.Parameters.AddWithValue("@lastname", user.LastName);
                     cmd.Parameters.AddWithValue("@password", user.Password);
                     cmd.Parameters.AddWithValue("@salt", user.Salt);
                     cmd.Parameters.AddWithValue("@role", user.Role);
+	                cmd.Parameters.AddWithValue("@phonenumber", user.PhoneNumber);
 
                     cmd.ExecuteNonQuery();
 
@@ -112,7 +115,7 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE users SET password = @password, salt = @salt, role = @role WHERE id = @id;", conn);                    
+                    SqlCommand cmd = new SqlCommand("UPDATE users SET password = @password, salt = @salt, role = @role, phonenumber = @phonenumber WHERE id = @id;", conn);                    
                     cmd.Parameters.AddWithValue("@password", user.Password);
                     cmd.Parameters.AddWithValue("@salt", user.Salt);
                     cmd.Parameters.AddWithValue("@role", user.Role);
@@ -135,9 +138,12 @@ namespace WebApplication.Web.DAL
             {
                 Id = Convert.ToInt32(reader["id"]),
                 Username = Convert.ToString(reader["username"]),
+                FirstName = Convert.ToString(reader["firstname"]),
+                LastName = Convert.ToString(reader["lastname"]),
                 Password = Convert.ToString(reader["password"]),
                 Salt = Convert.ToString(reader["salt"]),
-                Role = Convert.ToString(reader["role"])
+                Role = Convert.ToString(reader["role"]),
+				PhoneNumber = Convert.ToInt32(reader["phonenumber"])
             };
         }
     }
