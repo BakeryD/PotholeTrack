@@ -12,6 +12,11 @@ body {
     padding-right: 15px;
 }
 
+ /*Navigation Bar*/
+ .navbar {
+     background: linear-gradient(rgb(59, 66, 76), rgb(186, 186, 186));
+ }
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
