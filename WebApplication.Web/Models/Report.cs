@@ -31,7 +31,7 @@ namespace WebApplication.Web.Models.Account
 	    /// The pothole location.
 	    /// </summary>
 	    [Required]
-	    public float Location { get; set; }
+	    public decimal Location { get; set; }
 
 		/// <summary>
 		/// The date inspected by city employee.
@@ -39,17 +39,17 @@ namespace WebApplication.Web.Models.Account
 		[Required]
 	    public int DateInspected { get; set; }
 
+	    /// <summary>
+	    /// The pothole severity.
+	    /// </summary>
+	    [Required]
+	    public int Severity { get; set; }
+
 		/// <summary>
 		/// The date repaired by city employee.
 		/// </summary>
 		[Required]
 	    public int DateRepaired { get; set; }
-
-		/// <summary>
-		/// The pothole severity.
-		/// </summary>
-		[Required]
-	    public int Severity { get; set; }
 		
 	    /// <summary>
 	    /// The pothole status.
@@ -67,8 +67,7 @@ namespace WebApplication.Web.Models.Account
 	    /// The pothole description (if any).
 	    /// </summary>
 	    [Required]
-	    [MaxLength(244)]
-		public string Description { get; set; }
+	    public string Description { get; set; }
 	}
 }
 

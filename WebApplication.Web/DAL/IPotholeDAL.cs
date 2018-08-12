@@ -13,13 +13,13 @@ namespace WebApplication.Web.DAL
 	    /// </summary>
 	    /// <param name="reportId"></param>
 	    /// <returns>The report for this pothole</returns>
-	    Report GetReport(string reportId);
+	    Report GetReport(int reportId);
 
 	    /// <summary>
 	    /// Creates a new report.
 	    /// </summary>
-	    /// <param name="reportId"></param>
-	    void CreateReport(Report reportId);
+	    /// <param name="report"></param>
+	    void CreateReport(Report report);
 
 		/// <summary>
 		/// Updates a report.
