@@ -33,12 +33,14 @@ namespace WebApplication.Web.DAL
 					conn.Open();
 					SqlCommand cmd =
 						new SqlCommand(
-							"INSERT INTO REPORTS VALUES (@submitter, @datecreated, @location, @dateinspected, @severity, @daterepaired, @status, @reportcount, @description);",
+                            $"INSERT INTO REPORTS(submitter, datecreated, lattitude, longitude, dateinspected, severity, daterepaired, status, reportcount, description)" +
+                            $" VALUES (@submitter, @datecreated, @lattitude, @longitude, @dateinspected, @severity, @daterepaired, @status, @reportcount, @description);",
 							conn);
 					cmd.Parameters.AddWithValue("@submitter", report.Submitter);
 					cmd.Parameters.AddWithValue("@datecreated", report.DateCreated);
-					cmd.Parameters.AddWithValue("@location", report.Location);
-					cmd.Parameters.AddWithValue("@dateinspected", report.DateInspected);
+					cmd.Parameters.AddWithValue("@longitude", report.Longitude);
+					cmd.Parameters.AddWithValue("@lattitude", report.Lattitude);
+                    cmd.Parameters.AddWithValue("@dateinspected", report.DateInspected);
 					cmd.Parameters.AddWithValue("@severity", report.Severity);
 					cmd.Parameters.AddWithValue("@daterepaired", report.DateRepaired);
 					cmd.Parameters.AddWithValue("@status", report.Status);
@@ -57,6 +59,30 @@ namespace WebApplication.Web.DAL
 
 		}
 
+        public IList<Report> GetAllReports()
+        {
+            var reports = new List<Report>();
+            string sql = "Select * From records;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    var cmd = new SqlCommand(sql, conn);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        reports.Add(MapRowToReport(reader));
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
+            return reports;
+        }
 
 		/// <summary>
 		/// Returns the report.
@@ -70,7 +96,7 @@ namespace WebApplication.Web.DAL
 				using (SqlConnection conn = new SqlConnection(connectionString))
 				{
 					conn.Open();
-					SqlCommand cmd = new SqlCommand("SELECT * FROM REPORTS WHERE reportId = @reportid;", conn);
+					SqlCommand cmd = new SqlCommand("SELECT * FROM REPORTS WHERE id = @reportid;", conn);
 					cmd.Parameters.AddWithValue("@reportid", reportId);
 
 					SqlDataReader reader = cmd.ExecuteReader();
@@ -104,10 +130,11 @@ namespace WebApplication.Web.DAL
 
 					SqlCommand cmd =
 						new SqlCommand(
-							"UPDATE REPORTS SET location = @location, dateinspected = @dateinspected, severity = @severity, daterepaired = @daterepaired, status = @status, reportcount = @reportcount, description = @description WHERE id = @id;",
+							"UPDATE REPORTS SET longitude = @longitude, lattitude = @lattitude, dateinspected = @dateinspected, severity = @severity, daterepaired = @daterepaired, status = @status, reportcount = @reportcount, description = @description WHERE id = @id;",
 							conn);
-					cmd.Parameters.AddWithValue("@location", report.Location);
-					cmd.Parameters.AddWithValue("@dateinspected", report.DateInspected);
+					cmd.Parameters.AddWithValue("@longitude", report.Longitude);
+					cmd.Parameters.AddWithValue("@lattitude", report.Lattitude);
+                    cmd.Parameters.AddWithValue("@dateinspected", report.DateInspected);
 					cmd.Parameters.AddWithValue("@severity", report.Severity);
 					cmd.Parameters.AddWithValue("@daterepaired", report.DateRepaired);
 					cmd.Parameters.AddWithValue("@status", report.Status);
@@ -139,8 +166,9 @@ namespace WebApplication.Web.DAL
 				Id = Convert.ToInt32(reader["id"]),
 				Submitter = Convert.ToString(reader["submitter"]),
 				DateCreated = Convert.ToDateTime(reader["datecreated"]),
-				Location = Convert.ToDecimal(reader["location"]),
-				DateInspected = Convert.ToDateTime(reader["dateinspected"]),
+				Lattitude = Convert.ToDecimal(reader["lattitude"]),
+				Longitude = Convert.ToDecimal(reader["longitude"]),
+                DateInspected = Convert.ToDateTime(reader["dateinspected"]),
 				Severity = Convert.ToInt32(reader["severity"]),
 				DateRepaired = Convert.ToDateTime(reader["daterepaired"]),
 				Status = Convert.ToInt32(reader["status"]),

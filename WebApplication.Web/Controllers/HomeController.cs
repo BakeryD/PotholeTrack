@@ -5,14 +5,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Web.Models;
+using WebApplication.Web.DAL;
 
 namespace WebApplication.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private IUserDAL uDal;
+        private IPotholeDAL pDal;
+        private IClaimDAL cDal;
+
+        public HomeController(IUserDAL u, IPotholeDAL p, IClaimDAL c)
+        {
+            this.uDal = u;
+            this.pDal = p;
+            this.cDal = c;
+        }
+
+        /// <summary>
+        /// Displays the home page with a map showing all of the currently unfixed potholes
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
-        {            
-            return View();
+        {
+            var reports = pDal.GetAllReports();
+            return View(reports);
         }
 
         public IActionResult About()

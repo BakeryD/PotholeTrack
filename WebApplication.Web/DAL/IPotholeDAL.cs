@@ -6,7 +6,7 @@ using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.DAL
 {
-    interface IPotholeDAL
+    public interface IPotholeDAL
     {
 	    /// <summary>
 	    /// Retrieves a report from the system by reportId.
@@ -27,7 +27,11 @@ namespace WebApplication.Web.DAL
 		/// <param name="reportId"></param>
 		void UpdateReport(Report reportId);
 
-	   
+        /// <summary>
+        /// Returns a list of all recorded potholes
+        /// </summary>
+        /// <returns></returns>
+        IList<Report> GetAllReports();
 
 	}
 }

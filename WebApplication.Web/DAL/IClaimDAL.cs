@@ -7,7 +7,7 @@ using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.DAL
 {
-    interface IClaimDAL
+   public interface IClaimDAL
     {
 	    /// <summary>
 	    /// Retrieves a claim from the system by claimId.

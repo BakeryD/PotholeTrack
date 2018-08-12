@@ -47,7 +47,9 @@ namespace WebApplication.Web
             // For Authentication
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IAuthProvider, SessionAuthProvider>();
-            services.AddTransient<IUserDAL>(m => new UserSqlDAL(@"Data Source=.\SQLEXPRESS;Initial Catalog=DemoDB;Integrated Security=True"));
+            services.AddTransient<IUserDAL>(m => new UserSqlDAL(Configuration["ConnectionStrings:Development"]));
+            services.AddTransient<IPotholeDAL>(p => new PotholeReportDAL(Configuration["ConnectionStrings:Development"]));
+            services.AddTransient<IClaimDAL>(c => new PotholeClaimsDAL(Configuration["ConnectionStrings:Development"]));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

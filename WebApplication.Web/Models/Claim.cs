@@ -36,7 +36,7 @@ namespace WebApplication.Web.Models
 		/// The status of the claim.
 		/// </summary>
 		[Required]
-		public int Status { get; set; }
+		public bool Status { get; set; }
 
 	    /// <summary>
 	    /// The description of the claim.

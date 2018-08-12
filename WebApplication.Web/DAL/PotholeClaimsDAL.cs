@@ -63,7 +63,7 @@ namespace WebApplication.Web.DAL
 				using (SqlConnection conn = new SqlConnection(connectionString))
 				{
 					conn.Open();
-					SqlCommand cmd = new SqlCommand("SELECT * FROM CLAIMS WHERE claimId = @claimid;", conn);
+					SqlCommand cmd = new SqlCommand("SELECT * FROM CLAIMS WHERE id = @claimid;", conn);
 					cmd.Parameters.AddWithValue("@claimid", claimId);
 
 					SqlDataReader reader = cmd.ExecuteReader();
@@ -128,7 +128,7 @@ namespace WebApplication.Web.DAL
 				Submitter = Convert.ToInt32(reader["submitter"]),
 				PotholeRecord = Convert.ToInt32(reader["potholeid"]),
 				DateSubmitted = Convert.ToDateTime(reader["datesubmitted"]),
-				Status = Convert.ToInt32(reader["status"]),
+				Status = Convert.ToBoolean(reader["status"]),
 				Description = Convert.ToString(reader["description"])
 				
 			};

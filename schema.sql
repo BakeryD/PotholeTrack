@@ -20,47 +20,50 @@ BEGIN TRANSACTION;
 
 CREATE TABLE users
 (
-	id				int			identity(1,1),
-	username		varchar(50)	not null,
-	email			varchar(50) not null,
-	password		varchar(50)	not null,
-	first_name		varchar(100) NOT NULL,
-	last_name		varchar(100) NOT NULL,
-	salt			varchar(50)	not null,
-	phone_number	int NOT NULL,
-	role			varchar(50)	default('user'),
+    id              int         identity(1,1),
+    username        varchar(50) NOT NULL,
+    password        varchar(50) NOT NULL,
+    firstname      varchar(100) NOT NULL,
+    lastname       varchar(100) NOT NULL,
+    salt            varchar(50) NOT NULL,
+    phonenumber    int NOT NULL,
+    role            varchar(50) default('user'),
 
-	constraint pk_users primary key (id)
+    constraint pk_users primary key (id)
 );
 
 
 CREATE TABLE records 
 (
-	id				int NOT NULL Identity(1,1),
-	submitter		int NOT NULL,
-	date_posted		datetime NOT NULL,
-	date_inspected	datetime NOT NULL,
-	severity		int NOT NULL,
-	repair_date		datetime NOT NULL,
-	location		varchar(19) NOT NULL, -- We need to store lat. and long coordinates which are 8 digits each for most locations in Ohio + a comma
-	status			int NOT NULL,
-	report_count	int NOT NULL,
-	description		TEXT NOT NULL,
+    id              int NOT NULL Identity(1,1),
+    submitter       int NOT NULL,
+    datecreated    datetime NOT NULL,
+    dateinspected  datetime,
+    severity        int NOT NULL default(2),
+    repairdate		datetime,
+	lattitude		numeric(8,6) not null,
+	longitude		numeric(8,6) not null,
+	status          int NOT NULL default(1),
+    reportcount    int NOT NULL default(1),
+    description     TEXT NOT NULL,
 
-	Constraint	pk_records	PRIMARY KEY (id),
-	Constraint	fk_records_users	FOREIGN KEY (submitter) REFERENCES users(id)
+    Constraint  pk_records  PRIMARY KEY (id),
+    Constraint  fk_records_users    FOREIGN KEY (submitter) REFERENCES users(id)
 );
 
 CREATE TABLE claims 
 (
-	id				int NOT NULL Identity(1,1),
-	submitter		int NOT NULL,
-	pothole_record	int NOT NULL,
-	date_submitted	int NOT NULL,
+    id              int NOT NULL Identity(1,1),
+    submitter       int NOT NULL,
+    potholerecord  int NOT NULL,
+    datesubmitted  datetime NOT NULL,
+    status          bit NOT NULL default(1), -- True = open claim, false = closed claim 
+    description     TEXT NOT NULL,
+    
 
-	Constraint	pk_claims PRIMARY KEY (id),
-	Constraint	fk_claims_users		FOREIGN KEY (submitter) REFERENCES users(id),
-	Constraint	fk_claims_records	FOREIGN KEY (pothole_record) REFERENCES records(id)
+    Constraint  pk_claims PRIMARY KEY (id),
+    Constraint  fk_claims_users     FOREIGN KEY (submitter) REFERENCES users(id),
+    Constraint  fk_claims_records   FOREIGN KEY (pothole_record) REFERENCES records(id)
 );
 
 

@@ -31,7 +31,7 @@ namespace WebApplication.Web.Models.Account
 	    /// The pothole latitude.
 	    /// </summary>
 	    [Required]
-	    public decimal Latitude { get; set; }
+	    public decimal Lattitude { get; set; }
 
 	    /// <summary>
 	    /// The pothole longitude.
