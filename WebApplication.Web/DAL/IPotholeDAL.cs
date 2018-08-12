@@ -9,7 +9,7 @@ namespace WebApplication.Web.DAL
     interface IPotholeDAL
     {
 	    /// <summary>
-	    /// Retrieves a user from the system by username.
+	    /// Retrieves a report from the system by reportId.
 	    /// </summary>
 	    /// <param name="reportId"></param>
 	    /// <returns>The report for this pothole</returns>

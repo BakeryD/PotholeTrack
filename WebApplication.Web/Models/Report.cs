@@ -25,7 +25,7 @@ namespace WebApplication.Web.Models.Account
 	    /// The report's creation date.
 	    /// </summary>
 	    [Required]
-	    public string DateCreated { get; set; }
+	    public DateTime DateCreated { get; set; }
 
 		/// <summary>
 	    /// The pothole location.
@@ -37,7 +37,7 @@ namespace WebApplication.Web.Models.Account
 		/// The date inspected by city employee.
 		/// </summary>
 		[Required]
-	    public int DateInspected { get; set; }
+	    public DateTime DateInspected { get; set; }
 
 	    /// <summary>
 	    /// The pothole severity.
@@ -49,7 +49,7 @@ namespace WebApplication.Web.Models.Account
 		/// The date repaired by city employee.
 		/// </summary>
 		[Required]
-	    public int DateRepaired { get; set; }
+	    public DateTime DateRepaired { get; set; }
 		
 	    /// <summary>
 	    /// The pothole status.

@@ -33,7 +33,7 @@ namespace WebApplication.Web.DAL
 					conn.Open();
 					SqlCommand cmd =
 						new SqlCommand(
-							"INSERT INTO users VALUES (@submitter, @datecreated, @location, @dateinspected, @severity, @daterepaired, @status, @reportcount, @description);",
+							"INSERT INTO REPORTS VALUES (@submitter, @datecreated, @location, @dateinspected, @severity, @daterepaired, @status, @reportcount, @description);",
 							conn);
 					cmd.Parameters.AddWithValue("@submitter", report.Submitter);
 					cmd.Parameters.AddWithValue("@datecreated", report.DateCreated);
@@ -70,7 +70,7 @@ namespace WebApplication.Web.DAL
 				using (SqlConnection conn = new SqlConnection(connectionString))
 				{
 					conn.Open();
-					SqlCommand cmd = new SqlCommand("SELECT * FROM USERS WHERE reportId = @reportid;", conn);
+					SqlCommand cmd = new SqlCommand("SELECT * FROM REPORTS WHERE reportId = @reportid;", conn);
 					cmd.Parameters.AddWithValue("@reportid", reportId);
 
 					SqlDataReader reader = cmd.ExecuteReader();
@@ -104,7 +104,7 @@ namespace WebApplication.Web.DAL
 
 					SqlCommand cmd =
 						new SqlCommand(
-							"UPDATE users SET password = @password, salt = @salt, role = @role, phonenumber = @phonenumber WHERE id = @id;",
+							"UPDATE REPORTS SET location = @location, dateinspected = @dateinspected, severity = @severity, daterepaired = @daterepaired, status = @status, reportcount = @reportcount, description = @description WHERE id = @id;",
 							conn);
 					cmd.Parameters.AddWithValue("@location", report.Location);
 					cmd.Parameters.AddWithValue("@dateinspected", report.DateInspected);
@@ -124,7 +124,6 @@ namespace WebApplication.Web.DAL
 				throw ex;
 			}
 
-
 		}
 
 
@@ -139,11 +138,11 @@ namespace WebApplication.Web.DAL
 			{
 				Id = Convert.ToInt32(reader["id"]),
 				Submitter = Convert.ToString(reader["submitter"]),
-				DateCreated = Convert.ToString(reader["datecreated"]),
+				DateCreated = Convert.ToDateTime(reader["datecreated"]),
 				Location = Convert.ToDecimal(reader["location"]),
-				DateInspected = Convert.ToInt32(reader["dateinspected"]),
+				DateInspected = Convert.ToDateTime(reader["dateinspected"]),
 				Severity = Convert.ToInt32(reader["severity"]),
-				DateRepaired = Convert.ToInt32(reader["daterepaired"]),
+				DateRepaired = Convert.ToDateTime(reader["daterepaired"]),
 				Status = Convert.ToInt32(reader["status"]),
 				ReportCount = Convert.ToInt32(reader["reportcount"]),
 				Description = Convert.ToString(reader["description"])
