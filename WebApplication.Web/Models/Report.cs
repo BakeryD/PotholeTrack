@@ -28,10 +28,16 @@ namespace WebApplication.Web.Models.Account
 	    public DateTime DateCreated { get; set; }
 
 		/// <summary>
-	    /// The pothole location.
+	    /// The pothole latitude.
 	    /// </summary>
 	    [Required]
-	    public decimal Location { get; set; }
+	    public decimal Latitude { get; set; }
+
+	    /// <summary>
+	    /// The pothole longitude.
+	    /// </summary>
+	    [Required]
+	    public decimal Longitude { get; set; }
 
 		/// <summary>
 		/// The date inspected by city employee.
