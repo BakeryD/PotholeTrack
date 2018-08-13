@@ -25,12 +25,9 @@
                 }
             ]
         });
-
         
-
-
         infowindow = new google.maps.InfoWindow({
-            content: document.getElementById('form')
+            content: document.getElementById('potholereport')
         });
 
         messagewindow = new google.maps.InfoWindow({
@@ -50,6 +47,8 @@
 
             google.maps.event.addListener(marker, 'click', function () {
                 infowindow.open(map, marker);
+                var elem = document.getElementById('potholereport');
+                elem.style.display = 'block';
             });
         });
     }
@@ -57,7 +56,8 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbeqY7Px86Yip_ibuSnWdVnScfdE2NPQA&callback=initMap"
         async defer></script>
-<div id="form">
+
+<div id="potholereport" style="display: none" >
     <p>Report a pothole here?</p>
     <input type='button' value='Save' onclick='saveData()' data-toggle="modal" data-target="#reportsaved"/>
 
@@ -97,9 +97,9 @@
 <div class="seperator">
 
     <div class="button-container">
-        <Button class="index-button">Test</Button>
-        <Button class="index-button">Test</Button>
-        <Button class="index-button">Test</Button>
+        <Button class="index-button">New Report</Button>
+        <Button class="index-button">New Claim</Button>
+        <Button class="index-button">Profile</Button>
 
     </div>
 </div>
