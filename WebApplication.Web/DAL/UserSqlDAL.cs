@@ -122,6 +122,7 @@ namespace WebApplication.Web.DAL
                     cmd.Parameters.AddWithValue("@role", user.Role);
                     cmd.Parameters.AddWithValue("@id", user.Id);
                     cmd.Parameters.AddWithValue("@email", user.Email);
+                    cmd.Parameters.AddWithValue("@phonenumber", user.PhoneNumber);
 
                     cmd.ExecuteNonQuery();
 
@@ -145,7 +146,7 @@ namespace WebApplication.Web.DAL
                 Password = Convert.ToString(reader["password"]),
                 Salt = Convert.ToString(reader["salt"]),
                 Role = Convert.ToString(reader["role"]),
-				PhoneNumber = Convert.ToInt32(reader["phonenumber"]),
+				PhoneNumber = Convert.ToString(reader["phonenumber"]),
                 Email= Convert.ToString(reader["email"])
             };
         }

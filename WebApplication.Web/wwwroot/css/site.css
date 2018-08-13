@@ -206,7 +206,7 @@ body {
     height: 500px;
     margin-left: 10%;
     margin-right: 10%;
-
+}
 
 /****  Register.cshtml  ****/
 
@@ -215,6 +215,10 @@ body {
 }
 
 #register input {
+   
+}
+
+div.form-field {
     display:block;
 }
 

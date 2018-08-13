@@ -26,7 +26,7 @@ CREATE TABLE users
     firstname      varchar(100) NOT NULL,
     lastname       varchar(100) NOT NULL,
     salt            varchar(50) NOT NULL,
-    phonenumber    int NOT NULL,
+    phonenumber    varchar(15) NOT NULL,
     role            varchar(50) default('user'),
 	email			varchar(100) Not Null,
 
@@ -46,7 +46,7 @@ CREATE TABLE records
 	longitude		numeric(8,6) not null,
 	status          int NOT NULL default(1),
     reportcount    int NOT NULL default(1),
-    description     TEXT NOT NULL,
+    description     TEXT,
 
     Constraint  pk_records  PRIMARY KEY (id),
     Constraint  fk_records_users    FOREIGN KEY (submitter) REFERENCES users(id)
