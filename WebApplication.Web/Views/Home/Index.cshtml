@@ -4,35 +4,91 @@
 }
 
 
-<div id="large-map">
-    <div class="container-fluid img-responsive center-image">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1064.6990981034487!2d-81.63955583415215!3d41.50364951441245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc9d82124a23048b8!2sTech+Elevator+Cleveland!5e1!3m2!1sen!2sus!4v1534089697210" width="1200" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+<script>
+    var map;
+    var marker = null;
+    var infowindow;
+    var messagewindow;
+    var image = '/images/constructioncone.jpg';
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 41.499252, lng: -81.694492 },
+            zoom: 14,
+            styles: [
+                {
+                    "featureType": "poi",
+                    "stylers": [
+                        { "visibility": "off" }
+                    ]
+                }
+            ]
+        });
+        
+        infowindow = new google.maps.InfoWindow({
+            content: document.getElementById('potholereport')
+        });
+
+        messagewindow = new google.maps.InfoWindow({
+            content: document.getElementById('message')
+        });
+
+        google.maps.event.addListener(map, 'click', function (event) {
+
+            if (marker === null) {
+                marker = new google.maps.Marker({
+                    position: event.latLng,
+                    map: map
+            });
+            } else {
+                marker.setPosition(event.latLng);
+            };
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+                var elem = document.getElementById('potholereport');
+                elem.style.display = 'block';
+            });
+        });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbeqY7Px86Yip_ibuSnWdVnScfdE2NPQA&callback=initMap"
+        async defer></script>
+
+<div id="potholereport" style="display: none" >
+    <p>Report a pothole here?</p>
+    <input type='button' value='Save' onclick='saveData()' data-toggle="modal" data-target="#reportsaved"/>
+
+</div>
+
+
+<div id="map" class="img-responsive"></div>
+
+<div class="modal fade" id="reportsaved" tabindex="-1" role="dialog" aria-labelledby="Thanks!" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ReportSaved">Report Saved!</h5>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center;">
+                <img style="max-height: 80px" src="images/dancingbanana.gif"/>
+                <img style="max-height: 80px" src="images/constructioncone.jpg"/>
+                    <img style="max-height: 80px" src="images/dancingbanana.gif"/>
+                </div>
+                <p>Thanks for your submission! A city worker will be dispatched to inspect this pothole shortly!</p>
+                <p>Your report won't show up on the map until it has been verified, but we're on the job!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<div id="medium-map">
-    <div class="container-fluid img-responsive center-image">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1064.6990981034487!2d-81.63955583415215!3d41.50364951441245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc9d82124a23048b8!2sTech+Elevator+Cleveland!5e1!3m2!1sen!2sus!4v1534089697210" width="1050" height="525" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-</div>
 
-<div id="normal-map">
-    <div class="container-fluid img-responsive center-image">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1064.6990981034487!2d-81.63955583415215!3d41.50364951441245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc9d82124a23048b8!2sTech+Elevator+Cleveland!5e1!3m2!1sen!2sus!4v1534089697210" width="700" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-</div>
-
-<div id="small-map">
-    <div class="container-fluid img-responsive center-image">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1064.6990981034487!2d-81.63955583415215!3d41.50364951441245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc9d82124a23048b8!2sTech+Elevator+Cleveland!5e1!3m2!1sen!2sus!4v1534089697210" width="550" height="275" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-</div>
-
-<div id="tiny-map">
-    <div class="container-fluid img-responsive center-image">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1064.6990981034487!2d-81.63955583415215!3d41.50364951441245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc9d82124a23048b8!2sTech+Elevator+Cleveland!5e1!3m2!1sen!2sus!4v1534089697210" width="280" height="140" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-</div>
 
 <BR />
 <BR />
@@ -41,9 +97,9 @@
 <div class="seperator">
 
     <div class="button-container">
-        <Button class="index-button">Test</Button>
-        <Button class="index-button">Test</Button>
-        <Button class="index-button">Test</Button>
+        <Button class="index-button">New Report</Button>
+        <Button class="index-button">New Claim</Button>
+        <Button class="index-button">Profile</Button>
 
     </div>
 </div>
@@ -60,28 +116,30 @@
     </div>
 
 }
-    <div id="about">
-        <h1>Do you hate potholes?</h1>
-        <div>
-            <p>
-                So do we!! That is why we have created this pothole tracking application. Living in Cleveland, we have to batle with these things on a daily
-                basis. Protect your car AND your sanity by signing up <strong>FOR FREE</strong> and never hit a pothole again!!
-            </p>
-        </div>
-        <div class="col-lg-6">
-            <p>You don't believe us? Read the testimonials from "real" users!!!</p>
-            <ul id="testimonials">
-                <li>Mary says: "This app is totally okay I guess."</li>
-                <li>Tony says: "It's alright, I've used it a couple times."</li>
-                <li>Josh says: "If you like to be confused than you should attempt to use this."</li>
-                <li>Natalie says: "This is the biggest pile of crap application...I mean, it's great I love it!"</li>
-                <li>Justin says: "This is the best application ever made by man kind."</li>
-                <li>Donny Trump says: "This is the best ever, you know it, I know it, everybody knows it."</li>
-            </ul>
-        </div>
-        <br />
-        <div class="col-lg-6">
-            <img src="https://www.insurancejournal.com/app/uploads/2016/03/pothole-damage-costs-us-580x571.jpg" class="img-circle img-responsive" />
-        </div>
+<div id="about">
+    <h1>Do you hate potholes?</h1>
+    <div>
+        <p>
+            So do we!! That is why we have created this pothole tracking application. Living in Cleveland, we have to batle with these things on a daily
+            basis. Protect your car AND your sanity by signing up <strong>FOR FREE</strong> and never hit a pothole again!!
+        </p>
     </div>
+    <div class="col-lg-6">
+        <p>You don't believe us? Read the testimonials from "real" users!!!</p>
+        <ul id="testimonials">
+            <li>Mary says: "This app is totally okay I guess."</li>
+            <li>Tony says: "It's alright, I've used it a couple times."</li>
+            <li>Josh says: "If you like to be confused than you should attempt to use this."</li>
+            <li>Natalie says: "This is the biggest pile of crap application...I mean, it's great I love it!"</li>
+            <li>Justin says: "This is the best application ever made by man kind."</li>
+            <li>Donny Trump says: "This is the best ever, you know it, I know it, everybody knows it."</li>
+        </ul>
+    </div>
+    <br />
+    <div class="col-lg-6">
+        <img src="https://www.insurancejournal.com/app/uploads/2016/03/pothole-damage-costs-us-580x571.jpg" class="img-circle img-responsive" />
+    </div>
+</div>
 <br />
+
+
