@@ -67,5 +67,13 @@ CREATE TABLE claims
     Constraint  fk_claims_records   FOREIGN KEY (potholerecord) REFERENCES records(id)
 );
 
+Create Table user_records
+(
+	user_id			int		Not Null,
+	record_id		int		Not Null,
+
+	Constraint	fk_user_records_user	Foreign Key	(user_id)	References	users(id),
+	Constraint	fk_user_records_records	Foreign Key	(record_id)	References	records(id)
+);
 
 COMMIT TRANSACTION;

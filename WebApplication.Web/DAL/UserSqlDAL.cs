@@ -39,13 +39,13 @@ namespace WebApplication.Web.DAL
 
                     cmd.ExecuteNonQuery();
 
-                    return;
                 }
             }
             catch(SqlException ex)
             {
                 throw ex;
             }
+            return;
         }
 
         /// <summary>
