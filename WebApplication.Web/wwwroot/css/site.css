@@ -35,6 +35,8 @@ body {
 }
 
 
+/** Map section start **/
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 499px) {
     /* Hide captions */
@@ -182,6 +184,10 @@ body {
     text-align: center;
 }
 
+/** Map Section End **/
+
+/** Button section start **/
+
 .seperator {
     background-color: blue;
     text-align: center;
@@ -193,6 +199,7 @@ body {
     padding-bottom: 15px;
 }
 
+/** Button section end **/
 
 #map {
     height: 500px;
@@ -200,4 +207,30 @@ body {
     margin-right: 10%;
 }
 
+/** About section start **/
 
+#about {
+    color: white;
+}
+
+/** Modal start **/
+
+
+.modal-header, h4, .close {
+    background-color: #5cb85c;
+    color: white !important;
+    text-align: center;
+    font-size: 30px;
+}
+
+.modal-header {
+    padding: 35px 50px;
+}
+
+.modal-body {
+    padding: 40px 50px;
+}
+
+.modal-footer {
+    background-color: #f9f9f9;
+}
