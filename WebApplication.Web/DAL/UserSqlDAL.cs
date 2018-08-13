@@ -27,7 +27,7 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @password, @salt, @role, @phonenumber);", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @password, @firstname, @lastname, @salt, @phonenumber, @role, @email);", conn);
                     cmd.Parameters.AddWithValue("@username", user.Username);
                     cmd.Parameters.AddWithValue("@firstname", user.FirstName);
                     cmd.Parameters.AddWithValue("@lastname", user.LastName);
@@ -35,6 +35,7 @@ namespace WebApplication.Web.DAL
                     cmd.Parameters.AddWithValue("@salt", user.Salt);
                     cmd.Parameters.AddWithValue("@role", user.Role);
 	                cmd.Parameters.AddWithValue("@phonenumber", user.PhoneNumber);
+                    cmd.Parameters.AddWithValue("@email", user.Email);
 
                     cmd.ExecuteNonQuery();
 
@@ -115,11 +116,12 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE users SET password = @password, salt = @salt, role = @role, phonenumber = @phonenumber WHERE id = @id;", conn);                    
+                    SqlCommand cmd = new SqlCommand("UPDATE users SET password = @password, salt = @salt, role = @role, phonenumber = @phonenumber, email = @email WHERE id = @id;", conn);                    
                     cmd.Parameters.AddWithValue("@password", user.Password);
                     cmd.Parameters.AddWithValue("@salt", user.Salt);
                     cmd.Parameters.AddWithValue("@role", user.Role);
                     cmd.Parameters.AddWithValue("@id", user.Id);
+                    cmd.Parameters.AddWithValue("@email", user.Email);
 
                     cmd.ExecuteNonQuery();
 
@@ -143,7 +145,8 @@ namespace WebApplication.Web.DAL
                 Password = Convert.ToString(reader["password"]),
                 Salt = Convert.ToString(reader["salt"]),
                 Role = Convert.ToString(reader["role"]),
-				PhoneNumber = Convert.ToInt32(reader["phonenumber"])
+				PhoneNumber = Convert.ToInt32(reader["phonenumber"]),
+                Email= Convert.ToString(reader["email"])
             };
         }
     }

@@ -63,7 +63,7 @@ CREATE TABLE claims
 
     Constraint  pk_claims PRIMARY KEY (id),
     Constraint  fk_claims_users     FOREIGN KEY (submitter) REFERENCES users(id),
-    Constraint  fk_claims_records   FOREIGN KEY (pothole_record) REFERENCES records(id)
+    Constraint  fk_claims_records   FOREIGN KEY (potholerecord) REFERENCES records(id)
 );
 
 
