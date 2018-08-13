@@ -32,6 +32,11 @@ namespace WebApplication.Web.Controllers
             return View(reports);
         }
 
+        public IActionResult AddRecord()
+        {
+            return View();
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

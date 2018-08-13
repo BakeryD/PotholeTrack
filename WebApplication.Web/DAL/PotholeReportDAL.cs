@@ -130,7 +130,15 @@ namespace WebApplication.Web.DAL
 
 					SqlCommand cmd =
 						new SqlCommand(
-							"UPDATE reports SET longitude = @longitude, lattitude = @lattitude, dateinspected = @dateinspected, severity = @severity, daterepaired = @daterepaired, status = @status, reportcount = @reportcount, description = @description WHERE id = @id;",
+							$"UPDATE reports SET longitude = @longitude," +
+                            $" lattitude = @lattitude," +
+                            $" dateinspected = @dateinspected," +
+                            $" severity = @severity," +
+                            $" daterepaired = @daterepaired," +
+                            $" status = @status," +
+                            $" reportcount = @reportcount," +
+                            $" description = @description" +
+                            $" WHERE id = @id;",
 							conn);
 					cmd.Parameters.AddWithValue("@longitude", report.Longitude);
 					cmd.Parameters.AddWithValue("@lattitude", report.Lattitude);

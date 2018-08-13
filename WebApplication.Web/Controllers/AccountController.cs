@@ -52,13 +52,6 @@ namespace WebApplication.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [AuthorizationFilter("admin")]
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register(RegisterViewModel registerViewModel)
@@ -78,6 +71,12 @@ namespace WebApplication.Web.Controllers
             }
 
             return View(registerViewModel);
+        }
+
+        public IActionResult ViewProfile()
+        {
+            var user = authProvider.GetCurrentUser();
+            return View(user);
         }
     }
 }
