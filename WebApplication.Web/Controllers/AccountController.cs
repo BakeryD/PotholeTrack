@@ -52,11 +52,10 @@ namespace WebApplication.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [AuthorizationFilter("admin")]
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            return View( new RegisterViewModel());
         }
 
         [HttpPost]
@@ -78,6 +77,12 @@ namespace WebApplication.Web.Controllers
             }
 
             return View(registerViewModel);
+        }
+
+        public IActionResult ViewProfile()
+        {
+            var user = authProvider.GetCurrentUser();
+            return View(user);
         }
     }
 }

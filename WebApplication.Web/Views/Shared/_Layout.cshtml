@@ -37,7 +37,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="signup"><button><a asp-area="" asp-controller="Home" asp-action="index"><span class="glyphicon glyphicon-user"></span><strong> Sign Up</strong></a></button></li>
+                    <li><a asp-controller="account" asp-action="Register"><span class="glyphicon glyphicon-user"></span><strong> Sign Up</strong></a></li>
                     <li><button id="login"><span class="glyphicon glyphicon-log-in"></span><strong> Login</strong></button></li>
                 </ul>
             </div>
@@ -81,6 +81,7 @@
     </nav>
 
     <partial name="_CookieConsentPartial" />
+    <partial name="_ValidationScriptsPartial" />
 
     <div class="container-fluid body-content">
         @RenderBody()

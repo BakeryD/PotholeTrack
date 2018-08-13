@@ -201,13 +201,25 @@ body {
 
 /** Button section end **/
 
+
 #map {
     height: 500px;
     margin-left: 10%;
     margin-right: 10%;
+
+
+/****  Register.cshtml  ****/
+
+.field-validation-error {
+    font-weight:bold;
+}
+
+#register input {
+    display:block;
 }
 
 /** About section start **/
+
 
 #about {
     color: white;
