@@ -52,6 +52,12 @@ namespace WebApplication.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View( new RegisterViewModel());
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register(RegisterViewModel registerViewModel)

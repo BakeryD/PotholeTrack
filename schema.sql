@@ -28,6 +28,7 @@ CREATE TABLE users
     salt            varchar(50) NOT NULL,
     phonenumber    int NOT NULL,
     role            varchar(50) default('user'),
+	email			varchar(100) Not Null,
 
     constraint pk_users primary key (id)
 );

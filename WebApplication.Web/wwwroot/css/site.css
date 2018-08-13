@@ -195,5 +195,12 @@ body {
 
 
 
+/****  Register.cshtml  ****/
 
+.field-validation-error {
+    font-weight:bold;
+}
 
+#register input {
+    display:block;
+}
