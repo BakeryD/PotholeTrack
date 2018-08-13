@@ -30,7 +30,7 @@ namespace WebApplication.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Check that they provided correct credentials
-                bool validLogin = authProvider.SignIn(loginViewModel.Email, loginViewModel.Password);
+                bool validLogin = authProvider.SignIn(loginViewModel.Username, loginViewModel.Password);
                 if (validLogin)
                 {
                     // Redirect the user where you want them to go after successful login
@@ -66,7 +66,12 @@ namespace WebApplication.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Register them as a new user (and set default role)
-                authProvider.Register(registerViewModel.Email, registerViewModel.Password, "user");
+                authProvider.Register(registerViewModel.Email,
+                                      registerViewModel.UserName,
+                                      registerViewModel.Password,
+                                      registerViewModel.FirstName,
+                                      registerViewModel.LastName,
+                                      registerViewModel.PhoneNumber, "user");
 
                 // Redirect the user where you want them to go after registering
                 return RedirectToAction("Index", "Home");

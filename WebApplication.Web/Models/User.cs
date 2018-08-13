@@ -14,6 +14,10 @@ namespace WebApplication.Web.Models
         [Required]
         public int Id { get; set; }
 
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
         /// <summary>
         /// The user's username.
         /// </summary>

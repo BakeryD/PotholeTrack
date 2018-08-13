@@ -33,7 +33,7 @@ namespace WebApplication.Web.DAL
 					conn.Open();
 					SqlCommand cmd =
 						new SqlCommand(
-                            $"INSERT INTO REPORTS(submitter, datecreated, lattitude, longitude, dateinspected, severity, daterepaired, status, reportcount, description)" +
+                            $"INSERT INTO reports(submitter, datecreated, lattitude, longitude, dateinspected, severity, daterepaired, status, reportcount, description)" +
                             $" VALUES (@submitter, @datecreated, @lattitude, @longitude, @dateinspected, @severity, @daterepaired, @status, @reportcount, @description);",
 							conn);
 					cmd.Parameters.AddWithValue("@submitter", report.Submitter);
@@ -96,7 +96,7 @@ namespace WebApplication.Web.DAL
 				using (SqlConnection conn = new SqlConnection(connectionString))
 				{
 					conn.Open();
-					SqlCommand cmd = new SqlCommand("SELECT * FROM REPORTS WHERE id = @reportid;", conn);
+					SqlCommand cmd = new SqlCommand("SELECT * FROM reports WHERE id = @reportid;", conn);
 					cmd.Parameters.AddWithValue("@reportid", reportId);
 
 					SqlDataReader reader = cmd.ExecuteReader();
@@ -130,7 +130,7 @@ namespace WebApplication.Web.DAL
 
 					SqlCommand cmd =
 						new SqlCommand(
-							"UPDATE REPORTS SET longitude = @longitude, lattitude = @lattitude, dateinspected = @dateinspected, severity = @severity, daterepaired = @daterepaired, status = @status, reportcount = @reportcount, description = @description WHERE id = @id;",
+							"UPDATE reports SET longitude = @longitude, lattitude = @lattitude, dateinspected = @dateinspected, severity = @severity, daterepaired = @daterepaired, status = @status, reportcount = @reportcount, description = @description WHERE id = @id;",
 							conn);
 					cmd.Parameters.AddWithValue("@longitude", report.Longitude);
 					cmd.Parameters.AddWithValue("@lattitude", report.Lattitude);
