@@ -34,10 +34,166 @@ body {
     margin: 15px;
 }
 
+
 /* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 499px) {
     /* Hide captions */
-    .carousel-caption {
+    #large-map {
         display: none;
     }
+
+    #normal-map {
+        display: none;
+    }
+
+    #medium-map {
+        display: none;
+    }
+
+    #small-map {
+        display: none;
+    }
+
+    .index-button {
+        margin-right: 1%;
+        margin-left: 1%;
+        height: 30px;
+        width: 50px;
+        background-color: orange;
+    }
 }
+
+/* Hide/rearrange for smaller screens */
+@media screen and (min-width: 500px) and (max-width: 767px) {
+    /* Hide captions */
+    #large-map {
+        display: none;
+    }
+
+    #normal-map {
+        display: none;
+    }
+
+    #medium-map {
+        display: none;
+    }
+
+    #tiny-map {
+        display: none;
+    }
+
+    .index-button {
+        margin-right: 3%;
+        margin-left: 3%;
+        height: 40px;
+        width: 120px;
+        background-color: orange;
+    }
+}
+
+
+/* Hide/rearrange for smaller screens */
+@media screen and (min-width: 768px) and (max-width: 1100px) {
+    /* Hide captions */
+    #large-map {
+        display: none;
+    }
+
+    #medium-map {
+        display: none;
+    }
+
+    #small-map {
+        display: none;
+    }
+
+    #tiny-map {
+        display: none;
+    }
+
+    .index-button {
+        margin-right: 7.5%;
+        margin-left: 7.5%;
+        height: 40px;
+        width: 120px;
+        background-color: orange;
+    }
+
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (min-width: 1101px) and (max-width: 1439px) {
+    /* Hide captions */
+    #small-map {
+        display: none;
+    }
+
+    #normal-map {
+        display: none;
+    }
+
+    #large-map {
+        display: none;
+    }
+
+    #tiny-map {
+        display: none;
+    }
+
+    
+    .index-button {
+        margin-right: 7%;
+        margin-left: 7%;
+        height: 40px;
+        width: 120px;
+        background-color: orange;
+    }
+
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (min-width: 1440px) {
+    /* Hide captions */
+
+    #tiny-map {
+        display: none;
+    }
+    
+    #small-map {
+        display: none;
+    }
+    #normal-map {
+        display: none;
+    }
+    #medium-map {
+        display: none;
+    }
+
+    .index-button {
+        margin-right: 8%;
+        margin-left: 8%;
+        height: 40px;
+        width: 120px;
+        background-color: orange;
+    }
+}
+
+.center-image {
+    text-align: center;
+}
+
+.seperator {
+    background-color: blue;
+    text-align: center;
+}
+
+.button-container {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+
+
+
