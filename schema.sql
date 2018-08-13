@@ -1,6 +1,6 @@
 ﻿
--- Switch to the system (aka master) database
-USE master;
+USE master;-- Switch to the system (aka master) database
+
 GO
 
 -- Delete the potholeDB Database (IF EXISTS)
