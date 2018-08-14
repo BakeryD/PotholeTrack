@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Web.Models;
 using WebApplication.Web.DAL;
+using WebApplication.Web.Providers.Auth;
 
 namespace WebApplication.Web.Controllers
 {
@@ -51,6 +52,7 @@ namespace WebApplication.Web.Controllers
             return View();
         }
 
+		[AuthorizationFilter("employee")]
 		public IActionResult Employee()
 		{
 			var reports = pDal.GetAllReports();
