@@ -30,8 +30,7 @@ namespace WebApplication.Web.Providers.Auth
                 context.Result = new RedirectToRouteResult(new
                 {
                     controller = "home",
-                    action = "index",     
-                   // ViewDataAttribute 
+                    action = "index",                    
                 });
                 return;
             }
