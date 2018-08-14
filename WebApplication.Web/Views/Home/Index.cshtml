@@ -3,7 +3,12 @@
     ViewData["Title"] = "Home Page";
 }
 
-
+@if ((bool)TempData["loggedIn"])
+{
+    <script src="~/js/site.js">
+        setCookie('loggedInUsr', true, 1);
+    </script>
+}
 
 <script type="text/javascript">
     var map;
@@ -83,7 +88,7 @@
         var settings = {
             method: 'post',
             body: JSON.stringify({
-                datecreated: @DateTime.Now,
+                datecreated: Date,
                 dateinspected: null,
                 severity: null,
                 location: marker.position.latLng,

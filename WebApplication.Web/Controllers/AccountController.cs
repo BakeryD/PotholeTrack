@@ -34,6 +34,7 @@ namespace WebApplication.Web.Controllers
                 if (validLogin)
                 {
                     // Redirect the user where you want them to go after successful login
+                    TempData["loggedIn"] = true;
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -79,6 +80,7 @@ namespace WebApplication.Web.Controllers
             return View(registerViewModel);
         }
 
+        [AuthorizationFilter("user","employee","admin")]
         public IActionResult ViewProfile()
         {
             var user = authProvider.GetCurrentUser();
