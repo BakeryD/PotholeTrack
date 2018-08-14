@@ -65,6 +65,8 @@ if (!checkCookie('loggedInUsr')) {
     $('#employee-btn').attr('href', '#');
     $('#employee-btn').remove('#employee-btn');
    // $('#login').css("display", "none");
+} else {
+    $('.navbar-right').remove();
 }
 
 
