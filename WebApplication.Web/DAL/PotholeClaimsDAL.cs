@@ -40,10 +40,10 @@ namespace WebApplication.Web.DAL
 
 					cmd.ExecuteNonQuery();
 
-					return;
 				}
-			}
-			catch (SqlException ex)
+                return;
+            }
+            catch (SqlException ex)
 			{
 				throw ex;
 			}
@@ -104,10 +104,10 @@ namespace WebApplication.Web.DAL
 
 					cmd.ExecuteNonQuery();
 
-					return;
 				}
-			}
-			catch (SqlException ex)
+                return;
+            }
+            catch (SqlException ex)
 			{
 				throw ex;
 			}

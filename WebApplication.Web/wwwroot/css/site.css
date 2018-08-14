@@ -61,17 +61,28 @@ body {
 
 /****  Register.cshtml  ****/
 
+h2.register-title {
+    color:aliceblue;
+}
+
+p.register-desc {
+    color:goldenrod;
+}
+
 .field-validation-error {
     font-weight:bold;
 }
 
-#register input {
-   
+#register label {
+   color:aliceblue;
+   padding-left:1.3rem;
 }
 
 div.form-field {
     display:block;
+    margin-bottom:1.2rem;
 }
+
 
 /** About section start **/
 
