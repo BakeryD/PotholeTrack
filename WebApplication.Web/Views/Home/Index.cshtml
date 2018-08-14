@@ -5,12 +5,16 @@
 
 
 
-<script>
+<script type="text/javascript">
     var map;
     var marker = null;
     var infowindow;
     var messagewindow;
     var image = '/images/constructioncone.jpg';
+    var lat;
+    var long;
+    var potholeData;
+
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -25,6 +29,29 @@
                 }
             ]
         });
+
+        @foreach (var report in Model)
+    {
+        <text>
+            var point = new google.maps.LatLng(
+                parseFloat(@report.Lattitude),
+                parseFloat(@report.Longitude));
+
+        var pothole@(report.Id) = new google.maps.Marker({
+                map: map,
+                position: point
+        });
+
+        google.maps.event.addListener(pothole@(report.Id), 'click', function () {
+            $('#datecreated', $('#potholedata')).val ('@report.DateCreated');
+            $('#status', $('#potholedata')).val('@report.Status');
+            $('#severity', $('#potholedata')).val('@report.Severity');
+            $('#description', $('#potholedata')).val('@report.Description');
+            $("#potholedata").modal();
+        });
+
+        </text>
+    }
 
         infowindow = new google.maps.InfoWindow({
             content: document.getElementById('potholereport')
@@ -51,16 +78,19 @@
                 elem.style.display = 'block';
             });
         });
+
     }
+
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbeqY7Px86Yip_ibuSnWdVnScfdE2NPQA&callback=initMap"
         async defer></script>
 
+
+
 <div id="potholereport" style="display: none">
     <p>Report a pothole here?</p>
     <input type='button' value='Save' onclick='saveData()' data-toggle="modal" data-target="#reportsaved" />
-
 </div>
 
 
@@ -87,6 +117,32 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="potholedata" tabindex="-1" role="dialog" aria-labelledby="Data!" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Pothole Data">Pothole Data!</h5>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center;">
+                    <img style="max-height: 80px" src="images/dancingbanana.gif" />
+                    <img style="max-height: 80px" src="images/constructioncone.jpg" />
+                    <img style="max-height: 80px" src="images/dancingbanana.gif" />
+                </div>
+                <p>Date Created: <input type="text" id="datecreated" readonly style="border:none"></input></p>
+                <p>Status: <input type="text" id="status" readonly style="border:none"></input></p>
+                <p>Severity: <input type="text" id="severity" readonly style="border:none"></input></p>
+                <p>Description: <input type="text" id="description" readonly style="border:none"></input></p>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -122,13 +178,6 @@
 <br />
 
 
-@foreach (var report in Model)
-{
-    <div id="potholes_reported">
-        <p>@report.Lattitude</p>
-        <p>@report.Longitude</p>
-    </div>
 
-}
 
 
