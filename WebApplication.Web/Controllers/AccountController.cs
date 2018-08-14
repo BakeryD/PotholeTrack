@@ -41,7 +41,6 @@ namespace WebApplication.Web.Controllers
             return View(loginViewModel);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult LogOff()

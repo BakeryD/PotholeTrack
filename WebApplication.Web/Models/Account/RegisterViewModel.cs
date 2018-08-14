@@ -26,7 +26,7 @@ namespace WebApplication.Web.Models.Account
         public string LastName { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$",ErrorMessage ="* Enter a valid phone number")]
+        [RegularExpression(@"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$",ErrorMessage ="* Enter a Valid Phone Number")]
         [Required(ErrorMessage ="* Enter a Valid Phone Number")]
         [Display(Name ="Phone Number")]
         public string PhoneNumber { get; set; }
