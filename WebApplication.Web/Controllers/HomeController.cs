@@ -51,6 +51,12 @@ namespace WebApplication.Web.Controllers
             return View();
         }
 
+		public IActionResult Employee()
+		{
+			var reports = pDal.GetAllReports();
+			return View(reports);
+		}
+
         public IActionResult Privacy()
         {
             return View();
