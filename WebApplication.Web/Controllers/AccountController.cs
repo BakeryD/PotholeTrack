@@ -42,26 +42,6 @@ namespace WebApplication.Web.Controllers
         }
 
         [HttpPost]
-        [AuthorizationFilter("employee")]
-        [ValidateAntiForgeryToken]
-        public IActionResult Login(LoginViewModel loginViewModel)
-        {
-            // Ensure the fields were filled out
-            if (ModelState.IsValid)
-            {
-                // Check that they provided correct credentials
-                bool validLogin = authProvider.SignIn(loginViewModel.Username, loginViewModel.Password);
-                if (validLogin)
-                {
-                    // Redirect the user where you want them to go after successful login
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-
-            return View(loginViewModel);
-        }
-
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult LogOff()
         {
