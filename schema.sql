@@ -38,7 +38,7 @@ CREATE TABLE records
 (
     id              int NOT NULL Identity(1,1),
     submitter       int NOT NULL,
-    datecreated    datetime NOT NULL,
+    datecreated    datetime NOT NULL default(Getdate()),
     dateinspected  datetime,
     severity        int NOT NULL default(2),
     repairdate		datetime,
@@ -57,7 +57,7 @@ CREATE TABLE claims
     id              int NOT NULL Identity(1,1),
     submitter       int NOT NULL,
     potholerecord  int NOT NULL,
-    datesubmitted  datetime NOT NULL,
+    datesubmitted  datetime NOT NULL default(Getdate()),
     status          bit NOT NULL default(1), -- True = open claim, false = closed claim 
     description     TEXT NOT NULL,
     
@@ -77,3 +77,5 @@ Create Table user_records
 );
 
 COMMIT TRANSACTION;
+
+select * from users;
