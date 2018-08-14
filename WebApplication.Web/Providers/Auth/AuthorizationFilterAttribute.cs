@@ -29,8 +29,8 @@ namespace WebApplication.Web.Providers.Auth
                 // Force the user to login first
                 context.Result = new RedirectToRouteResult(new
                 {
-                    controller = "account",
-                    action = "login",                    
+                    controller = "home",
+                    action = "index",                    
                 });
                 return;
             }
