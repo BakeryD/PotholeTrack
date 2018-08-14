@@ -1,11 +1,20 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-// Write your JavaScript code.
+// Login Modal
 $(document).ready(function () {
     $("#login").click(function () {
         $("#myModal").modal();
     });
+});
+
+// Pothole datatable on employee page
+$(document).ready(function () {
+    $('#pothole-table').DataTable({
+        "scrollY": "20vh",
+        "scrollCollapse": true,
+    });
+    $('.dataTables_length').addClass('bs-select');
 });
 
 
