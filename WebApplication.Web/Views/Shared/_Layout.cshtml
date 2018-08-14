@@ -84,13 +84,14 @@
 <partial name="_CookieConsentPartial" />
     <partial name="_ValidationScriptsPartial" />
 
-    <div class="container-fluid body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p style="text-align:center; color:white;">&copy; 2018 - WebApplication.Web</p>
-        </footer>
-    </div>
+<div class="container-fluid body-content">
+
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p style="text-align: center; color: white;">&copy; 2018 - WebApplication.Web</p>
+    </footer>
+</div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

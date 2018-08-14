@@ -25,7 +25,7 @@
                 }
             ]
         });
-        
+
         infowindow = new google.maps.InfoWindow({
             content: document.getElementById('potholereport')
         });
@@ -40,7 +40,7 @@
                 marker = new google.maps.Marker({
                     position: event.latLng,
                     map: map
-            });
+                });
             } else {
                 marker.setPosition(event.latLng);
             };
@@ -57,14 +57,14 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbeqY7Px86Yip_ibuSnWdVnScfdE2NPQA&callback=initMap"
         async defer></script>
 
-<div id="potholereport" style="display: none" >
+<div id="potholereport" style="display: none">
     <p>Report a pothole here?</p>
-    <input type='button' value='Save' onclick='saveData()' data-toggle="modal" data-target="#reportsaved"/>
+    <input type='button' value='Save' onclick='saveData()' data-toggle="modal" data-target="#reportsaved" />
 
 </div>
 
 
-<div id="map" class="img-responsive"></div>
+<div id="map" class="img-responsive" style="padding-top:25px"></div>
 
 <div class="modal fade" id="reportsaved" tabindex="-1" role="dialog" aria-labelledby="Thanks!" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -74,9 +74,9 @@
             </div>
             <div class="modal-body">
                 <div style="text-align: center;">
-                <img style="max-height: 80px" src="images/dancingbanana.gif"/>
-                <img style="max-height: 80px" src="images/constructioncone.jpg"/>
-                    <img style="max-height: 80px" src="images/dancingbanana.gif"/>
+                    <img style="max-height: 80px" src="images/dancingbanana.gif" />
+                    <img style="max-height: 80px" src="images/constructioncone.jpg" />
+                    <img style="max-height: 80px" src="images/dancingbanana.gif" />
                 </div>
                 <p>Thanks for your submission! A city worker will be dispatched to inspect this pothole shortly!</p>
                 <p>Your report won't show up on the map until it has been verified, but we're on the job!</p>
@@ -94,37 +94,18 @@
 <BR />
 <BR />
 
-<div class="seperator">
-
-    <div class="button-container">
-        <Button class="index-button">New Report</Button>
-        <Button class="index-button">New Claim</Button>
-        <Button class="index-button">Profile</Button>
-
-    </div>
-</div>
-
-
-
-
-
-@foreach (var report in Model)
-{
-    <div id="potholes_reported">
-        <p>@report.Lattitude</p>
-        <p>@report.Longitude</p>
-    </div>
-
-}
 <div id="about">
     <h1>Do you hate potholes?</h1>
+    <div>
+        <img src="https://www.insurancejournal.com/app/uploads/2016/03/pothole-damage-costs-us-580x571.jpg" class="img-circle img-responsive" style="max-height: 200px; padding-bottom: 20px; padding-top: 20px;" />
+    </div>
     <div>
         <p>
             So do we!! That is why we have created this pothole tracking application. Living in Cleveland, we have to batle with these things on a daily
             basis. Protect your car AND your sanity by signing up <strong>FOR FREE</strong> and never hit a pothole again!!
         </p>
     </div>
-    <div class="col-lg-6">
+    <div>
         <p>You don't believe us? Read the testimonials from "real" users!!!</p>
         <ul id="testimonials">
             <li>Mary says: "This app is totally okay I guess."</li>
@@ -136,10 +117,18 @@
         </ul>
     </div>
     <br />
-    <div class="col-lg-6">
-        <img src="https://www.insurancejournal.com/app/uploads/2016/03/pothole-damage-costs-us-580x571.jpg" class="img-circle img-responsive" />
-    </div>
+
 </div>
 <br />
+
+
+@foreach (var report in Model)
+{
+    <div id="potholes_reported">
+        <p>@report.Lattitude</p>
+        <p>@report.Longitude</p>
+    </div>
+
+}
 
 

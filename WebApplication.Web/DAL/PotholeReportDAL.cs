@@ -178,7 +178,7 @@ namespace WebApplication.Web.DAL
 				Longitude = Convert.ToDecimal(reader["longitude"]),
                 DateInspected = Convert.ToDateTime(reader["dateinspected"]),
 				Severity = Convert.ToInt32(reader["severity"]),
-				DateRepaired = Convert.ToDateTime(reader["daterepaired"]),
+				DateRepaired = Convert.ToDateTime(reader["repairdate"]),
 				Status = Convert.ToInt32(reader["status"]),
 				ReportCount = Convert.ToInt32(reader["reportcount"]),
 				Description = Convert.ToString(reader["description"])
