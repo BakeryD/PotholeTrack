@@ -3,7 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if ((bool)TempData["loggedIn"])
+@if (TempData["loggedIn"]!=null && (bool)TempData["loggedIn"])
 {
     <script src="~/js/site.js">
         setCookie('loggedInUsr', true, 1);
