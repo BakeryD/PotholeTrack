@@ -79,7 +79,29 @@
             });
         });
 
+        var url = `${base}/api/record`;
+        var settings = {
+            method: 'post',
+            body: JSON.stringify({
+                datecreated: @DateTime.Now,
+                dateinspected: null,
+                severity: null,
+                location: marker.position.latLng,
+                status: 1,
+                reportcount: 1,
+                description: null
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        
+      
     }
+
+
+
+
 
 </script>
 
@@ -92,6 +114,7 @@
     <p>Report a pothole here?</p>
     <input type='button' value='Save' onclick='saveData()' data-toggle="modal" data-target="#reportsaved" />
 </div>
+
 
 
 <div id="map" class="img-responsive" style="padding-top:25px"></div>
