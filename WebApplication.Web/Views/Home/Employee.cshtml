@@ -33,7 +33,7 @@
         @foreach(var report in Model)
         {
             <tr>
-                <td>@report.Id</td>
+                <td><button>@report.Id</button></td>
                 <td>@report.Lattitude +", " + @report.Longitude</td>
                 <td>@report.DateCreated</td>
                 <td>@report.Severity</td>
