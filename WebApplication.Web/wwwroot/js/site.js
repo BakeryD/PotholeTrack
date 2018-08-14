@@ -93,8 +93,8 @@ function getCookie(cname) {
 
 function checkCookie(cname) {
     var user = getCookie(cname);
-    if (user != "") {
-        //DO SOME STUFF
+    if (user != null) {
+        return true;
     } else {
         return false;
     }
