@@ -60,11 +60,11 @@
                     <form asp-action="login" asp-controller="account" method="post">
                         <div class="form-group">
                             <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                            <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                            <input class="form-control" type="text" data-val="true" data-val-required="The Username field is required." id="UserName" name="UserName" value="">
                         </div>
                         <div class="form-group">
                             <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                            <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                            <input class="form-control" type="password" data-val="true" data-val-length="The Password must be at least 6 characters long." data-val-length-max="100" data-val-length-min="6" data-val-required="The Password field is required." id="Password" name="Password">
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox" value="" checked>Remember me</label>
