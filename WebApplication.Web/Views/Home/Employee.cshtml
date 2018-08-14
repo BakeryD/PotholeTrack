@@ -1,0 +1,44 @@
+﻿@model IList<WebApplication.Web.Models.Account.Report>
+@{
+    ViewData["Title"] = "Employee";
+}
+
+<h2>Active Reports</h2>
+
+<table id="pothole-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style="color: white;">
+    <thead>
+        <tr>
+            <th class="th-sm">
+                ID#
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm">
+                Location
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm">
+                Date Created
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm">
+                Severity
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm">
+                status
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var report in Model)
+        {
+            <tr>
+                <td><button>@report.Id</button></td>
+                <td>@report.Lattitude +", " + @report.Longitude</td>
+                <td>@report.DateCreated</td>
+                <td>@report.Severity</td>
+                <td>@report.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

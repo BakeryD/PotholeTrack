@@ -84,5 +84,17 @@ namespace WebApplication.Web.Controllers
             var user = authProvider.GetCurrentUser();
             return View(user);
         }
+
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+                                                //OPTIONAL!!!
+        [HttpPost]
+        public IActionResult ForgotPassword(ForgotPasswordModel model)
+        {
+            return View();
+        }
     }
 }
