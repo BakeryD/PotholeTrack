@@ -25,10 +25,11 @@ namespace WebApplication.Web.Models.Account
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Phone]
-        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$")]
+        [Required(ErrorMessage ="WTAF")]
         [Display(Name ="Phone Number")]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

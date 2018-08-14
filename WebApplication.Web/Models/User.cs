@@ -62,6 +62,6 @@ namespace WebApplication.Web.Models
 	    /// The user's phone number.
 	    /// </summary>
 	    [Required]
-	    public int PhoneNumber { get; set; }
+	    public string PhoneNumber { get; set; }
 	}
 }

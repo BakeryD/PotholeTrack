@@ -66,6 +66,10 @@ body {
 }
 
 #register input {
+   
+}
+
+div.form-field {
     display:block;
 }
 

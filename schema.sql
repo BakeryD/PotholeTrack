@@ -26,7 +26,7 @@ CREATE TABLE users
     firstname      varchar(100) NOT NULL,
     lastname       varchar(100) NOT NULL,
     salt            varchar(50) NOT NULL,
-    phonenumber    int NOT NULL,
+    phonenumber    varchar(15) NOT NULL,
     role            varchar(50) default('user'),
 	email			varchar(100) Not Null,
 
@@ -38,7 +38,7 @@ CREATE TABLE records
 (
     id              int NOT NULL Identity(1,1),
     submitter       int NOT NULL,
-    datecreated    datetime NOT NULL,
+    datecreated    datetime NOT NULL default(Getdate()),
     dateinspected  datetime,
     severity        int NOT NULL default(2),
     repairdate		datetime,
@@ -46,7 +46,7 @@ CREATE TABLE records
 	longitude		numeric(8,6) not null,
 	status          int NOT NULL default(1),
     reportcount    int NOT NULL default(1),
-    description     TEXT NOT NULL,
+    description     TEXT,
 
     Constraint  pk_records  PRIMARY KEY (id),
     Constraint  fk_records_users    FOREIGN KEY (submitter) REFERENCES users(id)
@@ -57,7 +57,7 @@ CREATE TABLE claims
     id              int NOT NULL Identity(1,1),
     submitter       int NOT NULL,
     potholerecord  int NOT NULL,
-    datesubmitted  datetime NOT NULL,
+    datesubmitted  datetime NOT NULL default(Getdate()),
     status          bit NOT NULL default(1), -- True = open claim, false = closed claim 
     description     TEXT NOT NULL,
     
@@ -67,5 +67,15 @@ CREATE TABLE claims
     Constraint  fk_claims_records   FOREIGN KEY (potholerecord) REFERENCES records(id)
 );
 
+Create Table user_records
+(
+	user_id			int		Not Null,
+	record_id		int		Not Null,
+
+	Constraint	fk_user_records_user	Foreign Key	(user_id)	References	users(id),
+	Constraint	fk_user_records_records	Foreign Key	(record_id)	References	records(id)
+);
 
 COMMIT TRANSACTION;
+
+select * from users;
