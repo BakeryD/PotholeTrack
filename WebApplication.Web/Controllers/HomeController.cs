@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Web.Models;
 using WebApplication.Web.DAL;
+using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.Controllers
 {
@@ -56,6 +57,14 @@ namespace WebApplication.Web.Controllers
 			var reports = pDal.GetAllReports();
 			return View(reports);
 		}
+
+        [HttpPost]
+        public IActionResult AddRecord(Report report)
+        {
+            //var maxId = pDal.CreateReport(report);
+
+            return null;
+        }
 
         public IActionResult Privacy()
         {

@@ -62,7 +62,9 @@ function doNothing() {
 // COOKIE MANIPULATION
 
 if (!checkCookie('loggedInUsr')) {
-    $('#login').css("display", "none");
+    $('#employee-btn').attr('href', '#');
+    $('#employee-btn').remove('#employee-btn');
+   // $('#login').css("display", "none");
 }
 
 
