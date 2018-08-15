@@ -22,10 +22,7 @@
     var long;
     var potholeData;
 
-
-
-
-
+    
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 41.499252, lng: -81.694492 },
@@ -47,18 +44,20 @@
                 parseFloat(@report.Lattitude),
                 parseFloat(@report.Longitude));
 
-        var pothole@(report.Id) = new google.maps.Marker({
-                map: map,
-                position: point
-        });
+            if (@report.Status === 2) {
 
-        google.maps.event.addListener(pothole@(report.Id), 'click', function () {
-            $('#datecreated', $('#potholedata')).val('@report.DateCreated');
-            $('#status', $('#potholedata')).val('@report.Status');
-            $('#severity', $('#potholedata')).val('@report.Severity');
-            $('#description', $('#potholedata')).val('@report.Description');
-            $("#potholedata").modal();
-        });
+                var pothole@(report.Id) = new google.maps.Marker({
+                    map: map,
+                    position: point
+                });
+
+                google.maps.event.addListener(pothole@(report.Id), 'click', function () {
+                    $('#datecreated', $('#potholedata')).val('@report.DateCreated.ToShortDateString()');
+                    $('#severity', $('#potholedata')).val('@report.Severity');
+                    $('#reportcount', $('#potholedata')).val('@report.ReportCount');
+                    $("#potholedata").modal();
+                });
+            }
 
         </text>
     }
@@ -70,35 +69,31 @@
         messagewindow = new google.maps.InfoWindow({
             content: document.getElementById('message')
         });
+        
+        google.maps.event.addListener(map,
+            'click',
+            function(event) {
 
+                if (@((bool)ViewData["loggedIn"])) {
 
+                    if (marker === null) {
+                        marker = new google.maps.Marker({
+                            position: event.latLng,
+                            map: map
+                        });
+                    } else {
+                        marker.setPosition(event.latLng);
+                    };
 
-            google.maps.event.addListener(map,
-                'click',
-                function(event) {
-
-                    if (checkCookie('loggedInUsr')) {
-
-                        if (marker === null) {
-                            marker = new google.maps.Marker({
-                                position: event.latLng,
-                                map: map
-                            });
-                        } else {
-                            marker.setPosition(event.latLng);
-                        };
-
-                        google.maps.event.addListener(marker,
-                            'click',
-                            function() {
-                                infowindow.open(map, marker);
-                                var elem = document.getElementById('potholereport');
-                                elem.style.display = 'block';
-                            });
-                    }
-
-                });
-
+                    google.maps.event.addListener(marker,
+                        'click',
+                        function() {
+                            infowindow.open(map, marker);
+                            var elem = document.getElementById('potholereport');
+                            elem.style.display = 'block';
+                        });
+                }
+            });
     }
 
 
@@ -125,13 +120,13 @@
                 <h5 class="modal-title" id="ReportSaved">Report Saved!</h5>
             </div>
             <div class="modal-body">
-                <div style="text-align: center;">
+                <div style="text-align: center; padding-bottom: 10px">
                     <img style="max-height: 80px" src="images/dancingbanana.gif" />
                     <img style="max-height: 80px" src="images/constructioncone.jpg" />
                     <img style="max-height: 80px" src="images/dancingbanana.gif" />
                 </div>
                 <p>Thanks for your submission! A city worker will be dispatched to inspect this pothole shortly!</p>
-                <p>Your report won't show up on the map until it has been verified, but we're on the job!</p>
+                <p>Even though your report won't show up on the map until it has been verified, don't worry!  We're on the job!</p>
             </div>
             <div class="modal-footer">
                 <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -147,19 +142,26 @@
                 <h5 class="modal-title" id="Pothole Data">Pothole Data!</h5>
             </div>
             <div class="modal-body">
-                <div style="text-align: center;">
+                <div style="text-align: center; padding-bottom: 40px">
                     <img style="max-height: 80px" src="images/dancingbanana.gif" />
                     <img style="max-height: 80px" src="images/constructioncone.jpg" />
                     <img style="max-height: 80px" src="images/dancingbanana.gif" />
                 </div>
-                <p>Date Created: <input type="text" id="datecreated" readonly style="border:none"></input></p>
-                <p>Status: <input type="text" id="status" readonly style="border:none"></input></p>
-                <p>Severity: <input type="text" id="severity" readonly style="border:none"></input></p>
-                <p>Description: <input type="text" id="description" readonly style="border:none"></input></p>
+                <p><span style="font-weight: bold">Date Report Created:</span> <input type="text" id="datecreated" readonly style="border:none"></input></p>
+                <p><span style="font-weight: bold">Status:</span> Inspected and Awaiting Repair</p>
+                <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="severity" readonly style="border:none"></input></p>
+                <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="reportcount" readonly style="border:none"></input></p>
 
             </div>
             <div class="modal-footer">
+                @if ((bool)ViewData["loggedIn"])
+                {
+                    <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Add your Report</button>
+                }
+               
+
                 <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Close</button>
+
             </div>
         </div>
     </div>
