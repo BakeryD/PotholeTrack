@@ -9,13 +9,13 @@ $(document).ready(function () {
 });
 
 // Pothole datatable on employee page
-$(document).ready(function () {
-    $('#pothole-table').DataTable({
-        "scrollY": "20vh",
-        "scrollCollapse": true,
-    });
-    $('.dataTables_length').addClass('bs-select');
-});
+//$(document).ready(function () {
+//    $('#pothole-table').DataTable({
+//        "scrollY": "20vh",
+//        "scrollCollapse": true,
+//    });
+//    $('.dataTables_length').addClass('bs-select');
+//});
 
 
 function saveData() {
