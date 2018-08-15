@@ -7,7 +7,7 @@
 {
     <script src="~/js/site.js"></script>
     <script>
-        setCookie('loggedInUsr', 'true', (1/72));
+        setCookie('loggedInUsr', 'true', (1 / 72));
     </script>
 }
 
@@ -21,7 +21,7 @@
     var long;
     var potholeData;
 
-    
+
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 41.499252, lng: -81.694492 },
@@ -68,12 +68,12 @@
         messagewindow = new google.maps.InfoWindow({
             content: document.getElementById('message')
         });
-        
+
         google.maps.event.addListener(map,
             'click',
             function(event) {
 
-                if (@((bool)ViewData["loggedIn"])) {
+                if (checkCookie('loggedInUsr')) {
 
                     if (marker === null) {
                         marker = new google.maps.Marker({
@@ -157,7 +157,6 @@
                 {
                     <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Add your Report</button>
                 }
-               
 
                 <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Close</button>
 
@@ -173,7 +172,7 @@
 <BR />
 <BR />
 
-<div id="about">
+<div id="about" style="padding-bottom: 50px; border-bottom: white;">
     <h1>Do you hate potholes?</h1>
     <div>
         <img src="https://www.insurancejournal.com/app/uploads/2016/03/pothole-damage-costs-us-580x571.jpg" class="img-circle img-responsive" style="max-height: 200px; padding-bottom: 20px; padding-top: 20px;" />
@@ -199,7 +198,18 @@
     <br />
 
 </div>
-<br />
+<hr>
+<BR />
+<h1 style="text-align: center; color: aliceblue;">Your tax dollars at work!</h1>
+<BR />
+<BR />
+<div class="main-bottom">
+
+    <div class="main-report"><p class="report-number">300</p> <p>Potholes filled this month!</p></div>
+    <div class="main-report"><p class="report-number">600</p> <p>Potholes filled this year!</p></div>
+    <div class="main-report"><p class="report-number">900</p> <p>Potholes filled total!</p></div>
+    
+</div>
 
 
 
