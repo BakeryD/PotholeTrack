@@ -36,9 +36,9 @@ namespace WebApplication.Web.Controllers
             var reports = pDal.GetAllReports();
             var isLoggedIn = authProvider.GetCurrentUser();
             var isEmployee = authProvider.UserHasRole(new string[1] { "employee" });
-
-	        ViewData["loggedIn"] = isLoggedIn != null;
-            
+			
+	        ViewData["loggedIn"] = (isLoggedIn != null);
+			
             return View(reports);
         }
 

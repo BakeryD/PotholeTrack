@@ -15,6 +15,14 @@
     </script>
 }
 
+@if (TempData["loggedIn"] != null && !(bool)TempData["loggedIn"])
+{
+    <script src="~/js/site.js"></script>
+    <script>
+        setCookie('loggedInUsr', 'true', -1);
+    </script>
+}
+
 <script type="text/javascript">
     var map;
     var marker = null;
