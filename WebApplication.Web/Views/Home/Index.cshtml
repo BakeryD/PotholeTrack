@@ -3,7 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if (TempData["loggedIn"]!=null && (bool)TempData["loggedIn"])
+@if (TempData["loggedIn"] != null && (bool)TempData["loggedIn"])
 {
     <script src="~/js/site.js"></script>
     <script>
@@ -20,6 +20,9 @@
     var lat;
     var long;
     var potholeData;
+
+
+
 
 
     function initMap() {
@@ -49,7 +52,7 @@
         });
 
         google.maps.event.addListener(pothole@(report.Id), 'click', function () {
-            $('#datecreated', $('#potholedata')).val ('@report.DateCreated');
+            $('#datecreated', $('#potholedata')).val('@report.DateCreated');
             $('#status', $('#potholedata')).val('@report.Status');
             $('#severity', $('#potholedata')).val('@report.Severity');
             $('#description', $('#potholedata')).val('@report.Description');
@@ -67,46 +70,35 @@
             content: document.getElementById('message')
         });
 
-        google.maps.event.addListener(map, 'click', function (event) {
 
-            if (marker === null) {
-                marker = new google.maps.Marker({
-                    position: event.latLng,
-                    map: map
+
+            google.maps.event.addListener(map,
+                'click',
+                function(event) {
+
+                    if (checkCookie('loggedInUsr')) {
+
+                        if (marker === null) {
+                            marker = new google.maps.Marker({
+                                position: event.latLng,
+                                map: map
+                            });
+                        } else {
+                            marker.setPosition(event.latLng);
+                        };
+
+                        google.maps.event.addListener(marker,
+                            'click',
+                            function() {
+                                infowindow.open(map, marker);
+                                var elem = document.getElementById('potholereport');
+                                elem.style.display = 'block';
+                            });
+                    }
+
                 });
-            } else {
-                marker.setPosition(event.latLng);
-            };
 
-            google.maps.event.addListener(marker, 'click', function () {
-                infowindow.open(map, marker);
-                var elem = document.getElementById('potholereport');
-                elem.style.display = 'block';
-            });
-        });
-
-        var url = `${base}/api/record`;
-        var settings = {
-            method: 'post',
-            body: JSON.stringify({
-                datecreated: Date,
-                dateinspected: null,
-                severity: null,
-                location: marker.position.latLng,
-                status: 1,
-                reportcount: 1,
-                description: null
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-        
-      
     }
-
-
-
 
 
 </script>
@@ -163,7 +155,7 @@
                 <p>Status: <input type="text" id="status" readonly style="border:none"></input></p>
                 <p>Severity: <input type="text" id="severity" readonly style="border:none"></input></p>
                 <p>Description: <input type="text" id="description" readonly style="border:none"></input></p>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -185,11 +177,12 @@
         <img src="https://www.insurancejournal.com/app/uploads/2016/03/pothole-damage-costs-us-580x571.jpg" class="img-circle img-responsive" style="max-height: 200px; padding-bottom: 20px; padding-top: 20px;" />
     </div>
     <div>
-        <p>
+        <p id="p-about">
             So do we!! That is why we have created this pothole tracking application. Living in Cleveland, we have to batle with these things on a daily
             basis. Protect your car AND your sanity by signing up <strong>FOR FREE</strong> and never hit a pothole again!!
         </p>
     </div>
+    <br />
     <div>
         <p>You don't believe us? Read the testimonials from "real" users!!!</p>
         <ul id="testimonials">

@@ -3,9 +3,11 @@
     ViewData["Title"] = "ViewProfile";
 }
 
-<h2>Your Profile</h2>
+<h2 id="profile-title">Your Profile</h2>
 
-<table>
+<p class="profile-welcome">Welcome back <strong id="user-name">@Model.FirstName @Model.LastName</strong></p>
+
+<table style="color: aliceblue;">
     <tr>
         <td>Username: @Model.Username</td>
     </tr>
@@ -16,6 +18,10 @@
         <td>Last Name: @Model.LastName</td>
     </tr>
     <tr>
+        <td>Email: @Model.Email</td>
+    </tr>
+    <tr>
         <td>Phone Number: @Model.PhoneNumber</td>
     </tr>
 </table>
+

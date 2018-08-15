@@ -33,20 +33,16 @@ namespace WebApplication.Web.DAL
 					conn.Open();
 					SqlCommand cmd =
 						new SqlCommand(
-                            $"INSERT INTO reports(submitter, datecreated, lattitude, longitude, dateinspected, severity, daterepaired, status, reportcount, description)" +
-                            $" VALUES (@submitter, @datecreated, @lattitude, @longitude, @dateinspected, @severity, @daterepaired, @status, @reportcount, @description);",
+                            $"INSERT INTO records(submitter, datecreated, lattitude, longitude, status, reportcount)" +
+                            $" VALUES (@submitter, @datecreated, @lattitude, @longitude, @status, @reportcount);",
 							conn);
 					cmd.Parameters.AddWithValue("@submitter", report.Submitter);
 					cmd.Parameters.AddWithValue("@datecreated", report.DateCreated);
 					cmd.Parameters.AddWithValue("@longitude", report.Longitude);
 					cmd.Parameters.AddWithValue("@lattitude", report.Lattitude);
-                    cmd.Parameters.AddWithValue("@dateinspected", report.DateInspected);
-					cmd.Parameters.AddWithValue("@severity", report.Severity);
-					cmd.Parameters.AddWithValue("@daterepaired", report.DateRepaired);
-					cmd.Parameters.AddWithValue("@status", report.Status);
+                    cmd.Parameters.AddWithValue("@status", report.Status);
 					cmd.Parameters.AddWithValue("@reportcount", report.ReportCount);
-					cmd.Parameters.AddWithValue("@description", report.Description);
-
+					
 					cmd.ExecuteNonQuery();
 
 				}
@@ -172,7 +168,7 @@ namespace WebApplication.Web.DAL
 			return new Report()
 			{
 				Id = Convert.ToInt32(reader["id"]),
-				Submitter = Convert.ToString(reader["submitter"]),
+				Submitter = Convert.ToInt32(reader["submitter"]),
 				DateCreated = Convert.ToDateTime(reader["datecreated"]),
 				Lattitude = Convert.ToDecimal(reader["lattitude"]),
 				Longitude = Convert.ToDecimal(reader["longitude"]),

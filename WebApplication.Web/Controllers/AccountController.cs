@@ -39,7 +39,7 @@ namespace WebApplication.Web.Controllers
                 }
             }
 
-            return View(loginViewModel);
+            return View("Register");
         }
 
         [HttpPost]
