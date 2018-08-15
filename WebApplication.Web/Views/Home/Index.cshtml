@@ -91,7 +91,7 @@
             'click',
             function(event) {
 
-                if (checkCookie('loggedInUsr')) {
+                if ('@((bool)ViewData["loggedIn"])' === 'True') {
 
                     if (marker === null) {
                         marker = new google.maps.Marker({

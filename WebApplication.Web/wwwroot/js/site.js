@@ -19,9 +19,7 @@ $(document).ready(function () {
 
 
 function saveData() {
-
     
-
     var base = 'https://localhost:44302';
     var url = `${base}/api/record`;
     var lat = marker.getPosition().lat();
@@ -56,6 +54,10 @@ function saveData() {
 
 }
 
+
+function CountReports() {
+
+}
 
 // COOKIE MANIPULATION
 

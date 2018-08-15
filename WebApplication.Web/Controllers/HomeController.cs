@@ -37,7 +37,7 @@ namespace WebApplication.Web.Controllers
             var isLoggedIn = authProvider.GetCurrentUser();
             var isEmployee = authProvider.UserHasRole(new string[1] { "employee" });
 
-	        ViewData["loggedIn"] = isLoggedIn != null && isEmployee;
+	        ViewData["loggedIn"] = isLoggedIn != null;
             
             return View(reports);
         }

@@ -1,27 +1,79 @@
-﻿@model User
+﻿@model Profile
 @{
     ViewData["Title"] = "ViewProfile";
 }
 
 <h2 id="profile-title">Your Profile</h2>
 
-<p class="profile-welcome">Welcome back <strong id="user-name">@Model.FirstName @Model.LastName</strong></p>
+<p class="profile-welcome">Welcome back <strong id="user-name">@Model.user.FirstName @Model.user.LastName</strong></p>
 
+<div >
 <table class="user-data">
     <tr>
-        <td>Username : @Model.Username</td>
+        <td>Username : @Model.user.Username</td>
     </tr>
     <tr>
-        <td>First Name : @Model.FirstName</td>
+        <td>First Name : @Model.user.FirstName</td>
     </tr>
     <tr>
-        <td>Last Name : @Model.LastName</td>
+        <td>Last Name : @Model.user.LastName</td>
     </tr>
     <tr>
-        <td>Email : @Model.Email</td>
+        <td>Email : @Model.user.Email</td>
     </tr>
     <tr>
-        <td>Phone Number : @Model.PhoneNumber</td>
+        <td>Phone Number : @Model.user.PhoneNumber</td>
     </tr>
 </table>
 
+</div>
+<hr/>
+
+<table id="pothole-table-profile" class="table table-bordered table-sm" cellspacing="0" width="100%" style="color: white;">
+    <thead>
+        <tr>
+            <th class="th-sm">
+                ID#
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm">
+                Location
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm">
+                Date Created
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm">
+                status
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </tr>
+    </thead>
+    <tbody id="table-data">
+        @foreach (var report in Model.reports)
+        {
+            if (report.Submitter == @Model.user.Id)
+            {
+
+                <tr>
+                    <td><button>@report.Id</button></td>
+                    <td>@report.Lattitude, @report.Longitude</td>
+                    <td>@report.DateCreated</td>
+
+                    @if (report.Status == 3)
+                    {
+                        <td style="background-color: green;"></td>
+                    }
+                    else if (report.Status == 2)
+                    {
+                        <td style="background-color: orange;"></td>
+                    }
+                    else
+                    {
+                        <td style="background-color: red;"></td>
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>
