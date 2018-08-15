@@ -19,44 +19,42 @@ $(document).ready(function () {
 
 
 function saveData() {
-    var submitter = placeholder('submitter');
-    var datecreated = placeholder('datecreated');
-    var dateinspected = placeholder('dateinspected');
-    var severity = placeholder('severity');
-    var repairdate = placeholder('repairdate');
-    var status = placeholder('status');
-    var reportcount = placeholder('reportcount');
-    var description = placeholder('description');
-    var latlng = marker.getPosition();
-    var url = 'phpsqlinfo_addrow.php?submitter=' + submitter + '&datecreated=' + datecreated + '&dateinspected=' + dateinspected + '&severity=' + severity + '&repairdate=' + repairdate + '&status=' + status + '&reportcount=' + reportcount + '&description=' + description + '&lattitude=' + latlng.lat() + '&longitude=' + latlng.lng();
 
-    downloadUrl(url, function (data, responseCode) {
+    
 
-        if (responseCode == 200 && data.length <= 1) {
-            infowindow.close();
-            messagewindow.open(map, marker);
-        }
-    });
-}
-
-function downloadUrl(url, callback) {
-    var request = window.ActiveXObject ?
-        new ActiveXObject('Microsoft.XMLHTTP') :
-        new XMLHttpRequest;
-
-    request.onreadystatechange = function () {
-        if (request.readyState == 4) {
-            request.onreadystatechange = doNothing;
-            callback(request.responseText, request.status);
+    var base = 'https://localhost:44302';
+    var url = `${base}/api/record`;
+    var lat = marker.getPosition().lat();
+    var lng = marker.getPosition().lng();
+    var settings = {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({
+            DateCreated: new Date(),
+            Lattitude: lat,  
+            Longitude: lng, 
+            Status: 1,
+            ReportCount: 1
+        }),
+        headers: {
+            'Content-Type': 'application/json'
         }
     };
 
-    request.open('GET', url, true);
-    request.send(null);
-}
+    fetch(url, settings)
+        .then(function (response) {
+            if (!response.ok) {
+                console.log(response.statusText);
+                //throw Error(response.statusText);
+            }
+            return response;
+        }).then(function (response) {
+            console.log("ok");
+        }).catch(error => {
+            console.error('Error:', error);
+        });
 
-function doNothing() {
-};
+}
 
 
 // COOKIE MANIPULATION

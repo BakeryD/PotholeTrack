@@ -18,8 +18,7 @@ namespace WebApplication.Web.Models.Account
 	    /// <summary>
 	    /// The report's submitter.
 	    /// </summary>
-	    [Required]
-	    public string Submitter { get; set; }
+	    public int Submitter { get; set; }
 
 	    /// <summary>
 	    /// The report's creation date.
@@ -42,25 +41,21 @@ namespace WebApplication.Web.Models.Account
 		/// <summary>
 		/// The date inspected by city employee.
 		/// </summary>
-		[Required]
-	    public DateTime DateInspected { get; set; }
+		public DateTime DateInspected { get; set; }
 
 	    /// <summary>
 	    /// The pothole severity.
 	    /// </summary>
-	    [Required]
 	    public int Severity { get; set; }
 
 		/// <summary>
 		/// The date repaired by city employee.
 		/// </summary>
-		[Required]
-	    public DateTime DateRepaired { get; set; }
+		public DateTime DateRepaired { get; set; }
 		
 	    /// <summary>
 	    /// The pothole status.
 	    /// </summary>
-	    [Required]
 	    public int Status { get; set; }
 
 	    /// <summary>
@@ -72,7 +67,6 @@ namespace WebApplication.Web.Models.Account
 	    /// <summary>
 	    /// The pothole description (if any).
 	    /// </summary>
-	    [Required]
 	    public string Description { get; set; }
 	}
 }

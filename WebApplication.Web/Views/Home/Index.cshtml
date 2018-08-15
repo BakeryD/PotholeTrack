@@ -14,6 +14,7 @@
     var lat;
     var long;
     var potholeData;
+    
 
 
     function initMap() {
@@ -43,7 +44,7 @@
         });
 
         google.maps.event.addListener(pothole@(report.Id), 'click', function () {
-            $('#datecreated', $('#potholedata')).val ('@report.DateCreated');
+            $('#datecreated', $('#potholedata')).val('@report.DateCreated');
             $('#status', $('#potholedata')).val('@report.Status');
             $('#severity', $('#potholedata')).val('@report.Severity');
             $('#description', $('#potholedata')).val('@report.Description');
@@ -78,28 +79,10 @@
                 elem.style.display = 'block';
             });
         });
-
-        var url = `${base}/api/record`;
-        var settings = {
-            method: 'post',
-            body: JSON.stringify({
-                datecreated: @DateTime.Now,
-                dateinspected: null,
-                severity: null,
-                location: marker.position.latLng,
-                status: 1,
-                reportcount: 1,
-                description: null
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
         
-      
     }
 
-
+    
 
 
 
