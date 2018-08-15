@@ -1,6 +1,10 @@
 ﻿@model IList<WebApplication.Web.Models.Account.Report>
 @{
     ViewData["Title"] = "Home Page";
+    int totalCount = 0;
+    int yearCount = 0;
+    int monthCount = 0;
+
 }
 
 @if (TempData["loggedIn"] != null && (bool)TempData["loggedIn"])
@@ -37,7 +41,21 @@
         });
 
         @foreach (var report in Model)
-    {
+        {
+            if (report.Status == 3)
+            {
+                totalCount++;
+            }
+
+            if (report.DateRepaired.Year.Equals(DateTime.Now.Year))
+            {
+                yearCount++;
+            }
+
+            if (report.DateRepaired.Year.Equals(DateTime.Now.Year) && report.DateRepaired.Month.Equals(DateTime.Now.Month))
+            {
+                monthCount++;
+            }
         <text>
             var point = new google.maps.LatLng(
                 parseFloat(@report.Lattitude),
@@ -205,9 +223,9 @@
 <BR />
 <div class="main-bottom">
 
-    <div class="main-report"><p class="report-number">300</p> <p>Potholes filled this month!</p></div>
-    <div class="main-report"><p class="report-number">600</p> <p>Potholes filled this year!</p></div>
-    <div class="main-report"><p class="report-number">900</p> <p>Potholes filled total!</p></div>
+    <div class="main-report"><p class="report-number">@monthCount</p> <p>Potholes filled this month!</p></div>
+    <div class="main-report"><p class="report-number">@yearCount</p> <p>Potholes filled this year!</p></div>
+    <div class="main-report"><p class="report-number">@totalCount</p> <p>Potholes filled total!</p></div>
     
 </div>
 
