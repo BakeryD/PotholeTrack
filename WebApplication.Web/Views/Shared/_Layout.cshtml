@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - WebApplication.Web</title>
 
     <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -35,7 +36,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Account" asp-action="ViewProfile">Profile</a></li>
                     <li><a id="employee-btn" asp-area="" asp-controller="Home" asp-action="Employee">Employee</a></li>
-                    <li><a id="logout"><span class="glyphicon glyphicon-log-out"><strong> Log-Out</strong></span></a></li>
+                    <li><a id="logout"><span class="glyphicon glyphicon-log-out"></span><strong> Log-Out</strong></a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -84,8 +85,6 @@
         </div>
     </div>
 
-    <partial name="_CookieConsentPartial" />
-    <partial name="_ValidationScriptsPartial" />
 
     <div class="container-fluid body-content">
 
@@ -97,7 +96,6 @@
     </div>
 
     <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
@@ -116,6 +114,9 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+    <partial name="_CookieConsentPartial" />
+    <partial name="_ValidationScriptsPartial" />
+
 
     @RenderSection("Scripts", required: false)
 </body>

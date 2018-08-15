@@ -64,13 +64,6 @@ button.on('click', () => {
 
 // COOKIE MANIPULATION
 
-if (!checkCookie('loggedInUsr')) {
-    $('#employee-btn').attr('href', '#');
-    $('#employee-btn').remove('#employee-btn');
-   // $('#login').css("display", "none");
-} else {
-    $('.navbar-right').remove();
-}
 
 
 

@@ -35,6 +35,7 @@ namespace WebApplication.Web.Controllers
 	    {
 			Console.WriteLine("hello");
 		    report.Submitter = auth.GetCurrentUser().Id;
+            report.DateCreated = DateTime.Now;
 		    dal.CreateReport(report);
 
 			return Ok();
