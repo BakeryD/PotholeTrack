@@ -34,6 +34,29 @@ body {
     margin: 15px;
 }
 
+.main-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 3%;
+    padding-right: 3%;
+    color: aliceblue;
+}
+
+.main-report {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1em;
+    height: auto;
+}
+
+.report-number {
+    font-size: 4em;
+    font-weight: bold;
+    color: goldenrod;
+}
+
 
 /** Map section start **/
 

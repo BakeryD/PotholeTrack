@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Web.DAL;
 using WebApplication.Web.Models.Account;
 using WebApplication.Web.Providers.Auth;
 
@@ -11,9 +12,11 @@ namespace WebApplication.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthProvider authProvider;
-        public AccountController(IAuthProvider authProvider)
+        private readonly IPotholeDAL dal;
+        public AccountController(IAuthProvider authProvider, IPotholeDAL dal)
         {
             this.authProvider = authProvider;
+            this.dal = dal;
         }
         
         [HttpGet]
