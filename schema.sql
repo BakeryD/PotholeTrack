@@ -46,7 +46,7 @@ CREATE TABLE records
 	longitude		decimal(9,6) not null,
 	status          int NOT NULL default(1),
     reportcount    int NOT NULL default(1),
-    description     TEXT,
+    description     TEXT default(''),
 
     Constraint  pk_records  PRIMARY KEY (id),
     Constraint  fk_records_users    FOREIGN KEY (submitter) REFERENCES users(id)
@@ -79,3 +79,4 @@ Create Table user_records
 COMMIT TRANSACTION;
 
 select * from users;
+select * from records;

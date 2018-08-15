@@ -56,6 +56,11 @@ function saveData() {
 
 }
 
+var button = $('#logout');
+button.on('click', () => {
+    document.querySelector('form[name="logout"]').submit();
+})
+
 
 // COOKIE MANIPULATION
 
