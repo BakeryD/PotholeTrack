@@ -19,9 +19,7 @@ $(document).ready(function () {
 
 
 function saveData() {
-
     
-
     var base = 'https://localhost:44302';
     var url = `${base}/api/record`;
     var lat = marker.getPosition().lat();
@@ -62,6 +60,10 @@ button.on('click', () => {
 })
 
 
+function CountReports() {
+
+}
+
 // COOKIE MANIPULATION
 
 
@@ -79,10 +81,10 @@ function getCookie(cname) {
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) == ' ') {
+        while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.indexOf(name) === 0) {
             return c.substring(name.length, c.length);
         }
     }
@@ -91,7 +93,7 @@ function getCookie(cname) {
 
 function checkCookie(cname) {
     var user = getCookie(cname);
-    if (user != null) {
+    if (user !== null) {
         return true;
     } else {
         return false;

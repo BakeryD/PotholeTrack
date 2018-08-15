@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Web.DAL;
+using WebApplication.Web.Models;
 using WebApplication.Web.Models.Account;
 using WebApplication.Web.Providers.Auth;
 
@@ -11,12 +12,13 @@ namespace WebApplication.Web.Controllers
 {    
     public class AccountController : Controller
     {
+	    private readonly IPotholeDAL dal;
         private readonly IAuthProvider authProvider;
-        private readonly IPotholeDAL dal;
+
         public AccountController(IAuthProvider authProvider, IPotholeDAL dal)
         {
             this.authProvider = authProvider;
-            this.dal = dal;
+	        this.dal = dal;
         }
         
         [HttpGet]
@@ -88,8 +90,11 @@ namespace WebApplication.Web.Controllers
         [AuthorizationFilter("user","employee","admin")]
         public IActionResult ViewProfile()
         {
+	        var profile = new Profile();
             var user = authProvider.GetCurrentUser();
-            return View(user);
+	        profile.user = user;
+	        profile.reports = dal.GetAllReports();
+            return View(profile);
         }
 
         public IActionResult ForgotPassword()
