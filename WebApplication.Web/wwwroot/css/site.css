@@ -137,3 +137,32 @@ div.form-field {
 strong#user-name {
     color: goldenrod;
 }
+
+.user-data {
+    color: aliceblue;
+    font-weight: bold;
+}
+
+/** Employee view **/
+
+#employee-title {
+    color: aliceblue;
+    text-align: center;
+    font-weight: bolder;
+}
+
+#employee-welcome {
+    color: goldenrod;
+    text-align:center;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+#pothole-table {
+    color: aliceblue;
+}
+
+#table-data {
+    color: black;
+    background-color: white;
+}
