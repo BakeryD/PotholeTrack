@@ -63,10 +63,12 @@ body {
 
 h2.register-title {
     color:aliceblue;
+    text-align: center;
 }
 
 p.register-desc {
     color:goldenrod;
+    text-align: center;
 }
 
 .field-validation-error {
@@ -88,10 +90,14 @@ div.form-field {
 
 
 #about {
-    color: white;
+    color: aliceblue;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#p-about {
+    text-align: center;
 }
 
 /** Modal start **/
@@ -114,4 +120,20 @@ div.form-field {
 
 .modal-footer {
     background-color: #f9f9f9;
+}
+
+/** View Profile **/
+
+#profile-title {
+    color: aliceblue;
+    text-align: center;
+}
+
+.profile-welcome {
+    color: aliceblue;
+    text-align: center;
+}
+
+strong#user-name {
+    color: goldenrod;
 }

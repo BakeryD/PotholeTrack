@@ -63,6 +63,8 @@ if (!checkCookie('loggedInUsr')) {
     $('#employee-btn').attr('href', '#');
     $('#employee-btn').remove('#employee-btn');
    // $('#login').css("display", "none");
+} else {
+    $('.navbar-right').remove();
 }
 
 
@@ -91,8 +93,8 @@ function getCookie(cname) {
 
 function checkCookie(cname) {
     var user = getCookie(cname);
-    if (user != "") {
-        //DO SOME STUFF
+    if (user != null) {
+        return true;
     } else {
         return false;
     }
