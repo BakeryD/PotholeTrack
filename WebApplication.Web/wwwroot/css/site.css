@@ -125,7 +125,8 @@ div.form-field {
 /****  INDEX.CSHTML ****/
 
 li > a#login {
-    cursor:pointer;
+    cursor: pointer;
+}
 /** View Profile **/
 
 #profile-title {
