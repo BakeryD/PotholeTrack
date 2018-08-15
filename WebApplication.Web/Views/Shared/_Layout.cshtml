@@ -38,8 +38,9 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a asp-controller="account" asp-action="Register"><span class="glyphicon glyphicon-user"></span><strong> Sign Up</strong></a></li>
+                <li><a asp-controller="Account" asp-action="Register"><span class="glyphicon glyphicon-user"></span><strong> Sign Up</strong></a></li>
                 <li><a id="login" data-toggle="modal" data-target="#loginmodal" ><span class="glyphicon glyphicon-log-in"></span><strong> Login</strong></a></li>
+                <li><a><form asp-action="LogOff" asp-controller="Account"><span class="glyphicon glyphicon-log-out"><strong oncli> Log-Out</strong></span></form></a></li>
             </ul>
         </div>
             
