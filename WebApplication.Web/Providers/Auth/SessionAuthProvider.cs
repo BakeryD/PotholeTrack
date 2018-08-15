@@ -45,7 +45,8 @@ namespace WebApplication.Web.Providers.Auth
             var hashProvider = new HashProvider();                        
             
             if (user != null && hashProvider.VerifyPasswordMatch(user.Password, password, user.Salt))
-            {                
+            {
+                //SESSION TIMEOUT IS NOT = TO COOKIE TIMEOUT
                 Session.SetString(SessionKey, user.Username);
                 return true;
             }
