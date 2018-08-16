@@ -36,13 +36,12 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Account" asp-action="ViewProfile">Profile</a></li>
                     <li><a id="employee-btn" asp-area="" asp-controller="Home" asp-action="Employee">Employee</a></li>
-                    
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-controller="Account" asp-action="Register" id="signup"><span class="glyphicon glyphicon-user"></span><strong> Sign Up</strong></a></li>
-                    <li><a id="login" data-toggle="modal" data-target="#loginmodal"><span class="glyphicon glyphicon-log-in"></span><strong> Login</strong></a></li>
                     <li><a id="logout"><span class="glyphicon glyphicon-log-out"></span><strong> Log-Out</strong></a></li>
+                    <li><a id="nav-register" asp-controller="Account" asp-action="Register"><span class="glyphicon glyphicon-user"></span><strong> Sign Up</strong></a></li>
+                    <li><a id="login" data-toggle="modal" data-target="#loginmodal"><span class="glyphicon glyphicon-log-in"></span><strong> Login</strong></a></li>
                 </ul>
             </div>
 
