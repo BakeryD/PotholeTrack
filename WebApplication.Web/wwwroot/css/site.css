@@ -74,10 +74,6 @@ li > a#login, a#logout {
     cursor: pointer;
 }
 
-li > a#logout {
-    cursor: pointer;
-}
-
 #about {
     color: aliceblue;
     display: flex;
@@ -118,7 +114,7 @@ li > a#logout {
 /** Modal start **/
 
 .modal-header, h4, .close {
-    background-color: black;
+    background-color: #767676;
     color: aliceblue !important;
     text-align: center;
     font-size: 30px;
@@ -136,7 +132,7 @@ li > a#logout {
 
 .modal-footer {
     color: aliceblue;
-    background-color: black;
+    background-color: #767676;
 }
 
 /** Modal End **/
