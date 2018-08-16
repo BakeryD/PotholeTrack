@@ -7,45 +7,44 @@
 
 <p class="profile-welcome">Welcome back <strong id="user-name">@Model.user.FirstName @Model.user.LastName</strong></p>
 
-<div >
-<table class="user-data">
-    <tr>
-        <td>Username : @Model.user.Username</td>
-    </tr>
-    <tr>
-        <td>First Name : @Model.user.FirstName</td>
-    </tr>
-    <tr>
-        <td>Last Name : @Model.user.LastName</td>
-    </tr>
-    <tr>
-        <td>Email : @Model.user.Email</td>
-    </tr>
-    <tr>
-        <td>Phone Number : @Model.user.PhoneNumber</td>
-    </tr>
-</table>
-
+<div>
+    <table class="container user-data">
+        <tr>
+            <td>Username : <strong id="user-data">@Model.user.Username</strong></td>
+        </tr>
+        <tr>
+            <td>First Name : <strong id="user-data">@Model.user.FirstName</strong></td>
+        </tr>
+        <tr>
+            <td>Last Name : <strong id="user-data">@Model.user.LastName</strong></td>
+        </tr>
+        <tr>
+            <td>Email : <strong id="user-data">@Model.user.Email</strong></td>
+        </tr>
+        <tr>
+            <td>Phone Number : <strong id="user-data">@Model.user.PhoneNumber</strong></td>
+        </tr>
+    </table>
 </div>
-<hr/>
+<hr />
 
-<h3>Here's all the reports you have submitted:</h3>
+<h3 style="text-align: center; color: aliceblue;">Here's all the reports you have submitted:</h3>
 <table id="pothole-table-profile" class="table table-bordered table-sm" cellspacing="0" width="100%" style="color: white;">
     <thead>
         <tr>
-            <th class="th-sm"  style="text-align: center;">
+            <th class="th-sm" style="text-align: center;">
                 Pothole Report #
                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
             </th>
-            <th class="th-sm"  style="text-align: center;">
+            <th class="th-sm" style="text-align: center;">
                 Location of the pothole (LatLong)
                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
             </th>
-            <th class="th-sm"  style="text-align: center;">
+            <th class="th-sm" style="text-align: center;">
                 Date Report Created
                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
             </th>
-            <th class="th-sm"  style="text-align: center;">
+            <th class="th-sm" style="text-align: center;">
                 Current Status
                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
         </tr>
@@ -57,14 +56,14 @@
             {
 
                 <tr>
-                    <td  style="text-align: center;">@report.Id</td>
-                    <td  style="text-align: center;">@report.Lattitude, @report.Longitude</td>
-                    <td  style="text-align: center;">@report.DateCreated</td>
+                    <td style="text-align: center;">@report.Id</td>
+                    <td style="text-align: center;">@report.Lattitude, @report.Longitude</td>
+                    <td style="text-align: center;">@report.DateCreated</td>
 
                     @if (report.Status == 3)
                     {
                         <td style="background-color: green; text-align: center;">Fixed!</td>
-                        
+
                     }
                     else if (report.Status == 2)
                     {

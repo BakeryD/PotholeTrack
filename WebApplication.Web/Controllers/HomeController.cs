@@ -26,8 +26,10 @@ namespace WebApplication.Web.Controllers
             this.cDal = c;
             this.authProvider = auth;
         }
-        [ViewData]
-        public bool loggedIn => authProvider.IsLoggedIn;
+        //[ViewData]
+       // public bool loggedIn => authProvider.IsLoggedIn;
+
+        
 
         /// <summary>
         /// Displays the home page with a map showing all of the currently unfixed potholes
@@ -41,6 +43,7 @@ namespace WebApplication.Web.Controllers
 			
 	        ViewData["loggedIn"] = (isLoggedIn != null);
 			
+
             return View(reports);
         }
 
@@ -67,7 +70,7 @@ namespace WebApplication.Web.Controllers
 		public IActionResult Employee()
 		{
 			var reports = pDal.GetAllReports();
-            //ViewData["loggedIn"] = authProvider.IsLoggedIn;
+            ViewData["loggedIn"] = authProvider.IsLoggedIn;
 			return View(reports);
 		}
 

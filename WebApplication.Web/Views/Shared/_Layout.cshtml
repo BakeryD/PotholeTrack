@@ -90,6 +90,26 @@
 
         @RenderBody()
         <hr />
+        @{
+            if ((bool)ViewData["loggedIn"])//IF YOU ARE LOGGED IN
+            {
+                <script>
+                    $('#login').remove();
+                    $('#nav-register').remove();
+
+                </script>
+            }
+            else//OTHERWISE
+            {
+                <script>
+                    $('#employee-btn').attr('href', '#');
+                    $('#employee-btn').remove('#employee-btn');
+                    $('#logout').remove();
+                </script>
+            }
+
+
+        }
         <footer>
             <p style="text-align: center; color: aliceblue;">&copy; 2018 - WebApplication.Web</p>
         </footer>
