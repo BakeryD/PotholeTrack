@@ -147,7 +147,7 @@ div.form-field {
 
 /****  INDEX.CSHTML ****/
 
-li > a#login {
+li > a#login, a#logout {
     cursor: pointer;
 }
 /** View Profile **/
