@@ -3,11 +3,13 @@
     ViewData["Title"] = "Employee";
 }
 
+
+
 <h2 id="employee-title">Active Reports</h2>
 <p id="employee-welcome">There is work to be done!</p>
 <h3 style="text-align: center; color: aliceblue;">Table legend:</h3>
+
 <div class="legend-container">
-    
     <div>
         <ul style="color: aliceblue;">
             Severity:
@@ -25,6 +27,8 @@
         </ul>
     </div>
 </div>
+<hr/>
+
 <table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
     <thead>
         <tr>
@@ -50,10 +54,10 @@
         </tr>
     </thead>
     <tbody id="table-data">
-        @foreach(var report in Model)
+        @foreach (var report in Model)
         {
             <tr>
-                <td><button>@report.Id</button></td>
+                <td><button id="pothole-id" data-toggle="modal" data-target="#employee-modal">@report.Id</button></td>
                 <td>@report.Lattitude,  @report.Longitude</td>
                 <td>@report.DateCreated</td>
 
@@ -86,5 +90,23 @@
         }
     </tbody>
 </table>
-<hr/>
-<br/>
+<div class="container">
+    <div class="modal fade" id="employee-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ReportSaved">There is work to be done!!</h5>
+                </div>
+                <div class="modal-body">
+                    <p>thar be fields missin'</p>
+                    <form>
+                        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

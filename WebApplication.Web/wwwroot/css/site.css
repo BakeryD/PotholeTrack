@@ -150,6 +150,10 @@ div.form-field {
 li > a#login {
     cursor: pointer;
 }
+
+li > a#logout {
+    cursor: pointer;
+}
 /** View Profile **/
 
 #profile-title {

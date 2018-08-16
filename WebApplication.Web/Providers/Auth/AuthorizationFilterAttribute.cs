@@ -27,7 +27,7 @@ namespace WebApplication.Web.Providers.Auth
             if (!authProvider.IsLoggedIn)
             {
                 // Force the user to login first
-                TempData["wasNotUser"] = true;
+               // TempData["wasNotUser"] = true;
                 context.Result = new RedirectToRouteResult(new
                 {
                     controller = "home",
