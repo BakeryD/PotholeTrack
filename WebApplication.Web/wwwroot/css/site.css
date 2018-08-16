@@ -131,6 +131,9 @@ li > a#login, a#logout {
 }
 
 .modal-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     color: aliceblue;
     background-color: #767676;
 }
