@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Web.DAL;
+using WebApplication.Web.Models;
 using WebApplication.Web.Models.Account;
 using WebApplication.Web.Providers.Auth;
 
@@ -10,10 +12,13 @@ namespace WebApplication.Web.Controllers
 {    
     public class AccountController : Controller
     {
+	    private readonly IPotholeDAL dal;
         private readonly IAuthProvider authProvider;
-        public AccountController(IAuthProvider authProvider)
+
+        public AccountController(IAuthProvider authProvider, IPotholeDAL dal)
         {
             this.authProvider = authProvider;
+	        this.dal = dal;
         }
         
         [HttpGet]
@@ -48,10 +53,12 @@ namespace WebApplication.Web.Controllers
         {
             // Clear user from session
             authProvider.LogOff();
+            TempData["loggedIn"] = false;
 
             // Redirect the user where you want them to go after logoff
             return RedirectToAction("Index", "Home");
         }
+
 
         [HttpGet]
         public IActionResult Register()
@@ -83,8 +90,11 @@ namespace WebApplication.Web.Controllers
         [AuthorizationFilter("user","employee","admin")]
         public IActionResult ViewProfile()
         {
+	        var profile = new Profile();
             var user = authProvider.GetCurrentUser();
-            return View(user);
+	        profile.user = user;
+	        profile.reports = dal.GetAllReports();
+            return View(profile);
         }
 
         public IActionResult ForgotPassword()

@@ -5,22 +5,27 @@
 
 <h2 id="employee-title">Active Reports</h2>
 <p id="employee-welcome">There is work to be done!</p>
-
-<p style="color: aliceblue;">Table legend:</p>
-<ul style="color: aliceblue;">
-    Severity:
-    <li><strong style="color: green;">Green</strong> is not bad</li>
-    <li><strong style="color: orange;">Orange</strong> is kind of bad</li>
-    <li><strong style="color: red;">Red</strong> is impending doom to anyone who drives over it</li>
-</ul>
-<ul style="color: aliceblue;">
-    Status:
-    <li><strong style="color:red;">Red</strong> is reported</li>
-    <li><strong style="color:orange;">Orange</strong> is inspected</li>
-    <li><strong style="color:green;">Green</strong> is repaired</li>
-</ul>
-<hr />
-<table id="pothole-table" class="table table-bordered table-sm" cellspacing="0" width="100%" style="color: white;">
+<h3 style="text-align: center; color: aliceblue;">Table legend:</h3>
+<div class="legend-container">
+    
+    <div>
+        <ul style="color: aliceblue;">
+            Severity:
+            <li><strong style="color: green;">Green</strong> is not bad</li>
+            <li><strong style="color: orange;">Orange</strong> is kind of bad</li>
+            <li><strong style="color: red;">Red</strong> is impending doom to anyone who drives over it</li>
+        </ul>
+    </div>
+    <div>
+        <ul style="color: aliceblue;">
+            Status:
+            <li><strong style="color:red;">Red</strong> is reported</li>
+            <li><strong style="color:orange;">Orange</strong> is inspected</li>
+            <li><strong style="color:green;">Green</strong> is repaired</li>
+        </ul>
+    </div>
+</div>
+<table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
     <thead>
         <tr>
             <th class="th-sm">
@@ -45,7 +50,7 @@
         </tr>
     </thead>
     <tbody id="table-data">
-        @foreach (var report in Model)
+        @foreach(var report in Model)
         {
             <tr>
                 <td><button>@report.Id</button></td>
@@ -54,43 +59,32 @@
 
                 @if (report.Severity == 3)
                 {
-                    <td style="background-color: red;">3</td>
+                    <td style="background-color: red;"></td>
                 }
                 else if (report.Severity == 2)
                 {
-                    <td style="background-color: orange;">2</td>
+                    <td style="background-color: orange;"></td>
                 }
                 else
                 {
-                    <td style="background-color: green;">1</td>
+                    <td style="background-color: green;"></td>
                 }
 
                 @if (report.Status == 3)
                 {
-                    <td style="background-color: green;">3</td>
+                    <td style="background-color: green;"></td>
                 }
                 else if (report.Status == 2)
                 {
-                    <td style="background-color: orange;">2</td>
+                    <td style="background-color: orange;"></td>
                 }
                 else
                 {
-                    <td style="background-color: red;">1</td>
+                    <td style="background-color: red;"></td>
                 }
             </tr>
         }
     </tbody>
 </table>
-<br />
-
-<div class="modal fade" id="potholedata" tabindex="-1" role="dialog" aria-labelledby="Data!" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="Pothole Data">Pothole Data!</h5>
-            </div>
-            <div class="modal-body">
-            </div>
-        </div>
-    </div>
-</div>
+<hr/>
+<br/>
