@@ -92,7 +92,7 @@ namespace WebApplication.Web.DAL
 				using (SqlConnection conn = new SqlConnection(connectionString))
 				{
 					conn.Open();
-					SqlCommand cmd = new SqlCommand("SELECT * FROM reports WHERE id = @reportid;", conn);
+					SqlCommand cmd = new SqlCommand("SELECT * FROM records WHERE id = @reportid;", conn);
 					cmd.Parameters.AddWithValue("@reportid", reportId);
 
 					SqlDataReader reader = cmd.ExecuteReader();
@@ -123,7 +123,7 @@ namespace WebApplication.Web.DAL
 				using (SqlConnection conn = new SqlConnection(connectionString))
 				{
 					conn.Open();
-					SqlCommand cmd = new SqlCommand("UPDATE reports SET reportcount = reportcount + 1 WHERE id = @reportid; Insert Into user_records (user_id, record_id) Values (@user, @reportid);", conn);
+					SqlCommand cmd = new SqlCommand("Insert Into user_records (user_id, record_id) Values (@user, @reportid);", conn);
 					cmd.Parameters.AddWithValue("@reportid", report.Id);
 					cmd.Parameters.AddWithValue("@user", report.Submitter);
 

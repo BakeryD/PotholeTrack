@@ -15,10 +15,6 @@ namespace WebApplication.Web.Controllers
 	    private readonly IPotholeDAL dal;
         private readonly IAuthProvider authProvider;
 
-        [ViewData]
-        public bool loggedIn => authProvider.IsLoggedIn;
-
-
         public AccountController(IAuthProvider authProvider, IPotholeDAL dal)
         {
             this.authProvider = authProvider;

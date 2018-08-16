@@ -6,26 +6,7 @@
     int monthCount = 0;
 
 }
-@{
-    if ((bool)ViewData["loggedIn"])//IF YOU ARE LOGGED IN
-    {
-        <script>
-            $('#login').remove();
-            $('#nav-register').remove();
 
-        </script>
-    }
-    else//OTHERWISE
-    {
-        <script>
-            $('#employee-btn').attr('href', '#');
-            $('#employee-btn').remove('#employee-btn');
-            $('#logout').remove();
-        </script>
-    }
-
-
-}
 
 <script type="text/javascript">
     var map;
@@ -84,6 +65,7 @@
                     $('#datecreated', $('#potholedata')).val('@report.DateCreated.ToShortDateString()');
                     $('#severity', $('#potholedata')).val('@report.Severity');
                     $('#reportcount', $('#potholedata')).val('@report.ReportCount');
+                    $('#p-id', $('#potholedata')).val(@(report.Id));
                     $("#potholedata").modal();
                 });
             }
@@ -180,12 +162,15 @@
                 <p><span style="font-weight: bold">Status:</span> Inspected and Awaiting Repair</p>
                 <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="severity" readonly style="border:none"></input></p>
                 <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="reportcount" readonly style="border:none"></input></p>
+                <form name="updateRecord" asp-controller="PotholeAPI" asp-action="AddCount" method="post">
+                    <p style="display:none;"><input id="p-id" style="display:none;" /></p>
+                </form>
 
             </div>
             <div class="modal-footer">
                 @if ((bool)ViewData["loggedIn"])
                 {
-                    <button type="button" onclick='marker.setMap(null), marker = null, addCount()' class="btn btn-secondary" data-dismiss="modal">Add your Report</button>
+                    <button type="button" onclick="incrementReportCount()" class="btn btn-secondary" data-dismiss="modal">Add your Report</button>
                 }
 
                 <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Close</button>

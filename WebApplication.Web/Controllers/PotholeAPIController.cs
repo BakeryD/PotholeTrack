@@ -31,6 +31,7 @@ namespace WebApplication.Web.Controllers
 	    /// <param name="report"></param>
 	    /// <returns></returns>
 	    [HttpPost]
+        [Route("create")]
 	    public ActionResult Create(Report report)
 	    {
 			Console.WriteLine("hello");
@@ -44,23 +45,25 @@ namespace WebApplication.Web.Controllers
 		    //return Ok(); //;"GetReport", null);//, new { id = report.Id }, report);
 	    }
 
-		/// <summary>
-		/// Creates a new report in the system.
-		/// </summary>
-		/// <param name="report"></param>
-		/// <returns></returns>
-		[HttpPost]
-	    public ActionResult AddCount(Report report)
-	    {
-		    Console.WriteLine("hello2");
-		    report.Submitter = auth.GetCurrentUser().Id;
-			dal.AddReport(report);
+        /// <summary>
+        /// Creates a new report in the system.
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("update")]
+        public ActionResult AddCount(Report report)
+        {
+            report = dal.GetReport(report.Id);
+            Console.WriteLine("hello2");
+            report.Submitter = auth.GetCurrentUser().Id;
+            dal.AddReport(report);
 
-		    return Ok();
+            return Ok();
 
-		    // Return a created at route to indicate where the resource can be found
-		    //return Ok(); //;"GetReport", null);//, new { id = report.Id }, report);
-	    }
+            // Return a created at route to indicate where the resource can be found
+            //return Ok(); //;"GetReport", null);//, new { id = report.Id }, report);
+        }
 
-	}
+    }
 }

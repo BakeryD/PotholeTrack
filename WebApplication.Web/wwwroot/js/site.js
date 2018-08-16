@@ -21,7 +21,7 @@ $(document).ready(function () {
 function saveData() {
     
     var base = 'https://localhost:44302';
-    var url = `${base}/api/record`;
+    var url = `${base}/api/record/create`;
     var lat = marker.getPosition().lat();
     var lng = marker.getPosition().lng();
     var settings = {
@@ -57,7 +57,7 @@ function saveData() {
 function addCount() {
 
     var base = 'https://localhost:44302';
-    var url = `${base}/api/record`;
+    var url = `${base}/api/record/update`;
     var reportid = 0;
     var settings = {
         method: 'POST',
@@ -95,10 +95,36 @@ function CountReports() {
 
 }
 
+function incrementReportCount() {
+    var recordId = $('#p-id', $('form[name="updateRecord"]')).val();
+    var base = 'https://localhost:44302';
+    var url = `${base}/api/record/update`;
+    var settings = {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({
+            Id: recordId
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    fetch(url, settings)
+        .then(function (response) {
+            if (!response.ok) {
+                console.log(response.statusText);
+                //throw Error(response.statusText);
+            }
+            return response;
+        }).then(function (response) {
+            console.log("ok");
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+}
+
 // COOKIE MANIPULATION
-
-
-
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
