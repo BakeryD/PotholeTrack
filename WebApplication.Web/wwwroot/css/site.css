@@ -18,45 +18,6 @@ body {
      background: linear-gradient(rgb(78, 96, 106), rgb(0, 0, 0));
  }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
-
-.main-bottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-left: 3%;
-    padding-right: 3%;
-    color: aliceblue;
-}
-
-.main-report {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    font-size: 1em;
-    height: auto;
-}
-
-.report-number {
-    font-size: 4em;
-    font-weight: bold;
-    color: goldenrod;
-}
-
 
 /** Map section start **/
 
@@ -69,11 +30,6 @@ body {
     text-align: center;
 }
 
-/** Map Section End **/
-
-
-
-
 #map {
     height: 500px;
     margin-top: 25px;
@@ -81,8 +37,9 @@ body {
     margin-right: 5%;
 }
 
+/** Map Section End **/
 
-/****  Register.cshtml  ****/
+/**  Register.cshtml  **/
 
 h2.register-title {
     color:aliceblue;
@@ -108,9 +65,18 @@ div.form-field {
     margin-bottom:1.2rem;
 }
 
+/** Register End **/
 
-/** About section start **/
 
+/** Home page start **/
+
+li > a#login, a#logout {
+    cursor: pointer;
+}
+
+li > a#logout {
+    cursor: pointer;
+}
 
 #about {
     color: aliceblue;
@@ -123,8 +89,33 @@ div.form-field {
     text-align: center;
 }
 
-/** Modal start **/
+.main-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 3%;
+    padding-right: 3%;
+    color: aliceblue;
+}
 
+.main-report {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1em;
+    height: auto;
+}
+
+.report-number {
+    font-size: 4em;
+    font-weight: bold;
+    color: goldenrod;
+}
+
+/** Home page end **/
+
+
+/** Modal start **/
 
 .modal-header, h4, .close {
     background-color: #5cb85c;
@@ -145,16 +136,10 @@ div.form-field {
     background-color: #f9f9f9;
 }
 
-/****  INDEX.CSHTML ****/
+/** Modal End **/
 
-li > a#login, a#logout {
-    cursor: pointer;
-}
 
-li > a#logout {
-    cursor: pointer;
-}
-/** View Profile **/
+/** View Profile start **/
 
 #profile-title {
     color: aliceblue;
@@ -173,9 +158,19 @@ strong#user-name {
 .user-data {
     color: aliceblue;
     font-weight: bold;
+    margin-top: 15px;
 }
 
-/** Employee view **/
+strong#user-data {
+    color: goldenrod;
+    text-decoration: underline;
+    margin: 15px;
+}
+
+/** View Profile end **/
+
+
+/** Employee view start **/
 
 #employee-title {
     color: aliceblue;
@@ -214,3 +209,5 @@ strong#user-name {
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+
+/** Employee View end **/
