@@ -15,11 +15,18 @@ namespace WebApplication.Web.DAL
 	    /// <returns>The report for this pothole</returns>
 	    Report GetReport(int reportId);
 
-	    /// <summary>
-	    /// Creates a new report.
-	    /// </summary>
-	    /// <param name="report"></param>
-	    void CreateReport(Report report);
+		/// <summary>
+		/// Adds a user report count to an existing report.
+		/// </summary>
+		/// <param name="report"></param>
+		/// <returns>The report for this pothole</returns>
+		void AddReport(Report report);
+
+		/// <summary>
+		/// Creates a new report.
+		/// </summary>
+		/// <param name="report"></param>
+		void CreateReport(Report report);
 
 		/// <summary>
 		/// Updates a report.

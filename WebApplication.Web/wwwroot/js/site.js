@@ -54,6 +54,37 @@ function saveData() {
 
 }
 
+function addCount() {
+
+    var base = 'https://localhost:44302';
+    var url = `${base}/api/record`;
+    var reportid = 0;
+    var settings = {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({
+            reportid: reportid
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    fetch(url, settings)
+        .then(function (response) {
+            if (!response.ok) {
+                console.log(response.statusText);
+                //throw Error(response.statusText);
+            }
+            return response;
+        }).then(function (response) {
+            console.log("ok");
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+
+}
+
 var button = $('#logout');
 button.on('click', () => {
     document.querySelector('form[name="logout"]').submit();

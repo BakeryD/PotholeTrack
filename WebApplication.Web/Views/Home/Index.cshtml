@@ -185,7 +185,7 @@
             <div class="modal-footer">
                 @if ((bool)ViewData["loggedIn"])
                 {
-                    <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Add your Report</button>
+                    <button type="button" onclick='marker.setMap(null), marker = null, addCount()' class="btn btn-secondary" data-dismiss="modal">Add your Report</button>
                 }
 
                 <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Close</button>

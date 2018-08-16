@@ -113,6 +113,35 @@ namespace WebApplication.Web.DAL
 		}
 
 		/// <summary>
+		/// Adds a count to an existing report.
+		/// </summary>
+		/// <param name="report"></param>
+		public void AddReport(Report report)
+		{
+			try
+			{
+				using (SqlConnection conn = new SqlConnection(connectionString))
+				{
+					conn.Open();
+					SqlCommand cmd = new SqlCommand("UPDATE reports SET reportcount = reportcount + 1 WHERE id = @reportid; Insert Into user_records (user_id, record_id) Values (@user, @reportid);", conn);
+					cmd.Parameters.AddWithValue("@reportid", report.Id);
+					cmd.Parameters.AddWithValue("@user", report.Submitter);
+
+					cmd.ExecuteNonQuery();
+					
+				}
+				return;
+			}
+
+			catch (SqlException ex)
+			{
+				throw ex;
+			}
+		}
+
+
+
+		/// <summary>
 		/// Updates the report.
 		/// </summary>
 		/// <param name="report"></param>
