@@ -1,9 +1,6 @@
 ﻿@model IList<WebApplication.Web.Models.Account.Report>
 @{
     ViewData["Title"] = "Employee";
-    Dictionary<int, DateTime> DateInspected;
-    Dictionary<int, DateTime> DateRepaired;
-    Dictionary<int, List<String>> Description;
 }
 
 
@@ -30,43 +27,43 @@
         </ul>
     </div>
 </div>
-<hr/>
+<hr />
 
 <table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
     <thead>
-    <tr>
-        <th class="th-sm" style="text-align: center;">
-            ID#
-            <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </th>
-        <th class="th-sm" style="text-align: center;">
-            Location
-            <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </th>
-        <th class="th-sm" style="text-align: center;">
-            Date Created
-            <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </th>
-        <th class="th-sm" style="text-align: center;">
-            Report Count
-            <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </th>
-        <th class="th-sm" style="text-align: center;">
-            Severity
-            <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </th>
-        <th class="th-sm" style="text-align: center;">
-        Status
-        <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </tr>
+        <tr>
+            <th class="th-sm" style="text-align: center;">
+                ID#
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Location
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Date Created
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Report Count
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Severity
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Status
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </tr>
     </thead>
     <tbody id="table-data">
-    @foreach (var report in Model)
-    {
+        @foreach (var report in Model)
+        {
         <tr>
-            <td style="text-align: center;"><button id="pothole@(report.Id)">@report.Id</button></td>
-               
-                
+            <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.Id</button></td>
+            
+
             <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
             <td style="text-align: center;">@report.DateCreated</td>
             <td style="text-align: center;">@report.ReportCount</td>
@@ -97,8 +94,8 @@
                 <td style="background-color: red;"></td>
             }
         </tr>
-            
-    }
+
+        }
     </tbody>
 </table>
 
@@ -106,15 +103,13 @@
 {
     <script>
         document.querySelector('#pothole@(report.Id)').addEventListener('click',
-            function() {
+            function () {
                 $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToShortDateString()');
                 $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToShortDateString()');
                 $('#description', $('#employee-modal')).val('@report.Description');
-                $("#employee-modal").modal();
             });
     </script>
 }
-
 
 
 <div class="container">
@@ -122,18 +117,50 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="ReportSaved">There is work to be done!!</h5>
+                    <h4 class="modal-title" id="ReportSaved">There is work to be done!</h4>
                 </div>
                 <div class="modal-body">
-                    <p>thar be fields missin'</p>
-                    <form>
-                        <p><span style="font-weight: bold">Date Inspected:</span> <input type="text" id="dateinspected" style="border:none"></input></p>
-                        <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="daterepaired" style="border:none"></input></p>
-                        <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="description" style="border:none"></input></p>
+                    <div style="padding-bottom: 30px;">
+                        <div id="map"></div>
+                    </div>
+                    <script>
+
+                        function potholeMap(lat, lng) {
+
+                            var pothole = { lat, lng };
+                            var map = new google.maps.Map(
+                                document.getElementById('map'),
+                                {
+                                    zoom: 16,
+                                    center: pothole,
+                                    styles: [
+                                        {
+                                            "featureType": "poi",
+                                            "stylers": [
+                                                { "visibility": "off" }
+                                            ]
+                                        }
+                                    ]
+                                });
+
+                            var marker = new google.maps.Marker({ position: pothole, map: map });
+
+                        }
+                    </script>
+
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbeqY7Px86Yip_ibuSnWdVnScfdE2NPQA&"
+                            async defer></script>
+                    <form method="post">
+                        <p><span style="font-weight: bold">Date Inspected:  </span><input type="date" id="dateinspected" style="border: none; color: black;"></input></p>
+                       
+                        <p><span style="font-weight: bold">Date Repaired:  </span> <input type="date" id="daterepaired" style="border: none; color: black;"></input></p>
+                        <p><span style="font-weight: bold">Inspection/Repair Notes</span> <input type="text" id="description" style="border: none; color: black;"></input></p>
+                        <button type="submit" class="btn btn-success btn-default" data-dismiss="modal" onClick="updateReport()"><span class="glyphicon glyphicon-check"></span> Update Record</button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                    <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                    
                 </div>
             </div>
         </div>

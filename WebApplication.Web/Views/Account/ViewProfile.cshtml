@@ -1,7 +1,13 @@
 ﻿@model Profile
 @{
     ViewData["Title"] = "ViewProfile";
+    Random rnd = new Random();
 }
+
+
+
+
+
 
 <h2 id="profile-title">Your Profile</h2>
 
@@ -56,8 +62,9 @@
             {
 
                 <tr>
-                    <td style="text-align: center;">@report.Id</td>
-                    <td style="text-align: center;">@report.Lattitude, @report.Longitude</td>
+
+                    <td style="text-align: center;">CLE529@(report.Id)@(rnd.Next(35000, 80000))</td>
+                    <td style="text-align: center;"><a data-target="#potholemap" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)"> @report.Lattitude, @report.Longitude </a></td>
                     <td style="text-align: center;">@report.DateCreated</td>
 
                     @if (report.Status == 3)
@@ -78,3 +85,57 @@
         }
     </tbody>
 </table>
+
+<div class="modal fade" id="potholemap" tabindex="-1" role="dialog" aria-labelledby="Data!" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Pothole Data">Here's your Location!</h5>
+            </div>
+            <div class="modal-body">
+
+                <div style="text-align: center; padding-bottom: 40px">
+                    <div id="map"></div>
+                    <script>
+
+                        function potholeMap(lat, lng) {
+
+                            var pothole = { lat, lng };
+                            var map = new google.maps.Map(
+                                document.getElementById('map'),
+                                {
+                                    zoom: 16,
+                                    center: pothole,
+                                    styles: [
+                                        {
+                                            "featureType": "poi",
+                                            "stylers": [
+                                                { "visibility": "off" }
+                                            ]
+                                        }
+                                    ]
+                                });
+
+                            var marker = new google.maps.Marker({ position: pothole, map: map });
+
+
+                        }
+                    </script>
+
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbeqY7Px86Yip_ibuSnWdVnScfdE2NPQA&"
+                            async defer></script>
+
+                </div>
+                <p><span style="font-weight: bold">Date Report Created:</span> <input type="text" id="datecreated" readonly style="border: none"></input></p>
+                <p><span style="font-weight: bold">Status:</span> Inspected and Awaiting Repair</p>
+                <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="severity" readonly style="border: none"></input></p>
+                <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="reportcount" readonly style="border: none"></input></p>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -74,10 +74,6 @@ li > a#login, a#logout {
     cursor: pointer;
 }
 
-li > a#logout {
-    cursor: pointer;
-}
-
 #about {
     color: aliceblue;
     display: flex;
@@ -118,8 +114,8 @@ li > a#logout {
 /** Modal start **/
 
 .modal-header, h4, .close {
-    background-color: #5cb85c;
-    color: white !important;
+    background-color: #767676;
+    color: aliceblue !important;
     text-align: center;
     font-size: 30px;
 }
@@ -130,10 +126,16 @@ li > a#logout {
 
 .modal-body {
     padding: 40px 50px;
+    color: aliceblue;
+    background-color: #767676;
 }
 
 .modal-footer {
-    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: aliceblue;
+    background-color: #767676;
 }
 
 /** Modal End **/

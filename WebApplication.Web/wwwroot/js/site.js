@@ -96,7 +96,7 @@ function CountReports() {
 }
 
 function incrementReportCount() {
-    var recordId = $('#p-id', $('form[name="updateRecord"]')).val();
+    var recordId = $('form[name="updateRecord"]').children('#p-id').val();
     var base = 'https://localhost:44302';
     var url = `${base}/api/record/update`;
     var settings = {

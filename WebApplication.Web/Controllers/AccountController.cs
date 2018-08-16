@@ -55,7 +55,6 @@ namespace WebApplication.Web.Controllers
         {
             // Clear user from session
             authProvider.LogOff();
-            TempData["loggedIn"] = false;
 
             // Redirect the user where you want them to go after logoff
             return RedirectToAction("Index", "Home");
