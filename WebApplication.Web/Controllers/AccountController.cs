@@ -15,6 +15,10 @@ namespace WebApplication.Web.Controllers
 	    private readonly IPotholeDAL dal;
         private readonly IAuthProvider authProvider;
 
+        [ViewData]
+        public bool loggedIn => authProvider.IsLoggedIn;
+
+
         public AccountController(IAuthProvider authProvider, IPotholeDAL dal)
         {
             this.authProvider = authProvider;
@@ -38,8 +42,10 @@ namespace WebApplication.Web.Controllers
                 bool validLogin = authProvider.SignIn(loginViewModel.Username, loginViewModel.Password);
                 if (validLogin)
                 {
+                    var isLoggedIn = authProvider.GetCurrentUser();
+
                     // Redirect the user where you want them to go after successful login
-                    TempData["loggedIn"] = true;
+                    ViewData["loggedIn"] = (isLoggedIn != null);
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -90,10 +96,12 @@ namespace WebApplication.Web.Controllers
         [AuthorizationFilter("user","employee","admin")]
         public IActionResult ViewProfile()
         {
-	        var profile = new Profile();
+            var isLoggedIn = authProvider.GetCurrentUser();
+            var profile = new Profile();
             var user = authProvider.GetCurrentUser();
 	        profile.user = user;
 	        profile.reports = dal.GetAllReports();
+            ViewData["loggedIn"] = (isLoggedIn != null);
             return View(profile);
         }
 
