@@ -29,23 +29,24 @@
 </div>
 <hr/>
 
+<h3>Here's all the reports you have submitted:</h3>
 <table id="pothole-table-profile" class="table table-bordered table-sm" cellspacing="0" width="100%" style="color: white;">
     <thead>
         <tr>
-            <th class="th-sm">
-                ID#
+            <th class="th-sm"  style="text-align: center;">
+                Pothole Report #
                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
             </th>
-            <th class="th-sm">
-                Location
+            <th class="th-sm"  style="text-align: center;">
+                Location of the pothole (LatLong)
                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
             </th>
-            <th class="th-sm">
-                Date Created
+            <th class="th-sm"  style="text-align: center;">
+                Date Report Created
                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
             </th>
-            <th class="th-sm">
-                status
+            <th class="th-sm"  style="text-align: center;">
+                Current Status
                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
         </tr>
     </thead>
@@ -56,21 +57,22 @@
             {
 
                 <tr>
-                    <td>@report.Id</td>
-                    <td>@report.Lattitude, @report.Longitude</td>
-                    <td>@report.DateCreated</td>
+                    <td  style="text-align: center;">@report.Id</td>
+                    <td  style="text-align: center;">@report.Lattitude, @report.Longitude</td>
+                    <td  style="text-align: center;">@report.DateCreated</td>
 
                     @if (report.Status == 3)
                     {
-                        <td style="background-color: green;"></td>
+                        <td style="background-color: green; text-align: center;">Fixed!</td>
+                        
                     }
                     else if (report.Status == 2)
                     {
-                        <td style="background-color: orange;"></td>
+                        <td style="background-color: orange; text-align: center;">Waiting for Repair!</td>
                     }
                     else
                     {
-                        <td style="background-color: red;"></td>
+                        <td style="background-color: red; text-align: center;">Waiting for Inspection!</td>
                     }
                 </tr>
             }

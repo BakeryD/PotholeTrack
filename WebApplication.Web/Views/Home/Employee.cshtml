@@ -1,6 +1,9 @@
 ﻿@model IList<WebApplication.Web.Models.Account.Report>
 @{
     ViewData["Title"] = "Employee";
+    Dictionary<int, DateTime> DateInspected;
+    Dictionary<int, DateTime> DateRepaired;
+    Dictionary<int, List<String>> Description;
 }
 
 
@@ -31,65 +34,89 @@
 
 <table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
     <thead>
-        <tr>
-            <th class="th-sm">
-                ID#
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm">
-                Location
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm">
-                Date Created
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm">
-                Severity
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm">
-                status
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </tr>
+    <tr>
+        <th class="th-sm" style="text-align: center;">
+            ID#
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Location
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Date Created
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Report Count
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Severity
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+        Status
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </tr>
     </thead>
     <tbody id="table-data">
-        @foreach (var report in Model)
-        {
-            <tr>
-                <td><button id="pothole-id" data-toggle="modal" data-target="#employee-modal">@report.Id</button></td>
-                <td>@report.Lattitude,  @report.Longitude</td>
-                <td>@report.DateCreated</td>
+    @foreach (var report in Model)
+    {
+        <tr>
+            <td style="text-align: center;"><button id="pothole@(report.Id)" data-toggle="modal" data-target="#employee-modal">@report.Id</button></td>
+               
+                
+            <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
+            <td style="text-align: center;">@report.DateCreated</td>
+            <td style="text-align: center;">@report.ReportCount</td>
 
-                @if (report.Severity == 3)
-                {
-                    <td style="background-color: red;"></td>
-                }
-                else if (report.Severity == 2)
-                {
-                    <td style="background-color: orange;"></td>
-                }
-                else
-                {
-                    <td style="background-color: green;"></td>
-                }
+            @if (report.Severity == 3)
+            {
+                <td style="background-color: red;"></td>
+            }
+            else if (report.Severity == 2)
+            {
+                <td style="background-color: orange;"></td>
+            }
+            else
+            {
+                <td style="background-color: green;"></td>
+            }
 
-                @if (report.Status == 3)
-                {
-                    <td style="background-color: green;"></td>
-                }
-                else if (report.Status == 2)
-                {
-                    <td style="background-color: orange;"></td>
-                }
-                else
-                {
-                    <td style="background-color: red;"></td>
-                }
-            </tr>
-        }
+            @if (report.Status == 3)
+            {
+                <td style="background-color: green;"></td>
+            }
+            else if (report.Status == 2)
+            {
+                <td style="background-color: orange;"></td>
+            }
+            else
+            {
+                <td style="background-color: red;"></td>
+            }
+        </tr>
+            
+    }
     </tbody>
 </table>
+
+@foreach (var report in Model)
+{
+    <script>
+        document.querySelector('#pothole@(report.Id)').addEventListener('click',
+            function() {
+                $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToShortDateString()');
+                $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToShortDateString()');
+                $('#description', $('#employee-modal')).val('@report.Description');
+                $("#employee-modal").modal();
+            });
+    </script>
+}
+
+
+
 <div class="container">
     <div class="modal fade" id="employee-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -100,7 +127,9 @@
                 <div class="modal-body">
                     <p>thar be fields missin'</p>
                     <form>
-                        
+                        <p><span style="font-weight: bold">Date Inspected:</span> <input type="text" id="dateinspected" style="border:none"></input></p>
+                        <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="daterepaired" style="border:none"></input></p>
+                        <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="description" style="border:none"></input></p>
                     </form>
                 </div>
                 <div class="modal-footer">
