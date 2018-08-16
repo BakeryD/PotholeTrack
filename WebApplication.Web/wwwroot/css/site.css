@@ -118,8 +118,8 @@ li > a#logout {
 /** Modal start **/
 
 .modal-header, h4, .close {
-    background-color: #5cb85c;
-    color: white !important;
+    background-color: black;
+    color: aliceblue !important;
     text-align: center;
     font-size: 30px;
 }
@@ -130,10 +130,13 @@ li > a#logout {
 
 .modal-body {
     padding: 40px 50px;
+    color: aliceblue;
+    background-color: #767676;
 }
 
 .modal-footer {
-    background-color: #f9f9f9;
+    color: aliceblue;
+    background-color: black;
 }
 
 /** Modal End **/
