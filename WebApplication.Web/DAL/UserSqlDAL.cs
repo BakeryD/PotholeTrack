@@ -106,11 +106,44 @@ namespace WebApplication.Web.DAL
             }            
         }
 
-        /// <summary>
-        /// Updates the user in the database.
-        /// </summary>
-        /// <param name="user"></param>
-        public void UpdateUser(User user)
+
+		/// <summary>
+		/// Gets the user from the database.
+		/// </summary>
+		/// <param name="userid"></param>
+		/// <returns></returns>
+		public List<int> GetUserList(int userid)
+	    {
+			List<int> userReports = new List<int>();
+		    try
+		    {
+			    using (SqlConnection conn = new SqlConnection(connectionString))
+			    {
+				    conn.Open();
+				    SqlCommand cmd = new SqlCommand("SELECT record_id FROM user_records WHERE user_id = @userid;", conn);
+				    cmd.Parameters.AddWithValue("@userid", userid);
+
+				    SqlDataReader reader = cmd.ExecuteReader();
+
+				    while (reader.Read())
+				    {
+					    userReports.Add(Convert.ToInt32(reader["record_id"]));
+				    }
+			    }
+
+			    return userReports;
+		    }
+		    catch (SqlException ex)
+		    {
+			    throw ex;
+		    }
+	    }
+
+		/// <summary>
+		/// Updates the user in the database.
+		/// </summary>
+		/// <param name="user"></param>
+		public void UpdateUser(User user)
         {
             try
             {

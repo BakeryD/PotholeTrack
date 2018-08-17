@@ -27,29 +27,35 @@ namespace WebApplication.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Login(LoginViewModel loginViewModel)
-        {
-            // Ensure the fields were filled out
-            if (ModelState.IsValid)
-            {
-                // Check that they provided correct credentials
-                bool validLogin = authProvider.SignIn(loginViewModel.Username, loginViewModel.Password);
-                if (validLogin)
-                {
-                    var isLoggedIn = authProvider.GetCurrentUser();
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Login(LoginViewModel loginViewModel)
+		{
 
-                    // Redirect the user where you want them to go after successful login
-                    ViewData["loggedIn"] = (isLoggedIn != null);
-                    return RedirectToAction("Index", "Home");
-                }
-            }
+			var isLoggedIn = authProvider.GetCurrentUser();
 
-            return View("Register");
-        }
+			// Ensure the fields were filled out
+			if (ModelState.IsValid)
+			{
+				// Check that they provided correct credentials
+				bool validLogin = authProvider.SignIn(loginViewModel.Username, loginViewModel.Password);
+				if (validLogin)
+				{
 
-        [HttpPost]
+					// Redirect the user where you want them to go after successful login
+					isLoggedIn = authProvider.GetCurrentUser();
+					ViewData["loggedIn"] = (isLoggedIn != null);
+					return RedirectToAction("Index", "Home");
+				}
+			}
+			isLoggedIn = authProvider.GetCurrentUser();
+			ViewData["loggedIn"] = (isLoggedIn != null);
+
+			return View("Register");
+		}
+
+
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult LogOff()
         {

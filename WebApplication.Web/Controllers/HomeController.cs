@@ -45,12 +45,15 @@ namespace WebApplication.Web.Controllers
             if (isLoggedIn!=null)
             {
                 ViewData["currentUserID"] = isLoggedIn.Id;
+                ViewData["currentReportIDs"] = uDal.GetUserList(isLoggedIn.Id);
 
             }
             else
             {
                 ViewData["currentUserID"] = -1;
-            }
+	            List<int> temp = new List<int>() {-1};
+	            ViewData["currentReportIDs"] = temp;
+			}
             return View(reports);
         }
 
