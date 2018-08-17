@@ -36,13 +36,16 @@ namespace WebApplication.Web.Controllers
 	    {
 		    report.Submitter = auth.GetCurrentUser().Id;
             report.DateCreated = DateTime.Now;
-		    dal.CreateReport(report);
+		   int id= dal.CreateReport(report);
+            report = dal.GetReport(id);
+            dal.AddReport(report);
 
-			return Ok();
+
+            return Ok();
 	    }
 
         /// <summary>
-        /// Creates a new report in the system.
+        /// Increments the report count of a report in the system.
         /// </summary>
         /// <param name="report"></param>
         /// <returns></returns>
