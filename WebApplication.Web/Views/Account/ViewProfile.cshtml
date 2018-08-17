@@ -58,7 +58,7 @@
 
                 <tr id="profile-row@(report.Id)">
 
-                    <td style="text-align: center;">CLE529@(report.Id)@(rnd.Next(35000, 80000))</td>
+                    <td style="text-align: center;">@report.ReportNumber</td>
                     <td style="text-align: center;"><a data-target="#potholemap" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" style="cursor: pointer;"> @report.Lattitude, @report.Longitude </a></td>
                     <td style="text-align: center;">@report.DateCreated</td>
 

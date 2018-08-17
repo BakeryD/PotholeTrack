@@ -34,7 +34,7 @@
     <thead>
     <tr>
         <th class="th-sm" style="text-align: center;">
-            ID#
+            Report ID#
             <i class="fa fa-sort float-right" aria-hidden="true"></i>
         </th>
         <th class="th-sm" style="text-align: center;">
@@ -62,7 +62,7 @@
     @foreach (var report in Model)
     {
         <tr>
-            <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.Id</button></td>
+            <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.ReportNumber</button></td>
             
 
             <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
