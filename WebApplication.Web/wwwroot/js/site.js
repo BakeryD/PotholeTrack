@@ -38,7 +38,7 @@ function saveData() {
             'Content-Type': 'application/json'
         }
     };
-
+ 
     fetch(url, settings)
         .then(function (response) {
             if (!response.ok) {
