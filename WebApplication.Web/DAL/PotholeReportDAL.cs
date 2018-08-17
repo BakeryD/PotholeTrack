@@ -20,12 +20,14 @@ namespace WebApplication.Web.DAL
 			this.connectionString = connectionString;
 		}
 
-		/// <summary>
-		/// Saves the new report to the database.
-		/// </summary>
-		/// <param name="report"></param>
-		public void CreateReport(Report report)
+        /// <summary>
+        /// Saves the new report to the database.
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns>The ID of the report after it has been saved in the database.</returns>
+		public int CreateReport(Report report)
 		{
+            int newestId;
 			try
 			{
 				using (SqlConnection conn = new SqlConnection(connectionString))
@@ -34,7 +36,7 @@ namespace WebApplication.Web.DAL
 					SqlCommand cmd =
 						new SqlCommand(
                             $"INSERT INTO records(submitter, datecreated, lattitude, longitude, status, reportcount)" +
-                            $" VALUES (@submitter, @datecreated, @lattitude, @longitude, @status, @reportcount);",
+                            $" VALUES (@submitter, @datecreated, @lattitude, @longitude, @status, @reportcount); Select Max(id) from records;",
 							conn);
 					cmd.Parameters.AddWithValue("@submitter", report.Submitter);
 					cmd.Parameters.AddWithValue("@datecreated", report.DateCreated);
@@ -42,11 +44,11 @@ namespace WebApplication.Web.DAL
 					cmd.Parameters.AddWithValue("@lattitude", report.Lattitude);
                     cmd.Parameters.AddWithValue("@status", report.Status);
 					cmd.Parameters.AddWithValue("@reportcount", report.ReportCount);
-					
-					cmd.ExecuteNonQuery();
+
+                     newestId= Convert.ToInt32(cmd.ExecuteScalar());
 
 				}
-                return;
+                return newestId;
             }
             catch (SqlException ex)
 			{

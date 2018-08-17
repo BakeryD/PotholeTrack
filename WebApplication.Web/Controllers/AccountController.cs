@@ -64,6 +64,8 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            var isLoggedIn = authProvider.GetCurrentUser();
+            ViewData["loggedIn"] = (isLoggedIn != null);
             return View();
         }
 
