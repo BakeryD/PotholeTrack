@@ -68,6 +68,11 @@ namespace WebApplication.Web.Models.Account
 	    /// The pothole description (if any).
 	    /// </summary>
 	    public string Description { get; set; }
+
+	    /// <summary>
+	    /// The new and improved report number.
+	    /// </summary>
+	    public string ReportNumber { get; set; }
 	}
 }
 

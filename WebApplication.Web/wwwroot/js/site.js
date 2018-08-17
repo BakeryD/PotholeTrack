@@ -19,7 +19,7 @@ $(document).ready(function () {
 
 
 function saveData() {
-    
+    var reportNumber = getRndInteger();
     var base = 'https://localhost:44302';
     var url = `${base}/api/record/create`;
     var lat = marker.getPosition().lat();
@@ -32,7 +32,8 @@ function saveData() {
             Lattitude: lat,  
             Longitude: lng, 
             Status: 1,
-            ReportCount: 1
+            ReportCount: 1,
+            ReportNumber: 'CLE' + reportNumber
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -52,6 +53,10 @@ function saveData() {
             console.error('Error:', error);
         });
 
+}
+
+function getRndInteger() {
+    return Math.floor(Math.random() * (80000 - 35000 + 1)) + 35000;
 }
 
 function addCount() {

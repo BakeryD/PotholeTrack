@@ -35,8 +35,8 @@ namespace WebApplication.Web.DAL
 					conn.Open();
 					SqlCommand cmd =
 						new SqlCommand(
-                            $"INSERT INTO records(submitter, datecreated, lattitude, longitude, status, reportcount)" +
-                            $" VALUES (@submitter, @datecreated, @lattitude, @longitude, @status, @reportcount); Select Max(id) from records;",
+                            $"INSERT INTO records(submitter, datecreated, lattitude, longitude, status, reportcount, reportnumber)" +
+                            $" VALUES (@submitter, @datecreated, @lattitude, @longitude, @status, @reportcount, @reportnumber); Select Max(id) from records;",
 							conn);
 					cmd.Parameters.AddWithValue("@submitter", report.Submitter);
 					cmd.Parameters.AddWithValue("@datecreated", report.DateCreated);
@@ -44,6 +44,7 @@ namespace WebApplication.Web.DAL
 					cmd.Parameters.AddWithValue("@lattitude", report.Lattitude);
                     cmd.Parameters.AddWithValue("@status", report.Status);
 					cmd.Parameters.AddWithValue("@reportcount", report.ReportCount);
+					cmd.Parameters.AddWithValue("@reportnumber", report.ReportNumber);
 
                      newestId= Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -165,6 +166,7 @@ namespace WebApplication.Web.DAL
                             $" status = @status," +
                             $" reportcount = @reportcount," +
                             $" description = @description" +
+							$" reportnumber = @reportnumber" +
                             $" WHERE id = @id;",
 							conn);
 					cmd.Parameters.AddWithValue("@longitude", report.Longitude);
@@ -175,6 +177,7 @@ namespace WebApplication.Web.DAL
 					cmd.Parameters.AddWithValue("@status", report.Status);
 					cmd.Parameters.AddWithValue("@reportcount", report.ReportCount);
 					cmd.Parameters.AddWithValue("@description", report.Description);
+					cmd.Parameters.AddWithValue("@reportnumber", report.ReportNumber);
 
 					cmd.ExecuteNonQuery();
 
@@ -208,7 +211,8 @@ namespace WebApplication.Web.DAL
 				DateRepaired = Convert.ToDateTime(reader["repairdate"]),
 				Status = Convert.ToInt32(reader["status"]),
 				ReportCount = Convert.ToInt32(reader["reportcount"]),
-				Description = Convert.ToString(reader["description"])
+				Description = Convert.ToString(reader["description"]),
+				ReportNumber = Convert.ToString(reader["reportnumber"])
 			};
 		}
 

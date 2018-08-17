@@ -28,40 +28,41 @@
     </div>
 </div>
 <hr />
-
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+<br>
 <table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
     <thead>
-        <tr>
-            <th class="th-sm" style="text-align: center;">
-                ID#
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Location
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Date Created
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Report Count
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Severity
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Status
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </tr>
+    <tr>
+        <th class="th-sm" style="text-align: center;">
+            Report ID#
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Location
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Date Created
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Report Count
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Severity
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+        Status
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </tr>
     </thead>
     <tbody id="table-data">
-        @foreach (var report in Model)
-        {
+    @foreach (var report in Model)
+    {
         <tr>
-            <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.Id</button></td>
+            <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.ReportNumber</button></td>
             
 
             <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
@@ -95,9 +96,20 @@
             }
         </tr>
 
-        }
+    }
     </tbody>
 </table>
+
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#table-data tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 
 @foreach (var report in Model)
 {
@@ -155,7 +167,7 @@
                        
                         <p><span style="font-weight: bold">Date Repaired:  </span> <input type="date" id="daterepaired" style="border: none; color: black;"></input></p>
                         <p><span style="font-weight: bold">Inspection/Repair Notes</span> <input type="text" id="description" style="border: none; color: black;"></input></p>
-                        <button type="submit" class="btn btn-success btn-default" data-dismiss="modal" onClick="updateReport()"><span class="glyphicon glyphicon-check"></span> Update Record</button>
+                        <button type="submit" class="btn btn-success btn-default" data-dismiss="modal" onClick="updateReport()" style="text-align: center;" ><span class="glyphicon glyphicon-check"></span> Update Record</button>
                     </form>
                 </div>
                 <div class="modal-footer">

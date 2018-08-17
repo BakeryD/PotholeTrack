@@ -4,11 +4,6 @@
     Random rnd = new Random();
 }
 
-
-
-
-
-
 <h2 id="profile-title">Your Profile</h2>
 
 <p class="profile-welcome">Welcome back <strong id="user-name">@Model.user.FirstName @Model.user.LastName</strong></p>
@@ -61,9 +56,9 @@
             if (report.Submitter == @Model.user.Id)
             {
 
-                <tr>
+                <tr id="profile-row@(report.Id)">
 
-                    <td style="text-align: center;">CLE529@(report.Id)@(rnd.Next(35000, 80000))</td>
+                    <td style="text-align: center;">@report.ReportNumber</td>
                     <td style="text-align: center;"><a data-target="#potholemap" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" style="cursor: pointer;"> @report.Lattitude, @report.Longitude </a></td>
                     <td style="text-align: center;">@report.DateCreated</td>
 
@@ -81,6 +76,16 @@
                         <td style="background-color: red; text-align: center;">Waiting for Inspection!</td>
                     }
                 </tr>
+
+                <script>
+                    document.querySelector('#profile-row@(report.Id)').addEventListener('click',
+                        function () {
+                            $('#datecreated', $('#potholemap')).val('@report.DateInspected.ToShortDateString()');
+                            $('#status', $('#potholemap')).val('@report.Status');
+                            $('#severity', $('#potholemap')).val('@report.Severity');
+                            $('#reportcount', $('#potholemap')).val('@report.ReportCount');
+                        });
+                </script>
             }
         }
     </tbody>
@@ -126,15 +131,32 @@
                             async defer></script>
 
                 </div>
-                <p><span style="font-weight: bold">Date Report Created:</span> <input type="text" id="datecreated" readonly style="border: none"></input></p>
-                <p><span style="font-weight: bold">Status:</span> Inspected and Awaiting Repair</p>
-                <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="severity" readonly style="border: none"></input></p>
-                <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="reportcount" readonly style="border: none"></input></p>
+                <p><span style="font-weight: bold">Date Report Created:</span> <input type="text" id="datecreated" readonly style="border: none; background-color: #767676;"></input></p>
+                <script>
+                    var status2 = document.getElementById('status').value;
+                    if (status2 === 3) {
+                        status2 = 'Fixed!';
+
+                    }
+                    else if (status2 === 2) {
+                        status2 = 'Waiting for repair!';
+                    }
+                    else {
+                        status2 = 'Waiting for inspection!';
+                    }
+                    $('#status', $('#potholemap')).val(status);
+                </script>
+
+                <p><span style="font-weight: bold">Current Status:</span> <input type="text" id="status" readonly style="border: none; background-color: #767676;"></input></p>
+                <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="severity" readonly style="border: none; background-color: #767676;"></input></p>
+                
+                <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="reportcount" readonly style="border: none; background-color: #767676;"></input></p>
 
             </div>
             <div class="modal-footer">
-              <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-danger btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
 
+                <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-danger btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+               
             </div>
         </div>
     </div>
