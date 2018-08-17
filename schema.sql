@@ -45,7 +45,7 @@ CREATE TABLE records
 	lattitude		decimal(9,6) not null,
 	longitude		decimal(9,6) not null,
 	status          int NOT NULL default(1),
-    reportcount    int NOT NULL default(1),
+    reportcount    int NOT NULL default(0),
     description     TEXT default(''),
 
     Constraint  pk_records  PRIMARY KEY (id),
@@ -72,6 +72,7 @@ Create Table user_records
 	user_id			int		Not Null,
 	record_id		int		Not Null,
 
+	Constraint	pk_user_records			Primary Key (user_id, record_id),
 	Constraint	fk_user_records_user	Foreign Key	(user_id)	References	users(id),
 	Constraint	fk_user_records_records	Foreign Key	(record_id)	References	records(id)
 );
@@ -80,3 +81,10 @@ COMMIT TRANSACTION;
 
 select * from users;
 select * from records;
+select * from user_records;
+
+delete from records
+
+Update records set status=2;
+update records set severity=1 where id IN (1,4,5,6);
+

@@ -125,7 +125,7 @@ namespace WebApplication.Web.DAL
 				using (SqlConnection conn = new SqlConnection(connectionString))
 				{
 					conn.Open();
-					SqlCommand cmd = new SqlCommand("Insert Into user_records (user_id, record_id) Values (@user, @reportid);", conn);
+					SqlCommand cmd = new SqlCommand("Insert Into user_records (user_id, record_id) Values (@user, @reportid); Update records Set reportcount = reportcount + 1 Where id = @reportid;", conn);
 					cmd.Parameters.AddWithValue("@reportid", report.Id);
 					cmd.Parameters.AddWithValue("@user", report.Submitter);
 

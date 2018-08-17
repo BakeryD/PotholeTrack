@@ -54,10 +54,17 @@ namespace WebApplication.Web.Controllers
         public ActionResult AddCount(Report report)
         {
             report = dal.GetReport(report.Id);
-            report.Submitter = auth.GetCurrentUser().Id;
-            dal.AddReport(report);
+            if (!(report.Submitter == auth.GetCurrentUser().Id))
+            {
+                report.Submitter = auth.GetCurrentUser().Id;
+                dal.AddReport(report);
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
 
-            return Ok();
         }
 
     }
