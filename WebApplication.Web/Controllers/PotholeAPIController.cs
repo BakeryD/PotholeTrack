@@ -31,36 +31,41 @@ namespace WebApplication.Web.Controllers
 	    /// <param name="report"></param>
 	    /// <returns></returns>
 	    [HttpPost]
+        [Route("create")]
 	    public ActionResult Create(Report report)
 	    {
-			Console.WriteLine("hello");
 		    report.Submitter = auth.GetCurrentUser().Id;
             report.DateCreated = DateTime.Now;
-		    dal.CreateReport(report);
+		   int id= dal.CreateReport(report);
+            report = dal.GetReport(id);
+            dal.AddReport(report);
 
-			return Ok();
 
-		    // Return a created at route to indicate where the resource can be found
-		    //return Ok(); //;"GetReport", null);//, new { id = report.Id }, report);
+            return Ok();
 	    }
 
-		///// <summary>
-		///// Creates a new report in the system.
-		///// </summary>
-		///// <param name="report"></param>
-		///// <returns></returns>
-		//[HttpPost]
-	 //   public ActionResult AddCount(Report report)
-	 //   {
-		//    Console.WriteLine("hello2");
-		//    report.Submitter = auth.GetCurrentUser().Id;
-		//	dal.AddReport(report);
+        /// <summary>
+        /// Increments the report count of a report in the system.
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("update")]
+        public ActionResult AddCount(Report report)
+        {
+            report = dal.GetReport(report.Id);
+            if (!(report.Submitter == auth.GetCurrentUser().Id))
+            {
+                report.Submitter = auth.GetCurrentUser().Id;
+                dal.AddReport(report);
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
 
-		//    return Ok();
+        }
 
-		//    // Return a created at route to indicate where the resource can be found
-		//    //return Ok(); //;"GetReport", null);//, new { id = report.Id }, report);
-	 //   }
-
-	}
+    }
 }

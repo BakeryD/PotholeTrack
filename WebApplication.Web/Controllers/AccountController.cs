@@ -15,10 +15,6 @@ namespace WebApplication.Web.Controllers
 	    private readonly IPotholeDAL dal;
         private readonly IAuthProvider authProvider;
 
-        [ViewData]
-        public bool loggedIn => authProvider.IsLoggedIn;
-
-
         public AccountController(IAuthProvider authProvider, IPotholeDAL dal)
         {
             this.authProvider = authProvider;
@@ -59,7 +55,6 @@ namespace WebApplication.Web.Controllers
         {
             // Clear user from session
             authProvider.LogOff();
-            TempData["loggedIn"] = false;
 
             // Redirect the user where you want them to go after logoff
             return RedirectToAction("Index", "Home");
@@ -69,6 +64,8 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            var isLoggedIn = authProvider.GetCurrentUser();
+            ViewData["loggedIn"] = (isLoggedIn != null);
             return View();
         }
 
