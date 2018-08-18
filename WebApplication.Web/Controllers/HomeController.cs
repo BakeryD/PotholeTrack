@@ -26,10 +26,6 @@ namespace WebApplication.Web.Controllers
             this.cDal = c;
             this.authProvider = auth;
         }
-        //[ViewData]
-       // public bool loggedIn => authProvider.IsLoggedIn;
-
-        
 
         /// <summary>
         /// Displays the home page with a map showing all of the currently unfixed potholes
@@ -80,14 +76,6 @@ namespace WebApplication.Web.Controllers
             ViewData["loggedIn"] = authProvider.IsLoggedIn;
 			return View(reports);
 		}
-
-        [HttpPost]
-        public IActionResult AddRecord(Report report)
-        {
-            //var maxId = pDal.CreateReport(report);
-
-            return null;
-        }
 
         public IActionResult Privacy()
         {

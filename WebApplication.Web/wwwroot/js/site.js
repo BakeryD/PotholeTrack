@@ -24,34 +24,41 @@ function saveData() {
     var url = `${base}/api/record/create`;
     var lat = marker.getPosition().lat();
     var lng = marker.getPosition().lng();
-    var settings = {
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify({
-            DateCreated: new Date(),
-            Lattitude: lat,  
-            Longitude: lng, 
-            Status: 1,
-            ReportCount: 1,
-            ReportNumber: 'CLE' + reportNumber
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
- 
-    fetch(url, settings)
-        .then(function (response) {
-            if (!response.ok) {
-                console.log(response.statusText);
-                //throw Error(response.statusText);
+
+    if (lng >= -81.820158 &&
+        lng <= -81.535962 &&
+        lat <= 41.579773 &&
+        lat >= 41.427390) {
+
+        var settings = {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify({
+                DateCreated: new Date(),
+                Lattitude: lat,
+                Longitude: lng,
+                Status: 1,
+                ReportCount: 1,
+                ReportNumber: 'CLE' + reportNumber
+            }),
+            headers: {
+                'Content-Type': 'application/json'
             }
-            return response;
-        }).then(function (response) {
-            console.log("ok");
-        }).catch(error => {
-            console.error('Error:', error);
-        });
+        };
+
+        fetch(url, settings)
+            .then(function (response) {
+                if (!response.ok) {
+                    console.log(response.statusText);
+                    //throw Error(response.statusText);
+                }
+                return response;
+            }).then(function (response) {
+                console.log("ok");
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+    } 
 
 }
 

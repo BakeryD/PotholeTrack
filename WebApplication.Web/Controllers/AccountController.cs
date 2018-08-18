@@ -31,6 +31,9 @@ namespace WebApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(LoginViewModel loginViewModel)
         {
+
+            var isLoggedIn = authProvider.GetCurrentUser();
+
             // Ensure the fields were filled out
             if (ModelState.IsValid)
             {
@@ -38,13 +41,15 @@ namespace WebApplication.Web.Controllers
                 bool validLogin = authProvider.SignIn(loginViewModel.Username, loginViewModel.Password);
                 if (validLogin)
                 {
-                    var isLoggedIn = authProvider.GetCurrentUser();
 
                     // Redirect the user where you want them to go after successful login
+                     isLoggedIn = authProvider.GetCurrentUser();
                     ViewData["loggedIn"] = (isLoggedIn != null);
                     return RedirectToAction("Index", "Home");
                 }
             }
+            isLoggedIn = authProvider.GetCurrentUser();
+            ViewData["loggedIn"] = (isLoggedIn != null);
 
             return View("Register");
         }
