@@ -85,7 +85,13 @@ select * from records;
 select * from user_records;
 
 delete from records
+Insert Into records Values ()
+Update records set reportcount=2 where id=4;
+update records set severity=1, lattitude = 41.579773 , longitude= -81.547412 , status=2 where id =4 ;
 
-Update records set status=2;
-update records set severity=1 where id IN (1,4,5,6);
-
+Begin Try
+Insert Into user_records (user_id, record_id) Values (2, 4); Update records Set reportcount = reportcount + 1 Where id = 4;
+End Try
+Begin Catch
+End Catch;
+Select records.reportcount from records where id = 4;
