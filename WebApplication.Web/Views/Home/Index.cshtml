@@ -5,7 +5,8 @@
     int yearCount = 0;
     int monthCount = 0;
     int currentUserID = (int)ViewData["currentUserID"];
-
+    List<int> userReportIds = (List<int>)ViewData["currentReportIDs"];
+    bool userFlag = false;
 }
 
 
@@ -62,7 +63,32 @@
                     position: point
                 });
 
-                google.maps.event.addListener(pothole@(report.Id), 'click', function () {
+                google.maps.event.addListener(pothole@(report.Id), 'click', function() {
+                    @if ( userReportIds.Contains(report.Id))
+                    {
+                        <text>
+                        $('#potholedata').on('shown.bs.modal', function (e) {
+
+                            console.dir(e.currentTarget);
+                            $('#addReport').addClass('hidden');
+                            $(this).on('hide.bs.modal', () => {
+                                $('#addReport').removeClass('hidden');
+
+                            })
+                            // do something...
+                          });
+                    </text>
+                    }
+                    else
+                    {
+                            <text>
+                    $('#potholedata').on('shown.bs.modal', function (e) {
+                        $('#addReport').removeClass('hidden');
+
+                    });
+                            </text>
+                    }
+
                     $('#datecreated', $('#potholedata')).val('@report.DateCreated.ToShortDateString()');
                     $('#severity', $('#potholedata')).val('@report.Severity');
                     $('#reportcount', $('#potholedata')).val('@report.ReportCount');
@@ -118,6 +144,7 @@
                         }
             });
     }
+
 
 
 </script>
@@ -182,12 +209,12 @@
 
             </div>
             <div class="modal-footer">
-                @if ((bool)ViewData["loggedIn"])
+                @if ((bool)ViewData["loggedIn"] && (!userFlag))
                 {
                     <button id="addReport" type="button" onclick="incrementReportCount()" class="btn btn-primary btn-default" data-dismiss="modal">Add your Report</button>
                 }
 
-                <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-danger btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger btn-default pull-left" data-dismiss="modal">Close</button>
 
             </div>
         </div>

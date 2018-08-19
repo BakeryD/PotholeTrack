@@ -47,14 +47,16 @@ namespace WebApplication.Web.Controllers
                     ViewData["loggedIn"] = (isLoggedIn != null);
                     return RedirectToAction("Index", "Home");
                 }
-            }
-            isLoggedIn = authProvider.GetCurrentUser();
-            ViewData["loggedIn"] = (isLoggedIn != null);
 
-            return View("Register");
-        }
+			}
+			isLoggedIn = authProvider.GetCurrentUser();
+			ViewData["loggedIn"] = (isLoggedIn != null);
 
-        [HttpPost]
+			return View("Register");
+		}
+
+
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult LogOff()
         {

@@ -63,5 +63,11 @@ namespace WebApplication.Web.Models
 	    /// </summary>
 	    [Required]
 	    public string PhoneNumber { get; set; }
+
+	    /// <summary>
+	    /// The user's phone number.
+	    /// </summary>
+	    [Required]
+	    public List<int> ReportIds { get; set; }
 	}
 }

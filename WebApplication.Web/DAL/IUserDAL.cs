@@ -32,5 +32,11 @@ namespace WebApplication.Web.DAL
         /// </summary>
         /// <param name="user"></param>
         void DeleteUser(User user);
-    }
+
+	    /// <summary>
+	    /// Gets the list of report ID's for that user.
+	    /// </summary>
+	    /// <param name="userid"></param>
+	    List<int> GetUserList(int userid);
+	}
 }

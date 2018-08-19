@@ -212,3 +212,7 @@ strong#user-data {
 }
 
 /** Employee View end **/
+
+.hidden {
+    display:none;
+}
