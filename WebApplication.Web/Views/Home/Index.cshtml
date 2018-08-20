@@ -276,7 +276,11 @@
 
 </div>
 
-
-
-
-
+@if ((bool)ViewData["loggedIn"])
+{
+    <script>
+        $(document).ready(function () {
+            $('#employee-signup').remove();
+        });
+    </script>
+}

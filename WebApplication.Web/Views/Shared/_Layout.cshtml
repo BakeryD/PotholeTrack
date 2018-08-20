@@ -27,13 +27,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">POTHOLES!!!!</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                     <li><a id="profile" asp-area="" asp-controller="Account" asp-action="ViewProfile">Profile</a></li>
                     <li><a id="employee-btn" asp-area="" asp-controller="Home" asp-action="Employee">Employee</a></li>
 
@@ -74,7 +72,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                        <p>Not a member? <button class="btn btn-primary" asp-action="register" asp-controller="account">Sign Up</button></p>
+                        <p>Not a member? <a class="btn btn-primary" asp-controller="Account" asp-action="Register">Sign Up</a></p>
                     </div>
                 </div>
             </div>
@@ -110,6 +108,7 @@
         <footer>
             <p style="text-align: center; color: aliceblue;">&copy; 2018 - WebApplication.Web</p>
         </footer>
+        <a id="employee-signup" class="btn btn-dark pull-right" asp-action="register" asp-controller="account">Employee Sign Up</a>
     </div>
 
     <environment include="Development">
