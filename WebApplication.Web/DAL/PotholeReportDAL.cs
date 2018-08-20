@@ -35,8 +35,8 @@ namespace WebApplication.Web.DAL
 					conn.Open();
 					SqlCommand cmd =
 						new SqlCommand(
-                            $"INSERT INTO records(submitter, datecreated, lattitude, longitude, status, reportcount, reportnumber)" +
-                            $" VALUES (@submitter, @datecreated, @lattitude, @longitude, @status, @reportcount, @reportnumber); Select Max(id) from records;",
+                            $"INSERT INTO records(submitter, datecreated, severity, lattitude, longitude, status, reportcount, reportnumber)" +
+                            $" VALUES (@submitter, @datecreated, @severity, @lattitude, @longitude, @status, @reportcount, @reportnumber); Select Max(id) from records;",
 							conn);
 					cmd.Parameters.AddWithValue("@submitter", report.Submitter);
 					cmd.Parameters.AddWithValue("@datecreated", report.DateCreated);
@@ -45,6 +45,7 @@ namespace WebApplication.Web.DAL
                     cmd.Parameters.AddWithValue("@status", report.Status);
 					cmd.Parameters.AddWithValue("@reportcount", report.ReportCount);
 					cmd.Parameters.AddWithValue("@reportnumber", report.ReportNumber);
+                    cmd.Parameters.AddWithValue("@severity", report.Severity);
 
                      newestId= Convert.ToInt32(cmd.ExecuteScalar());
 
