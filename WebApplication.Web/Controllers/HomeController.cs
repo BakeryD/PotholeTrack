@@ -32,6 +32,7 @@ namespace WebApplication.Web.Controllers
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
+
         {
             var reports = pDal.GetAllReports();
             var isLoggedIn = authProvider.GetCurrentUser();

@@ -50,7 +50,7 @@ namespace WebApplication.Web.Controllers
         /// <param name="report"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("update")]
+        [Route("AddReport")]
         public ActionResult AddCount(Report report)
         {
             report = dal.GetReport(report.Id);
@@ -67,11 +67,13 @@ namespace WebApplication.Web.Controllers
 
         }
 
-        [HttpPut]
-        [Route("update/{id}")]
-        public ActionResult UpdateReport(int id,Report updatedReport)
+        [HttpPost]
+        [Route("update")]
+        public ActionResult UpdateReport(Report updatedReport)
         {
-            Report existingReport = dal.GetReport(id);
+            //Passing in the JSON as a Report parameter
+
+            Report existingReport = dal.GetReport(updatedReport.Id);
             if (updatedReport.DateInspected != null)
             {
                 existingReport.DateInspected = updatedReport.DateInspected;

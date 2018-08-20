@@ -164,11 +164,11 @@ namespace WebApplication.Web.DAL
 
 					SqlCommand cmd =
 						new SqlCommand(
-							$"UPDATE reports SET dateinspected = @dateinspected," +
+							$"UPDATE records SET dateinspected = @dateinspected," +
                             $" severity = @severity," +
-                            $" daterepaired = @daterepaired," +
+                            $" repairdate = @daterepaired," +
                             $" status = @status," +
-                            $" description = @description," +
+                            $" description = @description" +
                             $" WHERE id = @id;",
 							conn);
                     cmd.Parameters.AddWithValue("@dateinspected", report.DateInspected);

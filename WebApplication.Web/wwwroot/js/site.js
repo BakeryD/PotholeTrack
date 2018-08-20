@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 function saveData() {
     var reportNumber = getRndInteger();
-    var base = window.location.href;
+    var base = window.location.protocol + "//" + window.location.host;
     var url = `${base}/api/record/create`;
     var lat = marker.getPosition().lat();
     var lng = marker.getPosition().lng();
@@ -64,8 +64,8 @@ button.on('click', () => {
 
 function incrementReportCount() {
     var recordId = $('form[name="updateRecord"]').children('#p-id').val();
-    var base = 'https://localhost:44302';
-    var url = `${base}/api/record/update`;
+    var base = window.location.protocol + "//" + window.location.host;
+    var url = `${base}/api/record/AddReport`;
     var settings = {
         method: 'POST',
         credentials: 'include',
@@ -92,13 +92,58 @@ function incrementReportCount() {
 }
 
 function updateReport() {
-    var base = window.location.href;
+    var base = window.location.protocol + "//" + window.location.host;
     var id = $('#report-id', $('#employee-modal')).val();
-    var url = `${base}api/record/update/${id}`;
+    var url = `${base}/api/record/update`;
     var dateInspected = $('#dateinspected', $('#employee-modal')).val();
     var dateRepaired = $('#daterepaired', $('#employee-modal')).val();
     var description = $('#description', $('#employee-modal')).val();
-    //console.log(id, dateInspected, dateRepaired, description);
+    var status = $('#status', $('#employee-modal')).val();
+    var severity = $('#severity', $('#employee-modal')).val();
+
+
+    if (dateInspected === "") {
+        dateInspected = null;
+    }
+    if (dateRepaired === "") {
+        dateRepaired = null;
+    }
+    if (description === "") {
+        description = null;
+    }
+
+    var settings = {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify({
+            //Only passing in values that are being changed and the id so that we
+            // can get the existing report when updating
+            // Also passing in anything marked as required in the model
+            // Otherwise we get a 400 error
+            Id : id,
+            Severity: severity,
+            Status: status,
+            Description: description,
+            DateInspected: dateInspected,
+            DateRepaired: dateRepaired,
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    fetch(url, settings)
+        .then(function (response) {
+            if (!response.ok) {
+                console.log(response.statusText);
+                //throw Error(response.statusText);
+            }
+            return response;
+        }).then(function (response) {
+            console.log("ok");
+        }).catch(error => {
+            console.error('Error:', error);
+        });
 
 
 }
