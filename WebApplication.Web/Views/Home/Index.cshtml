@@ -15,7 +15,7 @@
     var marker = null;
     var infowindow;
     var messagewindow;
-    var image = '/images/constructioncone.jpg';
+    var markerimage = '/images/testpothole2.png';
     var lat;
     var long;
     var potholeData;
@@ -60,7 +60,8 @@
 
                 var pothole@(report.Id) = new google.maps.Marker({
                     map: map,
-                    position: point
+                    position: point,
+                    icon: markerimage
                 });
 
                 google.maps.event.addListener(pothole@(report.Id), 'click', function() {
@@ -123,8 +124,9 @@
                     if (marker === null) {
                         marker = new google.maps.Marker({
                             position: event.latLng,
-                            map: map
-                        });
+                            map: map,
+                            icon: markerimage
+                    });
                     } else {
                         marker.setPosition(event.latLng);
                     };
