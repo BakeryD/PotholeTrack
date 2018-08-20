@@ -20,10 +20,11 @@ $(document).ready(function () {
 
 function saveData() {
     var reportNumber = getRndInteger();
-    var base = 'https://localhost:44302';
+    var base = window.location.href;
     var url = `${base}/api/record/create`;
     var lat = marker.getPosition().lat();
     var lng = marker.getPosition().lng();
+    var severity = $('#marker-severity').selectedOptions[0].value;
 
     if (lng >= -81.820158 &&
         lng <= -81.535962 &&
@@ -37,6 +38,7 @@ function saveData() {
                 DateCreated: new Date(),
                 Lattitude: lat,
                 Longitude: lng,
+                Severity: severity,
                 Status: 1,
                 ReportCount: 1,
                 ReportNumber: 'CLE' + reportNumber
@@ -68,7 +70,7 @@ function getRndInteger() {
 
 function addCount() {
 
-    var base = 'https://localhost:44302';
+    var base = window.location.href;
     var url = `${base}/api/record/update`;
     var reportid = 0;
     var settings = {

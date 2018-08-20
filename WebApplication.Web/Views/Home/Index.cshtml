@@ -64,7 +64,7 @@
                 });
 
                 google.maps.event.addListener(pothole@(report.Id), 'click', function() {
-                    @if ( userReportIds.Contains(report.Id))
+                    @if ( userReportIds.Contains(report.Id)) //IF THE USER SUBMITTED A REPORT, HIDE BUTTON
                     {
                         <text>
                         $('#potholedata').on('shown.bs.modal', function (e) {
@@ -79,7 +79,8 @@
                           });
                     </text>
                     }
-                    else
+                    else   //OTHERWISE LET THEM ADD A REPORT
+
                     {
                             <text>
                     $('#potholedata').on('shown.bs.modal', function (e) {
@@ -156,6 +157,14 @@
 
 <div id="potholereport" style="display: none">
     <p>Report a pothole here?</p>
+    <p>
+        Severity <select id="marker-severity">
+            <option value=1>1 - Not too bad.</option>
+            <option value=2>2 - This is an issue.</option>
+            <option value=3>3 - I lost a hubcap.</option>
+
+        </select>
+    </p>
     <input type='button' value='Save' onclick='saveData()' data-toggle="modal" data-target="#reportsaved" />
 </div>
 
