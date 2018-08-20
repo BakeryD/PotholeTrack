@@ -3,6 +3,13 @@
     ViewData["Title"] = "ViewProfile";
     Random rnd = new Random();
 }
+@{
+<script>
+    $(document).ready(function () {
+        $('#employee-signup').remove();
+    });
+</script>
+}
 
 <h2 id="profile-title">Your Profile</h2>
 
@@ -106,6 +113,7 @@
                         function potholeMap(lat, lng) {
 
                             var pothole = { lat, lng };
+                            var markerimage = '/images/testpothole2.png';
                             var map = new google.maps.Map(
                                 document.getElementById('map'),
                                 {
@@ -121,7 +129,7 @@
                                     ]
                                 });
 
-                            var marker = new google.maps.Marker({ position: pothole, map: map });
+                            var marker = new google.maps.Marker({ position: pothole, icon: markerimage, map: map });
 
 
                         }
@@ -149,9 +157,8 @@
 
                 <p><span style="font-weight: bold">Current Status:</span> <input type="text" id="status" readonly style="border: none; background-color: #767676;"></input></p>
                 <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="severity" readonly style="border: none; background-color: #767676;"></input></p>
-                
                 <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="reportcount" readonly style="border: none; background-color: #767676;"></input></p>
-
+                <a class="btn btn-group-lg btn-block btn-warning" href="https://drive.google.com/open?id=1Mtv98qnFfKbIh6WxVIwHa5RPbTOtGQDv" target="_blank"><span class="glyphicon glyphicon-alert"></span> Make A Claim</a>
             </div>
             <div class="modal-footer">
 

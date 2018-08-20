@@ -2,7 +2,13 @@
 @{
     ViewData["Title"] = "Employee";
 }
-
+@{
+    <script>
+        $(document).ready(function () {
+            $('#employee-signup').remove();
+        });
+    </script>
+}
 
 
 <h2 id="employee-title">Active Reports</h2>
@@ -32,79 +38,79 @@
 <br>
 <table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
     <thead>
-    <tr>
-        <th class="th-sm" style="text-align: center;">
-            Report ID#
-            <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </th>
-        <th class="th-sm" style="text-align: center;">
-            Location
-            <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </th>
-        <th class="th-sm" style="text-align: center;">
-            Date Created
-            <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </th>
-        <th class="th-sm" style="text-align: center;">
-            Report Count
-            <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </th>
-        <th class="th-sm" style="text-align: center;">
-            Severity
-            <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </th>
-        <th class="th-sm" style="text-align: center;">
-        Status
-        <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </tr>
+        <tr>
+            <th class="th-sm" style="text-align: center;">
+                Report ID#
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Location
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Date Created
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Report Count
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Severity
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Status
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </tr>
     </thead>
     <tbody id="table-data">
-    @foreach (var report in Model)
-    {
-        <tr>
-            <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.ReportNumber</button></td>
-            
+        @foreach (var report in Model)
+        {
+            <tr>
+                <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.ReportNumber</button></td>
 
-            <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
-            <td style="text-align: center;">@report.DateCreated</td>
-            <td style="text-align: center;">@report.ReportCount</td>
 
-            @if (report.Severity == 3)
-            {
-                <td style="background-color: red;"></td>
-            }
-            else if (report.Severity == 2)
-            {
-                <td style="background-color: orange;"></td>
-            }
-            else
-            {
-                <td style="background-color: green;"></td>
-            }
+                <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
+                <td style="text-align: center;">@report.DateCreated</td>
+                <td style="text-align: center;">@report.ReportCount</td>
 
-            @if (report.Status == 3)
-            {
-                <td style="background-color: green;"></td>
-            }
-            else if (report.Status == 2)
-            {
-                <td style="background-color: orange;"></td>
-            }
-            else
-            {
-                <td style="background-color: red;"></td>
-            }
-        </tr>
+                @if (report.Severity == 3)
+                {
+                    <td style="background-color: red;"></td>
+                }
+                else if (report.Severity == 2)
+                {
+                    <td style="background-color: orange;"></td>
+                }
+                else
+                {
+                    <td style="background-color: green;"></td>
+                }
 
-    }
+                @if (report.Status == 3)
+                {
+                    <td style="background-color: green;"></td>
+                }
+                else if (report.Status == 2)
+                {
+                    <td style="background-color: orange;"></td>
+                }
+                else
+                {
+                    <td style="background-color: red;"></td>
+                }
+            </tr>
+
+        }
     </tbody>
 </table>
 
 <script>
-    $(document).ready(function(){
-        $("#myInput").on("keyup", function() {
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#table-data tr").filter(function() {
+            $("#table-data tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
@@ -142,6 +148,7 @@
                         function potholeMap(lat, lng) {
 
                             var pothole = { lat, lng };
+                            var markerimage = '/images/testpothole2.png';
                             var map = new google.maps.Map(
                                 document.getElementById('map'),
                                 {
@@ -157,7 +164,7 @@
                                     ]
                                 });
 
-                            var marker = new google.maps.Marker({ position: pothole, map: map });
+                            var marker = new google.maps.Marker({ position: pothole, icon: markerimage, map: map });
 
                         }
                     </script>
@@ -165,6 +172,7 @@
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbeqY7Px86Yip_ibuSnWdVnScfdE2NPQA&"
                             async defer></script>
                     <form method="post">
+<<<<<<< HEAD
                         <p style="display:none;" id="report-id"></p>
                         <p><span style="font-weight:bold">Status:  </span><input min="1" max="3" type="number" id="status" style="border: none; color: black;"  /></p>
                         <p><span style="font-weight: bold">Date Inspected:  </span><input type="date" id="dateinspected" style="border: none; color: black;"/></p>
@@ -172,11 +180,18 @@
                         <p><span style="font-weight: bold">Date Repaired:  </span> <input type="date" id="daterepaired" style="border: none; color: black;"/></p>
                         <p><span style="font-weight: bold">Inspection/Repair Notes</span> <textarea id="description" style="border: none; color: black; margin: 0px; width: 515px; height: 157px;"></textarea></p>
                         <button type="submit" class="btn btn-success btn-default" data-dismiss="modal" onClick="updateReport()" style="text-align: center;" ><span class="glyphicon glyphicon-check"></span> Update Record</button>
+=======
+                        <p><span style="font-weight: bold">Date Inspected:  </span><input type="date" id="dateinspected" style="border: none; color: black;"></input></p>
+
+                        <p><span style="font-weight: bold">Date Repaired:  </span> <input type="date" id="daterepaired" style="border: none; color: black;"></input></p>
+                        <p><span style="font-weight: bold">Inspection/Repair Notes</span> <input type="text" id="description" style="border: none; color: black;"></input></p>
+                        <button type="submit" class="btn btn-success btn-default" data-dismiss="modal" onClick="updateReport()" style="text-align: center;"><span class="glyphicon glyphicon-check"></span> Update Record</button>
+>>>>>>> bd46b5668c55988ec5511b01c925f82dd8e084c9
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
-                    
+
                 </div>
             </div>
         </div>
