@@ -164,26 +164,19 @@ namespace WebApplication.Web.DAL
 
 					SqlCommand cmd =
 						new SqlCommand(
-							$"UPDATE reports SET longitude = @longitude," +
-                            $" lattitude = @lattitude," +
-                            $" dateinspected = @dateinspected," +
+							$"UPDATE reports SET dateinspected = @dateinspected," +
                             $" severity = @severity," +
                             $" daterepaired = @daterepaired," +
                             $" status = @status," +
-                            $" reportcount = @reportcount," +
-                            $" description = @description" +
-							$" reportnumber = @reportnumber" +
+                            $" description = @description," +
                             $" WHERE id = @id;",
 							conn);
-					cmd.Parameters.AddWithValue("@longitude", report.Longitude);
-					cmd.Parameters.AddWithValue("@lattitude", report.Lattitude);
                     cmd.Parameters.AddWithValue("@dateinspected", report.DateInspected);
 					cmd.Parameters.AddWithValue("@severity", report.Severity);
 					cmd.Parameters.AddWithValue("@daterepaired", report.DateRepaired);
 					cmd.Parameters.AddWithValue("@status", report.Status);
-					cmd.Parameters.AddWithValue("@reportcount", report.ReportCount);
 					cmd.Parameters.AddWithValue("@description", report.Description);
-					cmd.Parameters.AddWithValue("@reportnumber", report.ReportNumber);
+                    cmd.Parameters.AddWithValue("@id", report.Id);
 
 					cmd.ExecuteNonQuery();
 

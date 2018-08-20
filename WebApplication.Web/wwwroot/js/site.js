@@ -24,7 +24,6 @@ function saveData() {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify({
-                DateCreated: new Date(),
                 Lattitude: lat,
                 Longitude: lng,
                 Severity: severity,
@@ -92,3 +91,14 @@ function incrementReportCount() {
         });
 }
 
+function updateReport() {
+    var base = window.location.href;
+    var id = $('#report-id', $('#employee-modal')).val();
+    var url = `${base}api/record/update/${id}`;
+    var dateInspected = $('#dateinspected', $('#employee-modal')).val();
+    var dateRepaired = $('#daterepaired', $('#employee-modal')).val();
+    var description = $('#description', $('#employee-modal')).val();
+    //console.log(id, dateInspected, dateRepaired, description);
+
+
+}

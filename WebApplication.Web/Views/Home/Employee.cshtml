@@ -116,9 +116,11 @@
     <script>
         document.querySelector('#pothole@(report.Id)').addEventListener('click',
             function () {
+                $('#report-id', $('#employee-modal')).val(@report.Id);
                 $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToShortDateString()');
                 $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToShortDateString()');
                 $('#description', $('#employee-modal')).val('@report.Description');
+                $('#status', $('#employee-modal')).val(@report.Status);
             });
     </script>
 }
@@ -163,10 +165,12 @@
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbeqY7Px86Yip_ibuSnWdVnScfdE2NPQA&"
                             async defer></script>
                     <form method="post">
-                        <p><span style="font-weight: bold">Date Inspected:  </span><input type="date" id="dateinspected" style="border: none; color: black;"></input></p>
+                        <p style="display:none;" id="report-id"></p>
+                        <p><span style="font-weight:bold">Status:  </span><input min="1" max="3" type="number" id="status" style="border: none; color: black;"  /></p>
+                        <p><span style="font-weight: bold">Date Inspected:  </span><input type="date" id="dateinspected" style="border: none; color: black;"/></p>
                        
-                        <p><span style="font-weight: bold">Date Repaired:  </span> <input type="date" id="daterepaired" style="border: none; color: black;"></input></p>
-                        <p><span style="font-weight: bold">Inspection/Repair Notes</span> <input type="text" id="description" style="border: none; color: black;"></input></p>
+                        <p><span style="font-weight: bold">Date Repaired:  </span> <input type="date" id="daterepaired" style="border: none; color: black;"/></p>
+                        <p><span style="font-weight: bold">Inspection/Repair Notes</span> <textarea id="description" style="border: none; color: black; margin: 0px; width: 515px; height: 157px;"></textarea></p>
                         <button type="submit" class="btn btn-success btn-default" data-dismiss="modal" onClick="updateReport()" style="text-align: center;" ><span class="glyphicon glyphicon-check"></span> Update Record</button>
                     </form>
                 </div>

@@ -67,5 +67,29 @@ namespace WebApplication.Web.Controllers
 
         }
 
+        [HttpPut]
+        [Route("update/{id}")]
+        public ActionResult UpdateReport(int id,Report updatedReport)
+        {
+            Report existingReport = dal.GetReport(id);
+            if (updatedReport.DateInspected != null)
+            {
+                existingReport.DateInspected = updatedReport.DateInspected;
+            }
+            if (updatedReport.DateRepaired != null)
+            {
+                existingReport.DateRepaired = updatedReport.DateRepaired;
+
+            }
+            if (!String.IsNullOrEmpty(updatedReport.Description))
+            {
+                existingReport.Description = updatedReport.Description;
+
+            }
+
+            existingReport.Severity = updatedReport.Severity;
+            dal.UpdateReport(existingReport);
+            return NoContent();
+        }
     }
 }
