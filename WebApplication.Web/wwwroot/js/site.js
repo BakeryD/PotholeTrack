@@ -24,7 +24,7 @@ function saveData() {
     var url = `${base}/api/record/create`;
     var lat = marker.getPosition().lat();
     var lng = marker.getPosition().lng();
-    var severity = $('#marker-severity').selectedOptions[0].value;
+   // var severity = $('#marker-severity').selectedOptions[0].value;
 
     if (lng >= -81.820158 &&
         lng <= -81.535962 &&
@@ -38,7 +38,7 @@ function saveData() {
                 DateCreated: new Date(),
                 Lattitude: lat,
                 Longitude: lng,
-                Severity: severity,
+               // Severity: severity,
                 Status: 1,
                 ReportCount: 1,
                 ReportNumber: 'CLE' + reportNumber
