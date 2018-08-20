@@ -146,6 +146,7 @@
                         function potholeMap(lat, lng) {
 
                             var pothole = { lat, lng };
+                            var markerimage = '/images/testpothole2.png';
                             var map = new google.maps.Map(
                                 document.getElementById('map'),
                                 {
@@ -161,7 +162,7 @@
                                     ]
                                 });
 
-                            var marker = new google.maps.Marker({ position: pothole, map: map });
+                            var marker = new google.maps.Marker({ position: pothole, icon: markerimage, map: map });
 
                         }
                     </script>
