@@ -22,10 +22,12 @@
             Status:
             <li><strong style="color:red;">Red</strong> is reported</li>
             <li><strong style="color:orange;">Orange</strong> is inspected</li>
+            <li><strong style="color: blue">Blue</strong> is scheduled for repair</li>
             <li><strong style="color:green;">Green</strong> is repaired</li>
         </ul>
     </div>
 </div>
+<br/>
 <hr />
 <input class="form-control" id="myInput" type="text" placeholder="Search..">
 <br>
@@ -81,9 +83,13 @@
                     <td style="background-color: green;"></td>
                 }
 
-                @if (report.Status == 3)
+                @if (report.Status == 4)
                 {
                     <td style="background-color: green;"></td>
+                }
+                else if (report.Status == 3)
+                {
+                    <td style="background-color: blue;"></td>
                 }
                 else if (report.Status == 2)
                 {
