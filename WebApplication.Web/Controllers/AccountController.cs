@@ -76,6 +76,14 @@ namespace WebApplication.Web.Controllers
             return View();
         }
 
+		[HttpGet]
+        public IActionResult EmployeeRegister()
+        {
+            var isLoggedIn = authProvider.GetCurrentUser();
+            ViewData["loggedIn"] = (isLoggedIn != null);
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register(RegisterViewModel registerViewModel)
