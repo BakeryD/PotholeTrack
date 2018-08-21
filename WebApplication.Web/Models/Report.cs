@@ -41,7 +41,7 @@ namespace WebApplication.Web.Models.Account
 		/// <summary>
 		/// The date inspected by city employee.
 		/// </summary>
-		public DateTime DateInspected { get; set; }
+		public DateTime? DateInspected { get; set; }
 
 	    /// <summary>
 	    /// The pothole severity.
@@ -51,7 +51,7 @@ namespace WebApplication.Web.Models.Account
 		/// <summary>
 		/// The date repaired by city employee.
 		/// </summary>
-		public DateTime DateRepaired { get; set; }
+		public DateTime? DateRepaired { get; set; }
 		
 	    /// <summary>
 	    /// The pothole status.

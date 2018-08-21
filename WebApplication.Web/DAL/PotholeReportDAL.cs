@@ -198,22 +198,42 @@ namespace WebApplication.Web.DAL
 		/// <returns>A report object<returns>
 		private Report MapRowToReport(SqlDataReader reader)
 		{
-			return new Report()
-			{
-				Id = Convert.ToInt32(reader["id"]),
-				Submitter = Convert.ToInt32(reader["submitter"]),
-				DateCreated = Convert.ToDateTime(reader["datecreated"]),
-				Lattitude = Convert.ToDecimal(reader["lattitude"]),
-				Longitude = Convert.ToDecimal(reader["longitude"]),
-                DateInspected = Convert.ToDateTime(reader["dateinspected"]),
-				Severity = Convert.ToInt32(reader["severity"]),
-				DateRepaired = Convert.ToDateTime(reader["repairdate"]),
-				Status = Convert.ToInt32(reader["status"]),
-				ReportCount = Convert.ToInt32(reader["reportcount"]),
-				Description = Convert.ToString(reader["description"]),
-				ReportNumber = Convert.ToString(reader["reportnumber"])
-			};
-		}
+            Report report = new Report();
+
+
+            report.Id = Convert.ToInt32(reader["id"]);
+            report.Submitter = Convert.ToInt32(reader["submitter"]);
+            report.DateCreated = Convert.ToDateTime(reader["datecreated"]);
+            report.Lattitude = Convert.ToDecimal(reader["lattitude"]);
+            report.Longitude = Convert.ToDecimal(reader["longitude"]);
+            if (reader["dateinspected"] is DBNull)
+            {
+                report.DateInspected = null;
+            }
+            else
+            {
+                report.DateInspected = Convert.ToDateTime(reader["dateinspected"]);
+
+            }
+            report.Severity = Convert.ToInt32(reader["severity"]);
+
+            if (reader["repairdate"] is DBNull)
+            {
+                report.DateRepaired = null;
+            }
+            else
+            {
+                report.DateRepaired = Convert.ToDateTime(reader["repairdate"]);
+
+            }
+            report.Status = Convert.ToInt32(reader["status"]);
+            report.ReportCount = Convert.ToInt32(reader["reportcount"]);
+            report.Description = Convert.ToString(reader["description"]);
+            report.ReportNumber = Convert.ToString(reader["reportnumber"]);
+
+            return report;
+        }
+
 
 		
 	}
