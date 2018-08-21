@@ -103,13 +103,13 @@ function updateReport() {
 
 
     if (dateInspected === "") {
-        dateInspected = null;
+        dateInspected = new Date();
     }
     if (dateRepaired === "") {
-        dateRepaired = null;
+        dateRepaired = new Date();
     }
     if (description === "") {
-        description = null;
+        description = new Date();
     }
 
     var settings = {
@@ -147,3 +147,7 @@ function updateReport() {
 
 
 }
+
+//$('#employee-modal').on('shown.bs.modal', function (e) {
+//    $('#')
+//});
