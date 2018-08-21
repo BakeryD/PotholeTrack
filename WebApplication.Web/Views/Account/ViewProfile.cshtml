@@ -62,12 +62,12 @@
                     <td style="text-align: center;"><a data-target="#potholemap" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" style="cursor: pointer;"> @report.Lattitude, @report.Longitude </a></td>
                     <td style="text-align: center;">@report.DateCreated</td>
 
-                    @if (report.Status == 3)
+                    @if (report.Status == 4)
                     {
                         <td style="background-color: green; text-align: center;">Fixed!</td>
 
                     }
-                    else if (report.Status == 2)
+                    else if (report.Status == 3 || report.Status == 2)
                     {
                         <td style="background-color: orange; text-align: center;">Waiting for Repair!</td>
                     }
