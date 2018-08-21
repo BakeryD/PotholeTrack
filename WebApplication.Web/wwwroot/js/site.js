@@ -100,13 +100,14 @@ function updateReport() {
     var description = $('#description', $('#employee-modal')).val();
     var status = $('#status', $('#employee-modal')).val();
     var severity = $('#severity', $('#employee-modal')).val();
-
+    var d = new Date();
+    d.setDate(d.getDate() - 1);
 
     if (dateInspected === "") {
-        dateInspected = new Date();
+        dateInspected = d;
     }
     if (dateRepaired === "") {
-        dateRepaired = new Date();
+        dateRepaired = d;
     }
 
     var settings = {

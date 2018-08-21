@@ -80,7 +80,7 @@
                 <script>
                     document.querySelector('#profile-row@(report.Id)').addEventListener('click',
                         function () {
-                            $('#datecreated', $('#potholemap')).val('@report.DateInspected.ToShortDateString()');
+                            $('#datecreated', $('#potholemap')).val('@report.DateCreated.ToShortDateString()');
                             $('#status', $('#potholemap')).val('@report.Status');
                             $('#severity', $('#potholemap')).val('@report.Severity');
                             $('#reportcount', $('#potholemap')).val('@report.ReportCount');

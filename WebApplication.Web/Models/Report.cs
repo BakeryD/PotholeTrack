@@ -74,5 +74,7 @@ namespace WebApplication.Web.Models.Account
 	    /// </summary>
 	    public string ReportNumber { get; set; }
 	}
+
+
 }
 

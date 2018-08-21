@@ -122,44 +122,79 @@
 
 @foreach (var report in Model)
 {
+    //Report cannot be marked as repaired before it is inspected
     var minRepairDate = report.DateInspected.ToString("d", culture).Replace('/', '-');
+    //Report cannot be marked as inspected before it has been created
     var minInspectDate = report.DateCreated.ToString("d", culture).Replace('/', '-');
 
 
-    <script>
+<script>
         document.querySelector('#pothole@(report.Id)').addEventListener('click',
             function () {
                 $('#report-id', $('#employee-modal')).val(@report.Id);
-                @if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value) {
+                //If it hasn't been inspected, minnimum value should be today
+                @if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+                {
+
                     <text>
                 $('#dateinspected', $('#employee-modal')).val('');
+                document.querySelector('#dateinspected').setAttribute("min",'@DateTime.Today.ToString("d", culture).Replace('/', '-')');
+
                     </text>
                 }
+                //Otherwise, minnimum value should be the last recorded date of inspection
                 else
                 {
                 <text>
-                  $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d",culture).Replace('/','-')');
+                $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d",culture).Replace('/','-')');
+                document.querySelector('#dateinspected').setAttribute("min", '@minRepairDate');
                 </text>
                 }
-                @if (report.DateRepaired == System.Data.SqlTypes.SqlDateTime.MinValue.Value) {
+
+
+                //If it hasn't been repaired, minnimum value should be the date of inspection
+                @if (report.DateRepaired == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+                {
+                    //If it hasn't been inspected yet, wait for the user to enter a date 
+                    if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+                    {
+
+                        //And set said date as the minnimum
+                        <text>
+                document.querySelector('#daterepaired').readOnly = true;
+                $('#dateinspected').change((event) => {
+
+                    let newMinVal = event.currentTarget.value;
+                    if (event.currentTarget.value !== '') {
+                        document.querySelector('#daterepaired').readOnly = false;
+
+                        document.querySelector('#daterepaired').setAttribute("min", newMinVal);
+
+                    }
+                });
+                        </text>
+
+                    }
                     <text>
                 $('#daterepaired', $('#employee-modal')).val('');
+                document.querySelector('#daterepaired').setAttribute("min",'@minRepairDate');
                     </text>
                 }
+                //Otherwise, minnimum value should be last recorded date of repair
                 else
                 {
                 <text>
                 $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
+                document.querySelector('#daterepaired').setAttribute("min",'@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
                 </text>
                 }
-                $('#description', $('#employee-modal')).val('@report.Description');
+
+                $('#description', $('#employee-modal')).html('@report.Description');
                 $('#status', $('#employee-modal')).val(@report.Status);
                 $('#severity', $('#employee-modal')).val(@report.Severity);
-                document.querySelector('#daterepaired').setAttribute("min",'@minRepairDate');
-                document.querySelector('#dateinspected').setAttribute("min",'@minInspectDate');
 
     });
-    </script>
+</script>
 }
 
 

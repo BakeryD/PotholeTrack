@@ -78,12 +78,14 @@ namespace WebApplication.Web.Controllers
 
             //Copy the appropriate fields if they were changed
             if (updatedReport.DateInspected != existingReport.DateInspected &&
-                updatedReport.DateInspected != DateTime.Today)
+                updatedReport.DateInspected > DateTime.Today)
             {
                 existingReport.DateInspected = updatedReport.DateInspected;
             }
             if (updatedReport.DateRepaired != existingReport.DateRepaired &&
-                updatedReport.DateRepaired != DateTime.Today)
+                updatedReport.DateRepaired > DateTime.Today &&
+                updatedReport.DateRepaired != existingReport.DateCreated &&
+                updatedReport.DateRepaired > updatedReport.DateInspected)
             {
                 existingReport.DateRepaired = updatedReport.DateRepaired;
             }
