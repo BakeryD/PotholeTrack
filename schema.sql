@@ -53,20 +53,6 @@ CREATE TABLE records
     Constraint  fk_records_users    FOREIGN KEY (submitter) REFERENCES users(id)
 );
 
-CREATE TABLE claims 
-(
-    id              int NOT NULL Identity(1,1),
-    submitter       int NOT NULL,
-    potholerecord  int NOT NULL,
-    datesubmitted  datetime NOT NULL default(Getdate()),
-    status          bit NOT NULL default(1), -- True = open claim, false = closed claim 
-    description     TEXT NOT NULL,
-    
-
-    Constraint  pk_claims PRIMARY KEY (id),
-    Constraint  fk_claims_users     FOREIGN KEY (submitter) REFERENCES users(id),
-    Constraint  fk_claims_records   FOREIGN KEY (potholerecord) REFERENCES records(id)
-);
 
 Create Table user_records
 (
