@@ -16,14 +16,12 @@ namespace WebApplication.Web.Controllers
     {
         private IUserDAL uDal;
         private IPotholeDAL pDal;
-        private IClaimDAL cDal;
         private readonly IAuthProvider authProvider;
 
-        public HomeController(IUserDAL u, IPotholeDAL p, IClaimDAL c, IAuthProvider auth)
+        public HomeController(IUserDAL u, IPotholeDAL p, IAuthProvider auth)
         {
             this.uDal = u;
             this.pDal = p;
-            this.cDal = c;
             this.authProvider = auth;
         }
 
@@ -34,9 +32,9 @@ namespace WebApplication.Web.Controllers
         public IActionResult Index()
 
         {
-            var reports = pDal.GetAllReports();
-            var isLoggedIn = authProvider.GetCurrentUser();
-            var isEmployee = authProvider.UserHasRole(new string[1] { "employee" });
+            IList<Report> reports = pDal.GetAllReports();
+            User isLoggedIn = authProvider.GetCurrentUser();
+            bool isEmployee = authProvider.UserHasRole(new string[1] { "employee" });
 			
 	        ViewData["loggedIn"] = (isLoggedIn != null);
             if (isLoggedIn!=null)
@@ -57,7 +55,7 @@ namespace WebApplication.Web.Controllers
 		[AuthorizationFilter("employee")]
 		public IActionResult Employee()
 		{
-			var reports = pDal.GetAllReports();
+			IList<Report> reports = pDal.GetAllReports();
             ViewData["loggedIn"] = authProvider.IsLoggedIn;
 			return View(reports);
 		}

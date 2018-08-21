@@ -32,7 +32,7 @@ namespace WebApplication.Web.Controllers
         public IActionResult Login(LoginViewModel loginViewModel)
         {
 
-            var isLoggedIn = authProvider.GetCurrentUser();
+            User isLoggedIn = authProvider.GetCurrentUser();
 
             // Ensure the fields were filled out
             if (ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            var isLoggedIn = authProvider.GetCurrentUser();
+            User isLoggedIn = authProvider.GetCurrentUser();
             ViewData["loggedIn"] = (isLoggedIn != null);
             return View();
         }
@@ -79,7 +79,7 @@ namespace WebApplication.Web.Controllers
 		[HttpGet]
         public IActionResult EmployeeRegister()
         {
-            var isLoggedIn = authProvider.GetCurrentUser();
+            User isLoggedIn = authProvider.GetCurrentUser();
             ViewData["loggedIn"] = (isLoggedIn != null);
             return View();
         }
@@ -108,9 +108,9 @@ namespace WebApplication.Web.Controllers
         [AuthorizationFilter("user","employee","admin")]
         public IActionResult ViewProfile()
         {
-            var isLoggedIn = authProvider.GetCurrentUser();
-            var profile = new Profile();
-            var user = authProvider.GetCurrentUser();
+            User isLoggedIn = authProvider.GetCurrentUser();
+            Profile profile = new Profile();
+            User user = authProvider.GetCurrentUser();
 	        profile.user = user;
 	        profile.reports = dal.GetAllReports();
             ViewData["loggedIn"] = (isLoggedIn != null);

@@ -11,15 +11,15 @@
 
 
 <script type="text/javascript">
-    var map;
-    var marker = null;
-    var infowindow;
-    var messagewindow;
-    var markerimage = '/images/testpothole2.png';
-    var lat;
-    var long;
-    var potholeData;
-    var currentUserID= @currentUserID;
+    let map;
+    let marker = null;
+    let infowindow;
+    let messagewindow;
+    let markerimage = '/images/testpothole2.png';
+    let lat;
+    let long;
+    let potholeData;
+    let currentUserID= @currentUserID;
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -35,7 +35,7 @@
             ]
         });
 
-        @foreach (var report in Model)
+        @foreach (WebApplication.Web.Models.Account.Report report in Model)
         {
             if (report.Status == 4)
             {
@@ -52,13 +52,13 @@
                 }
             }
         <text>
-            var point = new google.maps.LatLng(
+            let point = new google.maps.LatLng(
                 parseFloat(@report.Lattitude),
                 parseFloat(@report.Longitude));
 
             if (@report.Status === 2) {
 
-                var pothole@(report.Id) = new google.maps.Marker({
+                let pothole@(report.Id) = new google.maps.Marker({
                     map: map,
                     position: point,
                     icon: markerimage
@@ -135,7 +135,7 @@
                         'click',
                         function() {
                             infowindow.open(map, marker);
-                            var elem = document.getElementById('potholereport');
+                            let elem = document.getElementById('potholereport');
                             elem.style.display = 'block';
                         });
 

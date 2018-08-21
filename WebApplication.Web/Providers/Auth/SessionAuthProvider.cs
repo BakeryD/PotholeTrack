@@ -41,8 +41,8 @@ namespace WebApplication.Web.Providers.Auth
         /// <returns></returns>
         public bool SignIn(string username, string password)
         {
-            var user = userDAL.GetUser(username);
-            var hashProvider = new HashProvider();                        
+            User user = userDAL.GetUser(username);
+            HashProvider hashProvider = new HashProvider();                        
             
             if (user != null && hashProvider.VerifyPasswordMatch(user.Password, password, user.Salt))
             {
@@ -70,14 +70,14 @@ namespace WebApplication.Web.Providers.Auth
         /// <returns></returns>
         public bool ChangePassword(string existingPassword, string newPassword)
         {            
-            var hashProvider = new HashProvider();
-            var user = GetCurrentUser();
+            HashProvider hashProvider = new HashProvider();
+            User user = GetCurrentUser();
             
             // Confirm existing password match
             if (user != null && hashProvider.VerifyPasswordMatch(user.Password, existingPassword, user.Salt))
             {
                 // Hash new password
-                var newHash = hashProvider.HashPassword(newPassword);
+                HashedPassword newHash = hashProvider.HashPassword(newPassword);
                 user.Password = newHash.Password;
                 user.Salt = newHash.Salt;
 
@@ -96,7 +96,7 @@ namespace WebApplication.Web.Providers.Auth
         /// <returns></returns>
         public User GetCurrentUser()
         {
-            var username = Session.GetString(SessionKey);
+            string username = Session.GetString(SessionKey);
 
             if (!String.IsNullOrEmpty(username))
             {
@@ -115,14 +115,14 @@ namespace WebApplication.Web.Providers.Auth
         /// <returns></returns>
         public void Register(string email,string username, string password, string firstName, string lastName,string phoneNumber, string role)
         {
-            var hashProvider = new HashProvider();
+            HashProvider hashProvider = new HashProvider();
             if (email.Contains(".gov"))
             {
                 role = "employee";
             }
-            var passwordHash = hashProvider.HashPassword(password);
+            HashedPassword passwordHash = hashProvider.HashPassword(password);
 
-            var user = new User
+            User user = new User
             {
                 Username = username,
                 FirstName=firstName,
@@ -145,7 +145,7 @@ namespace WebApplication.Web.Providers.Auth
         /// <returns></returns>
         public bool UserHasRole(string[] roles)
         {            
-            var user = GetCurrentUser();
+            User user = GetCurrentUser();
             return (user != null) && 
                 roles.Any(r => r.ToLower() == user.Role.ToLower());
         }

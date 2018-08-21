@@ -49,7 +49,6 @@ namespace WebApplication.Web
             services.AddTransient<IAuthProvider, SessionAuthProvider>();
             services.AddTransient<IUserDAL>(m => new UserSqlDAL(Configuration["ConnectionStrings:Development"]));
             services.AddTransient<IPotholeDAL>(p => new PotholeReportDAL(Configuration["ConnectionStrings:Development"]));
-            services.AddTransient<IClaimDAL>(c => new PotholeClaimsDAL(Configuration["ConnectionStrings:Development"]));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

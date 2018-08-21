@@ -128,7 +128,7 @@
     var minInspectDate = report.DateCreated.ToString("d", culture).Replace('/', '-');
 
 
-<script>
+    <script>
         document.querySelector('#pothole@(report.Id)').addEventListener('click',
             function () {
                 $('#report-id', $('#employee-modal')).val(@report.Id);
@@ -155,7 +155,7 @@
                 //If it hasn't been repaired, minnimum value should be the date of inspection
                 @if (report.DateRepaired == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
                 {
-                    //If it hasn't been inspected yet, wait for the user to enter a date 
+                    //If it hasn't been inspected yet, wait for the user to enter a date
                     if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
                     {
 
@@ -194,7 +194,7 @@
                 $('#severity', $('#employee-modal')).val(@report.Severity);
 
     });
-</script>
+    </script>
 }
 
 

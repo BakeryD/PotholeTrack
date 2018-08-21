@@ -61,15 +61,15 @@ namespace WebApplication.Web.DAL
 
         public IList<Report> GetAllReports()
         {
-            var reports = new List<Report>();
+            List<Report> reports = new List<Report>();
             string sql = "Select * From records;";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    var cmd = new SqlCommand(sql, conn);
-                    var reader = cmd.ExecuteReader();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         reports.Add(MapRowToReport(reader));
