@@ -118,6 +118,7 @@ li > #login, #logout {
     color: aliceblue !important;
     text-align: center;
     font-size: 30px;
+    cursor:default;
 }
 
 .modal-header {
@@ -128,6 +129,7 @@ li > #login, #logout {
     padding: 40px 50px;
     color: aliceblue;
     background-color: #767676;
+    cursor: default;
 }
 
 .modal-footer {

@@ -132,14 +132,14 @@
                             async defer></script>
 
                 </div>
-                <p><span style="font-weight: bold">Date Report Created:</span> <input type="text" id="datecreated" readonly style="border: none; background-color: #767676;"></input></p>
+                <p><span style="font-weight: bold">Date Report Created:</span> <input type="text" id="datecreated" readonly style="border: none; background-color: #767676; cursor: default;"/></p>
                 <script>
-                    var status2 = document.getElementById('status').value;
-                    if (status2 === 3) {
+                    var status2 = document.getElementById('#status').value;
+                    if (status2 === 4) {
                         status2 = 'Fixed!';
 
                     }
-                    else if (status2 === 2) {
+                    else if (status2 === 2 || status2 === 3) {
                         status2 = 'Waiting for repair!';
                     }
                     else {
@@ -148,9 +148,9 @@
                     $('#status', $('#potholemap')).val(status);
                 </script>
 
-                <p><span style="font-weight: bold">Current Status:</span> <input type="text" id="status" readonly style="border: none; background-color: #767676;"></input></p>
-                <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="severity" readonly style="border: none; background-color: #767676;"></input></p>
-                <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="reportcount" readonly style="border: none; background-color: #767676;"></input></p>
+                <p><span style="font-weight: bold">Current Status:</span> <input type="text" id="status" readonly style="border: none; background-color: #767676; cursor: default;"/></p>
+                <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="severity" readonly style="border: none; background-color: #767676; cursor: default;"/></p>
+                <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="reportcount" readonly style="border: none; background-color: #767676; cursor: default;"/></p>
                 <a class="btn btn-group-lg btn-block btn-warning" href="https://drive.google.com/open?id=1Mtv98qnFfKbIh6WxVIwHa5RPbTOtGQDv" target="_blank"><span class="glyphicon glyphicon-alert"></span> Make A Claim</a>
             </div>
             <div class="modal-footer">
