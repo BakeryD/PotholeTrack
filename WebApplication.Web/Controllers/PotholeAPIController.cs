@@ -74,11 +74,11 @@ namespace WebApplication.Web.Controllers
             //Passing in the JSON as a Report parameter
 
             Report existingReport = dal.GetReport(updatedReport.Id);
-            if (updatedReport.DateInspected != DateTime.Today)
+            if (updatedReport.DateInspected != existingReport.DateInspected)
             {
                 existingReport.DateInspected = updatedReport.DateInspected;
             }
-            if (updatedReport.DateRepaired != DateTime.Today)
+            if (updatedReport.DateRepaired != existingReport.DateRepaired)
             {
                 existingReport.DateRepaired = updatedReport.DateRepaired;
 

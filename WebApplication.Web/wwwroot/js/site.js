@@ -101,17 +101,6 @@ function updateReport() {
     var status = $('#status', $('#employee-modal')).val();
     var severity = $('#severity', $('#employee-modal')).val();
 
-
-    if (dateInspected === "") {
-        dateInspected = new Date();
-    }
-    if (dateRepaired === "") {
-        dateRepaired = new Date();
-    }
-    if (description === "") {
-        description = new Date();
-    }
-
     var settings = {
         method: 'POST',
         credentials: 'include',
@@ -147,7 +136,3 @@ function updateReport() {
 
 
 }
-
-//$('#employee-modal').on('shown.bs.modal', function (e) {
-//    $('#')
-//});

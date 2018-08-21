@@ -117,23 +117,26 @@
 </script>
 
 @{ 
-    
     var culture = new System.Globalization.CultureInfo("ja-JP");
 }
 
 @foreach (var report in Model)
 {
+    var minRepairDate = report.DateInspected.ToString("d", culture).Replace('/', '-');
+    var minInspectDate = report.DateCreated.ToString("d", culture).Replace('/', '-');
     <script>
         document.querySelector('#pothole@(report.Id)').addEventListener('click',
             function () {
                 $('#report-id', $('#employee-modal')).val(@report.Id);
-                $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d",culture)');
-                $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToString("d", culture)');
+                $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d",culture).Replace('/','-')');
+                $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
                 $('#description', $('#employee-modal')).val('@report.Description');
                 $('#status', $('#employee-modal')).val(@report.Status);
                 $('#severity', $('#employee-modal')).val(@report.Severity);
+                document.querySelector('#daterepaired').setAttribute("min",'@minRepairDate');
+                document.querySelector('#dateinspected').setAttribute("min",'@minInspectDate');
 
-            });
+    });
     </script>
 }
 
@@ -197,6 +200,3 @@
         </div>
     </div>
 </div>
-<script>
-    document.querySelector('#daterepaired').setAttribute("min", new Date());
-</script>
