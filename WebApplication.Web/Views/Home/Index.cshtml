@@ -40,16 +40,16 @@
             if (report.Status == 4)
             {
                 totalCount++;
-            }
 
-            if (report.DateRepaired.Year.Equals(DateTime.Now.Year))
-            {
-                yearCount++;
-            }
+                if (report.DateRepaired.Year.Equals(DateTime.Now.Year))
+                {
+                    yearCount++;
+                }
 
-            if (report.DateRepaired.Year.Equals(DateTime.Now.Year) && report.DateRepaired.Month.Equals(DateTime.Now.Month))
-            {
-                monthCount++;
+                if (report.DateRepaired.Year.Equals(DateTime.Now.Year) && report.DateRepaired.Month.Equals(DateTime.Now.Month))
+                {
+                    monthCount++;
+                }
             }
         <text>
             var point = new google.maps.LatLng(

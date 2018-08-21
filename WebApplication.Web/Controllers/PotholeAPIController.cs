@@ -73,7 +73,10 @@ namespace WebApplication.Web.Controllers
         {
             //Passing in the JSON as a Report parameter
 
+            //Get the report as is in the database
             Report existingReport = dal.GetReport(updatedReport.Id);
+
+            //Copy the appropriate fields if they were changed
             if (updatedReport.DateInspected != existingReport.DateInspected &&
                 updatedReport.DateInspected != DateTime.Today)
             {
@@ -83,7 +86,6 @@ namespace WebApplication.Web.Controllers
                 updatedReport.DateRepaired != DateTime.Today)
             {
                 existingReport.DateRepaired = updatedReport.DateRepaired;
-
             }
             if (!String.IsNullOrEmpty(updatedReport.Description))
             {
@@ -96,6 +98,7 @@ namespace WebApplication.Web.Controllers
             }
 
             existingReport.Severity = updatedReport.Severity;
+            //Save changes
             dal.UpdateReport(existingReport);
             return Ok();
         }
