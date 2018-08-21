@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
@@ -208,7 +209,7 @@ namespace WebApplication.Web.DAL
             report.Longitude = Convert.ToDecimal(reader["longitude"]);
             if (reader["dateinspected"] is DBNull)
             {
-                report.DateInspected = DateTime.MinValue;
+                report.DateInspected = SqlDateTime.MinValue.Value;
             }
             else
             {
@@ -219,7 +220,7 @@ namespace WebApplication.Web.DAL
 
             if (reader["repairdate"] is DBNull)
             {
-                report.DateRepaired = DateTime.MinValue;
+                report.DateRepaired = SqlDateTime.MinValue.Value;
             }
             else
             {
