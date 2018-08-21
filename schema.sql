@@ -39,9 +39,9 @@ CREATE TABLE records
     id              int NOT NULL Identity(1,1),
     submitter       int NOT NULL,
     datecreated    datetime NOT NULL default(Getdate()),
-    dateinspected  datetime default ('1995-01-01'),
+    dateinspected  datetime default (NULL),
     severity        int NOT NULL default(2),
-    repairdate		datetime default ('1995-01-01'),
+    repairdate		datetime default (NULL),
 	lattitude		decimal(9,6) not null,
 	longitude		decimal(9,6) not null,
 	status          int NOT NULL default(1),
@@ -85,7 +85,6 @@ select * from records;
 select * from user_records;
 
 delete from records
-Insert Into records Values ()
 Update records set reportcount=2 where id=4;
 update records set severity=1, lattitude = 41.579773 , longitude= -81.547412 , status=2 where id =4 ;
 
