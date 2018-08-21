@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
@@ -164,26 +165,19 @@ namespace WebApplication.Web.DAL
 
 					SqlCommand cmd =
 						new SqlCommand(
-							$"UPDATE reports SET longitude = @longitude," +
-                            $" lattitude = @lattitude," +
-                            $" dateinspected = @dateinspected," +
+							$"UPDATE records SET dateinspected = @dateinspected," +
                             $" severity = @severity," +
-                            $" daterepaired = @daterepaired," +
+                            $" repairdate = @daterepaired," +
                             $" status = @status," +
-                            $" reportcount = @reportcount," +
                             $" description = @description" +
-							$" reportnumber = @reportnumber" +
                             $" WHERE id = @id;",
 							conn);
-					cmd.Parameters.AddWithValue("@longitude", report.Longitude);
-					cmd.Parameters.AddWithValue("@lattitude", report.Lattitude);
                     cmd.Parameters.AddWithValue("@dateinspected", report.DateInspected);
 					cmd.Parameters.AddWithValue("@severity", report.Severity);
 					cmd.Parameters.AddWithValue("@daterepaired", report.DateRepaired);
 					cmd.Parameters.AddWithValue("@status", report.Status);
-					cmd.Parameters.AddWithValue("@reportcount", report.ReportCount);
 					cmd.Parameters.AddWithValue("@description", report.Description);
-					cmd.Parameters.AddWithValue("@reportnumber", report.ReportNumber);
+                    cmd.Parameters.AddWithValue("@id", report.Id);
 
 					cmd.ExecuteNonQuery();
 
@@ -205,22 +199,42 @@ namespace WebApplication.Web.DAL
 		/// <returns>A report object<returns>
 		private Report MapRowToReport(SqlDataReader reader)
 		{
-			return new Report()
-			{
-				Id = Convert.ToInt32(reader["id"]),
-				Submitter = Convert.ToInt32(reader["submitter"]),
-				DateCreated = Convert.ToDateTime(reader["datecreated"]),
-				Lattitude = Convert.ToDecimal(reader["lattitude"]),
-				Longitude = Convert.ToDecimal(reader["longitude"]),
-                DateInspected = Convert.ToDateTime(reader["dateinspected"]),
-				Severity = Convert.ToInt32(reader["severity"]),
-				DateRepaired = Convert.ToDateTime(reader["repairdate"]),
-				Status = Convert.ToInt32(reader["status"]),
-				ReportCount = Convert.ToInt32(reader["reportcount"]),
-				Description = Convert.ToString(reader["description"]),
-				ReportNumber = Convert.ToString(reader["reportnumber"])
-			};
-		}
+            Report report = new Report();
+
+
+            report.Id = Convert.ToInt32(reader["id"]);
+            report.Submitter = Convert.ToInt32(reader["submitter"]);
+            report.DateCreated = Convert.ToDateTime(reader["datecreated"]);
+            report.Lattitude = Convert.ToDecimal(reader["lattitude"]);
+            report.Longitude = Convert.ToDecimal(reader["longitude"]);
+            if (reader["dateinspected"] is DBNull)
+            {
+                report.DateInspected = SqlDateTime.MinValue.Value;
+            }
+            else
+            {
+                report.DateInspected = Convert.ToDateTime(reader["dateinspected"]);
+
+            }
+            report.Severity = Convert.ToInt32(reader["severity"]);
+
+            if (reader["repairdate"] is DBNull)
+            {
+                report.DateRepaired = SqlDateTime.MinValue.Value;
+            }
+            else
+            {
+                report.DateRepaired = Convert.ToDateTime(reader["repairdate"]);
+
+            }
+            report.Status = Convert.ToInt32(reader["status"]);
+            report.ReportCount = Convert.ToInt32(reader["reportcount"]);
+            report.Description = Convert.ToString(reader["description"]);
+            report.ReportNumber = Convert.ToString(reader["reportnumber"]);
+
+            return report;
+        }
+
 
 		
 	}

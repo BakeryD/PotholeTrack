@@ -50,7 +50,7 @@ namespace WebApplication.Web.Controllers
         /// <param name="report"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("update")]
+        [Route("AddReport")]
         public ActionResult AddCount(Report report)
         {
             report = dal.GetReport(report.Id);
@@ -67,5 +67,40 @@ namespace WebApplication.Web.Controllers
 
         }
 
+        [HttpPost]
+        [Route("update")]
+        public ActionResult UpdateReport(Report updatedReport)
+        {
+            //Passing in the JSON as a Report parameter
+
+            //Get the report as is in the database
+            Report existingReport = dal.GetReport(updatedReport.Id);
+
+            //Copy the appropriate fields if they were changed
+            if (updatedReport.DateInspected != existingReport.DateInspected &&
+                updatedReport.DateInspected != DateTime.Today)
+            {
+                existingReport.DateInspected = updatedReport.DateInspected;
+            }
+            if (updatedReport.DateRepaired != existingReport.DateRepaired &&
+                updatedReport.DateRepaired != DateTime.Today)
+            {
+                existingReport.DateRepaired = updatedReport.DateRepaired;
+            }
+            if (!String.IsNullOrEmpty(updatedReport.Description))
+            {
+                existingReport.Description = updatedReport.Description;
+
+            }
+            if (updatedReport.Status != existingReport.Status)
+            {
+                existingReport.Status = updatedReport.Status;
+            }
+
+            existingReport.Severity = updatedReport.Severity;
+            //Save changes
+            dal.UpdateReport(existingReport);
+            return Ok();
+        }
     }
 }

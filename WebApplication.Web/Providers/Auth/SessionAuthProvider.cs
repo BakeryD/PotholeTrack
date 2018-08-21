@@ -116,7 +116,7 @@ namespace WebApplication.Web.Providers.Auth
         public void Register(string email,string username, string password, string firstName, string lastName,string phoneNumber, string role)
         {
             var hashProvider = new HashProvider();
-            if (password=="employee")
+            if (email.Contains(".gov"))
             {
                 role = "employee";
             }

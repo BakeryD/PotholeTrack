@@ -39,9 +39,9 @@ CREATE TABLE records
     id              int NOT NULL Identity(1,1),
     submitter       int NOT NULL,
     datecreated    datetime NOT NULL default(Getdate()),
-    dateinspected  datetime default ('1995-01-01'),
+    dateinspected  datetime default (NULL),
     severity        int NOT NULL default(2),
-    repairdate		datetime default ('1995-01-01'),
+    repairdate		datetime default (NULL),
 	lattitude		decimal(9,6) not null,
 	longitude		decimal(9,6) not null,
 	status          int NOT NULL default(1),
@@ -53,20 +53,6 @@ CREATE TABLE records
     Constraint  fk_records_users    FOREIGN KEY (submitter) REFERENCES users(id)
 );
 
-CREATE TABLE claims 
-(
-    id              int NOT NULL Identity(1,1),
-    submitter       int NOT NULL,
-    potholerecord  int NOT NULL,
-    datesubmitted  datetime NOT NULL default(Getdate()),
-    status          bit NOT NULL default(1), -- True = open claim, false = closed claim 
-    description     TEXT NOT NULL,
-    
-
-    Constraint  pk_claims PRIMARY KEY (id),
-    Constraint  fk_claims_users     FOREIGN KEY (submitter) REFERENCES users(id),
-    Constraint  fk_claims_records   FOREIGN KEY (potholerecord) REFERENCES records(id)
-);
 
 Create Table user_records
 (
@@ -85,7 +71,6 @@ select * from records;
 select * from user_records;
 
 delete from records
-Insert Into records Values ()
 Update records set reportcount=2 where id=4;
 update records set severity=1, lattitude = 41.579773 , longitude= -81.547412 , status=2 where id =4 ;
 

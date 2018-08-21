@@ -37,19 +37,19 @@
 
         @foreach (var report in Model)
         {
-            if (report.Status == 3)
+            if (report.Status == 4)
             {
                 totalCount++;
-            }
 
-            if (report.DateRepaired.Year.Equals(DateTime.Now.Year))
-            {
-                yearCount++;
-            }
+                if (report.DateRepaired.Year.Equals(DateTime.Now.Year))
+                {
+                    yearCount++;
+                }
 
-            if (report.DateRepaired.Year.Equals(DateTime.Now.Year) && report.DateRepaired.Month.Equals(DateTime.Now.Month))
-            {
-                monthCount++;
+                if (report.DateRepaired.Year.Equals(DateTime.Now.Year) && report.DateRepaired.Month.Equals(DateTime.Now.Month))
+                {
+                    monthCount++;
+                }
             }
         <text>
             var point = new google.maps.LatLng(
@@ -181,13 +181,8 @@
                 <h4 class="modal-title" id="ReportSaved">Report Saved!</h4>
             </div>
             <div class="modal-body">
-                <div style="text-align: center; padding-bottom: 10px">
-                    <img style="max-height: 80px" src="images/dancingbanana.gif" />
-                    <img style="max-height: 80px" src="images/dancingbanana.gif" />
-                    <img style="max-height: 80px" src="images/dancingbanana.gif" />
-                </div>
-                <p>Thanks for your submission! A city worker will be dispatched to inspect this pothole shortly!</p>
-                <p>Even though your report won't show up on the map until it has been verified, don't worry!  We're on the job!</p>
+                <p style="text-align: center;">Thanks for your submission! A city worker will be dispatched to inspect this pothole shortly!</p>
+                <p style="text-align: center;">Even though your report won't show up on the map until it has been verified, don't worry!  We're on the job!</p>
             </div>
             <div class="modal-footer">
                 <button type="button" onclick='marker.setMap(null), marker = null' class="btn btn-danger btn-default pull-left" data-dismiss="modal">Close</button>
@@ -203,15 +198,10 @@
                 <h4 class="modal-title" id="Pothole Data">Pothole Data!</h4>
             </div>
             <div class="modal-body">
-                <div style="text-align: center; padding-bottom: 40px">
-                    <img style="max-height: 80px" src="images/dancingbanana.gif" />
-                    <img style="max-height: 80px" src="images/dancingbanana.gif" />
-                    <img style="max-height: 80px" src="images/dancingbanana.gif" />
-                </div>
-                <p><span style="font-weight: bold">Date Report Created:</span> <input type="text" id="datecreated" readonly style="border:none; color: black;" /></p>
+                <p><span style="font-weight: bold">Date Report Created:</span> <input type="text" id="datecreated" readonly style="border:none; background-color: #767676; cursor: default;" /></p>
                 <p><span style="font-weight: bold">Status:</span> Inspected and Awaiting Repair</p>
-                <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="severity" readonly style="border:none; color: black;" /></p>
-                <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="reportcount" readonly style="border:none; color: black;" /></p>
+                <p><span style="font-weight: bold">Severity at time of inspection:</span> <input type="text" id="severity" readonly style="border:none;  background-color: #767676; cursor: default;" /></p>
+                <p><span style="font-weight: bold">How many people have reported this pothole:</span> <input type="text" id="reportcount" readonly style="border:none;  background-color: #767676; cursor: default;" /></p>
                 <input id="s-id" style="display:none;" />
                 <form name="updateRecord" asp-controller="PotholeAPI" asp-action="AddCount" method="post">
                     <input id="p-id" style="display:none;" />
@@ -270,15 +260,10 @@
 <h1 style="text-align: center; color: aliceblue;">Your tax dollars at work!</h1>
 <BR />
 <BR />
-<div class="main-bottom">
+<div class="main-bottom col-offset">
 
-    <div class="main-report"><p class="report-number">@monthCount</p> <p>Potholes filled this month!</p></div>
-    <div class="main-report"><p class="report-number">@yearCount</p> <p>Potholes filled this year!</p></div>
-    <div class="main-report"><p class="report-number">@totalCount</p> <p>Potholes filled total!</p></div>
+    <div class="main-report" id="month-count"><p class="report-number">@monthCount</p> <p>Potholes filled this month!</p></div>
+    <div class="main-report" id="year-count"><p class="report-number">@yearCount</p> <p>Potholes filled this year!</p></div>
+    <div class="main-report" id="total-count"><p class="report-number">@totalCount</p> <p>Potholes filled total!</p></div>
 
 </div>
-
-
-
-
-

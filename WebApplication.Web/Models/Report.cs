@@ -23,19 +23,19 @@ namespace WebApplication.Web.Models.Account
 	    /// <summary>
 	    /// The report's creation date.
 	    /// </summary>
-	    [Required]
+	    //[Required]
 	    public DateTime DateCreated { get; set; }
 
 		/// <summary>
 	    /// The pothole latitude.
 	    /// </summary>
-	    [Required]
+	    //[Required]
 	    public decimal Lattitude { get; set; }
 
 	    /// <summary>
 	    /// The pothole longitude.
 	    /// </summary>
-	    [Required]
+	    //[Required]
 	    public decimal Longitude { get; set; }
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace WebApplication.Web.Models.Account
 	    /// <summary>
 	    /// How many times this pothole has been reported.
 	    /// </summary>
-	    [Required]
+	    //[Required]
 	    public int ReportCount { get; set; }
 
 	    /// <summary>
