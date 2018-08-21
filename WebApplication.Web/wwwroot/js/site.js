@@ -101,6 +101,14 @@ function updateReport() {
     var status = $('#status', $('#employee-modal')).val();
     var severity = $('#severity', $('#employee-modal')).val();
 
+
+    if (dateInspected === "") {
+        dateInspected = new Date();
+    }
+    if (dateRepaired === "") {
+        dateRepaired = new Date();
+    }
+
     var settings = {
         method: 'POST',
         credentials: 'include',
@@ -109,7 +117,7 @@ function updateReport() {
             // can get the existing report when updating
             // Also passing in anything marked as required in the model
             // Otherwise we get a 400 error
-            Id : id,
+            Id: id,
             Severity: severity,
             Status: status,
             Description: description,

@@ -70,7 +70,7 @@ div.form-field {
 
 /** Home page start **/
 
-li > a#login, a#logout {
+li > #login, #logout {
     cursor: pointer;
 }
 

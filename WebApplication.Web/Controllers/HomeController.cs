@@ -54,25 +54,6 @@ namespace WebApplication.Web.Controllers
             return View(reports);
         }
 
-        public IActionResult AddRecord()
-        {
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
 		[AuthorizationFilter("employee")]
 		public IActionResult Employee()
 		{
@@ -80,11 +61,6 @@ namespace WebApplication.Web.Controllers
             ViewData["loggedIn"] = authProvider.IsLoggedIn;
 			return View(reports);
 		}
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
