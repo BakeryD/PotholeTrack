@@ -208,7 +208,7 @@ namespace WebApplication.Web.DAL
             report.Longitude = Convert.ToDecimal(reader["longitude"]);
             if (reader["dateinspected"] is DBNull)
             {
-                report.DateInspected = null;
+                report.DateInspected = DateTime.MinValue;
             }
             else
             {
@@ -219,7 +219,7 @@ namespace WebApplication.Web.DAL
 
             if (reader["repairdate"] is DBNull)
             {
-                report.DateRepaired = null;
+                report.DateRepaired = DateTime.MinValue;
             }
             else
             {
