@@ -12,77 +12,80 @@
 @*this table is filled with the users information they provided upon signing up*@
 <div>
     <table class="container user-data">
-        <tr>
-            <td>Username : <strong id="user-data">@Model.User.Username</strong></td>
-        </tr>
-        <tr>
-            <td>First Name : <strong id="user-data">@Model.User.FirstName</strong></td>
-        </tr>
-        <tr>
-            <td>Last Name : <strong id="user-data">@Model.User.LastName</strong></td>
-        </tr>
-        <tr>
-            <td>Email : <strong id="user-data">@Model.User.Email</strong></td>
-        </tr>
-        <tr>
-            <td>Phone Number : <strong id="user-data">@Model.User.PhoneNumber</strong></td>
-        </tr>
+        <tbody>
+            <tr>
+                <td>Username : <strong id="user-data">@Model.User.Username</strong></td>
+            </tr>
+            <tr>
+                <td>First Name : <strong id="user-data">@Model.User.FirstName</strong></td>
+            </tr>
+            <tr>
+                <td>Last Name : <strong id="user-data">@Model.User.LastName</strong></td>
+            </tr>
+            <tr>
+                <td>Email : <strong id="user-data">@Model.User.Email</strong></td>
+            </tr>
+            <tr>
+                <td>Phone Number : <strong id="user-data">@Model.User.PhoneNumber</strong></td>
+            </tr>
+        </tbody>
     </table>
 </div>
 <hr />
 
 @*this table is a list of all the potholes that the user has submitted themselves*@
 <h3 style="text-align: center; color: aliceblue;">Here's all the reports you have submitted:</h3>
-<table id="pothole-table-profile" class="table table-bordered table-sm" cellspacing="0" width="100%" style="color: white;">
-    <thead>
-        <tr>
-            <th class="th-sm" style="text-align: center;">
-                Pothole Report #
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Location of the pothole (LatLong)
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Date Report Created
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Current Status
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </tr>
-    </thead>
+<div class="container-fluid">
+    <table id="pothole-table-profile" class="table table-bordered table-sm" cellspacing="0" width="100%" style="color: white;">
+        <thead>
+            <tr>
+                <th class="th-sm" style="text-align: center;">
+                    Pothole Report #
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm" style="text-align: center;">
+                    Location of the pothole (LatLong)
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm" style="text-align: center;">
+                    Date Report Created
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm" style="text-align: center;">
+                    Current Status
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </tr>
+        </thead>
 
-    @*here we are talking to the database to retrieve all the information to each pothole based on the user.id*@
-    <tbody id="table-data">
-        @foreach (WebApplication.Web.Models.Account.Report report in Model.Reports)
-        {
-            if (report.Submitter == @Model.User.Id)
+        @*here we are talking to the database to retrieve all the information to each pothole based on the user.id*@
+        <tbody id="table-data">
+            @foreach (WebApplication.Web.Models.Account.Report report in Model.Reports)
             {
+                if (report.Submitter == @Model.User.Id)
+                {
 
-                <tr id="profile-row@(report.Id)">
+                    <tr id="profile-row@(report.Id)">
 
-                    <td style="text-align: center;">@report.ReportNumber</td>
-                    <td style="text-align: center;"><a data-target="#potholemap" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" style="cursor: pointer;"> @report.Lattitude, @report.Longitude </a></td>
-                    <td style="text-align: center;">@report.DateCreated</td>
+                        <td style="text-align: center;">@report.ReportNumber</td>
+                        <td style="text-align: center;"><a data-target="#potholemap" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" style="cursor: pointer;"> @report.Lattitude, @report.Longitude </a></td>
+                        <td style="text-align: center;">@report.DateCreated</td>
 
-                    @if (report.Status == 4)
-                    {
-                        <td style="background-color: green; text-align: center;">Fixed!</td>
+                        @if (report.Status == 4)
+                        {
+                            <td style="background-color: green; text-align: center;">Fixed!</td>
 
-                    }
-                    else if (report.Status == 3 || report.Status == 2)
-                    {
-                        <td style="background-color: orange; text-align: center;">Waiting for Repair!</td>
-                    }
-                    else
-                    {
-                        <td style="background-color: red; text-align: center;">Waiting for Inspection!</td>
-                    }
-                </tr>
+                        }
+                        else if (report.Status == 3 || report.Status == 2)
+                        {
+                            <td style="background-color: orange; text-align: center;">Waiting for Repair!</td>
+                        }
+                        else
+                        {
+                            <td style="background-color: red; text-align: center;">Waiting for Inspection!</td>
+                        }
+                    </tr>
 
-                <script>
+                    <script>
                     document.querySelector('#profile-row@(report.Id)').addEventListener('click',
                         function () {
                             $('#datecreated', $('#potholemap')).val('@report.DateInspected.ToShortDateString()');
@@ -108,11 +111,12 @@
                             $('#severity', $('#potholemap')).val('@report.Severity');
                             $('#reportcount', $('#potholemap')).val('@report.ReportCount');
                         });
-                </script>
+                    </script>
+                }
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 
 @*this modal appears when the user clicks on the location (in the table) of each pothole*@
 <div class="modal fade" id="potholemap" tabindex="-1" role="dialog" aria-labelledby="Data!" aria-hidden="true">

@@ -31,97 +31,101 @@
 <hr />
 
 @*this input field allows the user to search based on the report number (starts with CLE)*@
-<input class="form-control" id="myInput" type="text" placeholder="Search..">
+<div class="container-fluid">
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+</div>
 <br>
 
 @*this is the table that displays ALL potholes in the database*@
-<table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
-    <thead>
-        <tr>
-            <th class="th-sm" style="text-align: center;">
-                Report ID#
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Assigned To:
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Location
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Date Created
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Report Count
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Severity
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Status
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </tr>
-    </thead>
-    <tbody id="table-data">
-        @foreach (WebApplication.Web.Models.Account.Report report in Model)
-        {
+<div class="container-fluid">
+    <table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
+        <thead>
             <tr>
-                <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.ReportNumber</button></td>
-
-                @if (report.AssignedEmployee != 0)
-                {
-                    <td style="text-align: center;">Worker #@report.AssignedEmployee</td>
-                }
-                else
-                {
-                    <td style="text-align: center;"><button onclick="assignEmployee(@report.Id)" id="assignedemployee(@report.Id)">Assign to Self</button></td>
-                }
-
-                <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
-                <td style="text-align: center;">@report.DateCreated</td>
-                <td style="text-align: center;">@report.ReportCount</td>
-
-                @if (report.Severity == 3)
-                {
-                    <td style="background-color: red;"></td>
-                }
-                else if (report.Severity == 2)
-                {
-                    <td style="background-color: orange;"></td>
-                }
-                else
-                {
-                    <td style="background-color: green;"></td>
-                }
-
-                @if (report.Status == 4)
-                {
-                    <td style="background-color: green;"></td>
-                }
-                else if (report.Status == 3)
-                {
-                    <td style="background-color: blue;"></td>
-                }
-                else if (report.Status == 2)
-                {
-                    <td style="background-color: orange;"></td>
-                }
-                else
-                {
-                    <td style="background-color: red;"></td>
-                }
+                <th class="th-sm" style="text-align: center;">
+                    Report ID#
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm" style="text-align: center;">
+                    Assigned To:
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm" style="text-align: center;">
+                    Location
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm" style="text-align: center;">
+                    Date Created
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm" style="text-align: center;">
+                    Report Count
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm" style="text-align: center;">
+                    Severity
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm" style="text-align: center;">
+                    Status
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
             </tr>
+        </thead>
+        <tbody id="table-data">
+            @foreach (WebApplication.Web.Models.Account.Report report in Model)
+            {
+                <tr>
+                    <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.ReportNumber</button></td>
+
+                    @if (report.AssignedEmployee != 0)
+                    {
+                        <td style="text-align: center;">Worker #@report.AssignedEmployee</td>
+                    }
+                    else
+                    {
+                        <td style="text-align: center;"><button onclick="assignEmployee(@report.Id)" id="assignedemployee(@report.Id)">Assign to Self</button></td>
+                    }
+
+                    <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
+                    <td style="text-align: center;">@report.DateCreated</td>
+                    <td style="text-align: center;">@report.ReportCount</td>
+
+                    @if (report.Severity == 3)
+                    {
+                        <td style="background-color: red;"></td>
+                    }
+                    else if (report.Severity == 2)
+                    {
+                        <td style="background-color: orange;"></td>
+                    }
+                    else
+                    {
+                        <td style="background-color: green;"></td>
+                    }
+
+                    @if (report.Status == 4)
+                    {
+                        <td style="background-color: green;"></td>
+                    }
+                    else if (report.Status == 3)
+                    {
+                        <td style="background-color: blue;"></td>
+                    }
+                    else if (report.Status == 2)
+                    {
+                        <td style="background-color: orange;"></td>
+                    }
+                    else
+                    {
+                        <td style="background-color: red;"></td>
+                    }
+                </tr>
 
 
 
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -230,7 +234,7 @@
 }
 
 @*this is the modal that appears when a user clicks on the reportnumber button. allows the user to change data for single pothole*@
-<div class="container">
+<div class="container-fluid">
     <div class="modal fade" id="employee-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
