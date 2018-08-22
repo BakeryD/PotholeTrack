@@ -31,7 +31,7 @@ namespace WebApplication.Web.DAL
 					conn.Open();
 					SqlCommand cmd =
 						new SqlCommand(
-                            $"INSERT INTO records(submitter, datecreated, severity, lattitude, longitude, status, reportnumber)" +
+                            $"INSERT INTO records(submitter, datecreated, severity, lattitude, longitude, status, reportnumber, assignedemployee)" +
                             $" VALUES (@submitter, @datecreated, @severity, @lattitude, @longitude, @status, @reportnumber, @assignedemployee); Select Max(id) from records;",
 							conn);
 					cmd.Parameters.AddWithValue("@submitter", report.Submitter);
