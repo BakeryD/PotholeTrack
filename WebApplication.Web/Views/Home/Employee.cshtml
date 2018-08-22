@@ -151,25 +151,27 @@
 
     <script>
         document.querySelector('#pothole@(report.Id)').addEventListener('click',
-            function () {
+            function() {
                 $('#report-id', $('#employee-modal')).val(@report.Id);
                 //If it hasn't been inspected, minnimum value should be today
                 @if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
                 {
 
                     <text>
-                $('#dateinspected', $('#employee-modal')).val('');
-                document.querySelector('#dateinspected').setAttribute("min",'@DateTime.Today.ToString("d", culture).Replace('/', '-')');
+                        $('#dateinspected', $('#employee-modal')).val('');
+                        document.querySelector('#dateinspected').setAttribute("min",
+                            '@DateTime.Today.ToString("d", culture).Replace('/', '-')');
 
                     </text>
                 }
                 //Otherwise, minnimum value should be the last recorded date of inspection
                 else
                 {
-                <text>
-                $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d",culture).Replace('/','-')');
-                document.querySelector('#dateinspected').setAttribute("min", '@minRepairDate');
-                </text>
+                    <text>
+                        $('#dateinspected', $('#employee-modal'))
+                            .val('@report.DateInspected.ToString("d", culture).Replace('/', '-')');
+                        document.querySelector('#dateinspected').setAttribute("min", '@minRepairDate');
+                    </text>
                 }
 
 
@@ -182,43 +184,48 @@
 
                         //And set said date as the minnimum
                         <text>
-                document.querySelector('#daterepaired').readOnly = true;
-                $('#dateinspected').change((event) => {
+                            document.querySelector('#daterepaired').readOnly = true;
+                            $('#dateinspected').change((event) => {
 
-                    let newMinVal = event.currentTarget.value;
-                    if (event.currentTarget.value !== '') {
-                        document.querySelector('#daterepaired').readOnly = false;
+                                let newMinVal = event.currentTarget.value;
+                                if (event.currentTarget.value !== '') {
+                                    document.querySelector('#daterepaired').readOnly = false;
 
-                        document.querySelector('#daterepaired').setAttribute("min", newMinVal);
+                                    document.querySelector('#daterepaired').setAttribute("min", newMinVal);
 
-                    }
-                });
+                                }
+                            });
                         </text>
 
                     }
                     <text>
-                $('#daterepaired', $('#employee-modal')).val('');
-                document.querySelector('#daterepaired').setAttribute("min",'@minRepairDate');
+                        $('#daterepaired', $('#employee-modal')).val('');
+                        document.querySelector('#daterepaired').setAttribute("min", '@minRepairDate');
                     </text>
                 }
                 //Otherwise, minnimum value should be last recorded date of repair
                 else
                 {
-                <text>
-                $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
-                document.querySelector('#daterepaired').setAttribute("min",'@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
-                </text>
+                    <text>
+                        $('#daterepaired', $('#employee-modal'))
+                            .val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
+                        document.querySelector('#daterepaired').setAttribute("min",
+                            '@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
+                    </text>
                 }
 
                 $('#description', $('#employee-modal')).html('@report.Description');
                 $('#status', $('#employee-modal')).val(@report.Status);
                 $('#severity', $('#employee-modal')).val(@report.Severity);
 
-                document.getElementById('assignedemployee(@report.Id)').addEventListener('click', function() {
-                    var button = document.getElementById('assignedemployee(@report.Id)');
-                    button.style.background = '#65f442';
-                    button.textContent = "Assigned to You!";
-                });
+                document.getElementById('assignedemployee(@report.Id)').addEventListener('click',
+                    function() {
+                        var button = document.getElementById('assignedemployee(@report.Id)');
+                        button.style.background = '#65f442';
+                        button.textContent = "Assigned to You!";
+                    });
+
+            });
 
     </script>
 }
