@@ -3,7 +3,6 @@
     ViewData["Title"] = "Employee Portal";
 }
 
-
 <h2 id="employee-title">Active Reports</h2>
 <p id="employee-welcome">There is work to be done!</p>
 <h3 style="text-align: center; color: aliceblue;">Table legend:</h3>
@@ -274,9 +273,7 @@
                         <p style="display:none;" id="report-id"></p>
                         <p><span style="font-weight:bold">Status:  </span><input min="1" max="4" type="number" id="status" style="border: none; color: black;" /></p>
                         <p><span style="font-weight:bold">Severity:  </span><input min="1" max="3" type="number" id="severity" style="border: none; color: black;" /></p>
-
                         <p><span style="font-weight: bold">Date Inspected:  </span><input type="date" id="dateinspected" style="border: none; color: black;" /></p>
-
                         <p><span style="font-weight: bold">Date Repaired:  </span> <input type="date" id="daterepaired" style="border: none; color: black;" /></p>
                         <p><span style="font-weight: bold">Inspection/Repair Notes</span> <textarea id="description" style="border: none; color: black; margin: 0px; width: 515px; height: 157px;"></textarea></p>
                         <button type="submit" class="btn btn-success btn-default" data-dismiss="modal" onClick="updateReport()" style="text-align: center;"><span class="glyphicon glyphicon-check"></span> Update Record</button>

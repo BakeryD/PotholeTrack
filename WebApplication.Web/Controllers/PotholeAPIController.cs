@@ -68,11 +68,6 @@ namespace WebApplication.Web.Controllers
 
         }
 
-        /// <summary>
-        /// Updates the status, dates of inspection/repair for an existing pothole report
-        /// </summary>
-        /// <param name="updatedReport"></param>
-        /// <returns></returns>
 	    [HttpPost]
 	    [Route("assign/{id}")]
 	    public ActionResult AssignEmployee(int id)
@@ -82,7 +77,12 @@ namespace WebApplication.Web.Controllers
 
 		    return Ok();
 	    }
-	   
+
+        /// <summary>
+        /// Updates the status, dates of inspection/repair for an existing pothole report
+        /// </summary>
+        /// <param name="updatedReport"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("update")]
         public ActionResult UpdateReport(Report updatedReport)
