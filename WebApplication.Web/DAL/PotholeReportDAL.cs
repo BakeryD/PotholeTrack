@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
-using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using WebApplication.Web.Models;
 using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.DAL
@@ -192,7 +187,7 @@ namespace WebApplication.Web.DAL
 		{
 			try
 			{
-				using (SqlConnection conn = new SqlConnection(connectionString))
+				using (SqlConnection conn = new SqlConnection(ConnectionString))
 				{
 					conn.Open();
 
