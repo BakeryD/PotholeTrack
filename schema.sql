@@ -48,6 +48,7 @@ CREATE TABLE records
     reportcount    int NOT NULL default(0),
     description     TEXT default(''),
     reportnumber     varchar(20),
+	assignedemployee int default(0),
 
     Constraint  pk_records  PRIMARY KEY (id),
     Constraint  fk_records_users    FOREIGN KEY (submitter) REFERENCES users(id)
