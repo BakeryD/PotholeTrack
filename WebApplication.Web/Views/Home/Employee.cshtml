@@ -8,6 +8,7 @@
 <p id="employee-welcome">There is work to be done!</p>
 <h3 style="text-align: center; color: aliceblue;">Table legend:</h3>
 
+@*here is a legend for the table*@
 <div class="legend-container">
     <div>
         <ul style="color: aliceblue;">
@@ -29,8 +30,12 @@
 </div>
 <br />
 <hr />
+
+@*this input field allows the user to search based on the report number (starts with CLE)*@
 <input class="form-control" id="myInput" type="text" placeholder="Search..">
 <br>
+
+@*this is the table that displays ALL potholes in the database*@
 <table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
     <thead>
         <tr>
@@ -162,7 +167,7 @@
     </script>
 }
 
-
+@*this is the modal that appears when a user clicks on the reportnumber button. allows the user to change data for single pothole*@
 <div class="container">
     <div class="modal fade" id="employee-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">

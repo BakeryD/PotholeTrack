@@ -156,7 +156,7 @@
         async defer></script>
 
 
-
+@*this is the pop up that appears when a user is adding a new pothole*@
 <div id="potholereport" style="display: none">
     <p>Report a pothole here?</p>
     <p>
@@ -170,10 +170,10 @@
     <input type='button' value='Save' onclick='saveData()' data-toggle="modal" data-target="#reportsaved" />
 </div>
 
-
-
+@*the div that holds the map*@
 <div id="map" class="img-responsive" style="padding-top:25px"></div>
 
+@*the modal that appears after a user has clicked "save" for a new pothole*@
 <div class="modal fade" id="reportsaved" tabindex="-1" role="dialog" aria-labelledby="Thanks!" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -191,6 +191,7 @@
     </div>
 </div>
 
+@*the modal that appears when a user interacts with an already existing pothole*@
 <div class="modal fade" id="potholedata" tabindex="-1" role="dialog" aria-labelledby="Data!" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -222,10 +223,12 @@
 <br/>
 <hr/>
 <br/>
-<div class="parallax" id="parallax1"></div>
+<div class="parallax" id="parallax1"></div>  @*this div holds an image for parallax scrolling*@
 <br/>
 <hr/>
 <br/>
+
+@*Here is the about section of the index page*@
 <div id="about" style="padding-bottom: 50px; border-bottom: white;">
     <h1>Do you hate potholes?</h1>
     <div>
@@ -252,10 +255,13 @@
 </div>
 <br/>
 <hr/>
-<div class="parallax" id="parallax2"></div>
 <br/>
+<div class="parallax" id="parallax2"></div>  @*this div holds an image for parallax scrolling*@
 <br/>
 <hr/>
+<br/>
+
+@*here we show how many potholes have been repaired broken down by month, year, total*@
 <h1 id="report-title">Your tax dollars at work!</h1>
 <br/>
 <br/>
