@@ -86,6 +86,13 @@ li > #login, #logout {
     text-align: center;
 }
 
+#report-title {
+    text-align: center;
+    color: aliceblue;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
 .main-bottom {
     display: flex;
     flex-direction: row;
@@ -93,6 +100,7 @@ li > #login, #logout {
     padding-left: 6.25%;
     padding-right: 6.25%;
     color: aliceblue;
+    padding-bottom: 30px;
 }
 
 .main-report {
@@ -149,6 +157,10 @@ li > #login, #logout {
     background-color: #767676;
 }
 
+.hidden {
+    display: none;
+}
+
 /** Modal End **/
 
 
@@ -168,10 +180,12 @@ strong#user-name {
     color: goldenrod;
 }
 
+
 .user-data {
     color: aliceblue;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 45px;
+    margin-bottom: 35px;
 }
 
 strong#user-data {
@@ -224,6 +238,24 @@ strong#user-data {
 
 /** Employee View end **/
 
-.hidden {
-    display:none;
+/** Index page parallax start **/
+
+#parallax1 {
+    background-image: linear-gradient(to right bottom, rgba(78, 96, 106, 0.6), rgba(255, 255, 255, 0.6)), url(https://www.gannett-cdn.com/-mm-/38b2e6935d2caa4e96e963348fcbb385c228e98b/c=6-0-2994-1688/local/-/media/2018/02/20/USATODAY/USATODAY/636547270227322875-022018Pothole-michigan.jpg?width=3200&height=1680&fit=crop);
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
+#parallax2 {
+    background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0.60), rgba(0, 0, 0, 0.55)), url(https://sproutnewmedia.com/wp-content/uploads/2018/03/pothole-sm.jpg);
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*linear-gradient(rgb(78, 96, 106), rgb(0, 0, 0))*/
