@@ -1,6 +1,6 @@
 ﻿@model IList<WebApplication.Web.Models.Account.Report>
 @{
-    ViewData["Title"] = "Employee";
+    ViewData["Title"] = "Employee Portal";
 }
 
 
@@ -8,6 +8,7 @@
 <p id="employee-welcome">There is work to be done!</p>
 <h3 style="text-align: center; color: aliceblue;">Table legend:</h3>
 
+@*here is a legend for the table*@
 <div class="legend-container">
     <div>
         <ul style="color: aliceblue;">
@@ -29,13 +30,21 @@
 </div>
 <br />
 <hr />
+
+@*this input field allows the user to search based on the report number (starts with CLE)*@
 <input class="form-control" id="myInput" type="text" placeholder="Search..">
 <br>
+
+@*this is the table that displays ALL potholes in the database*@
 <table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
     <thead>
         <tr>
             <th class="th-sm" style="text-align: center;">
                 Report ID#
+                <i class="fa fa-sort float-right" aria-hidden="true"></i>
+            </th>
+            <th class="th-sm" style="text-align: center;">
+                Assigned To:
                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
             </th>
             <th class="th-sm" style="text-align: center;">
@@ -65,6 +74,14 @@
             <tr>
                 <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.ReportNumber</button></td>
 
+                @if (report.AssignedEmployee != 0)
+                {
+                    <td style="text-align: center;">Worker #@report.AssignedEmployee</td>
+                }
+                else
+                {
+                    <td style="text-align: center;"><button onclick="assignEmployee(@report.Id)" id="assignedemployee(@report.Id)">Assign to Self</button></td>
+                }
 
                 <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
                 <td style="text-align: center;">@report.DateCreated</td>
@@ -101,9 +118,13 @@
                 }
             </tr>
 
+
+
         }
     </tbody>
 </table>
+
+
 
 <script>
     $(document).ready(function () {
@@ -193,11 +214,16 @@
                 $('#status', $('#employee-modal')).val(@report.Status);
                 $('#severity', $('#employee-modal')).val(@report.Severity);
 
-    });
+                document.getElementById('assignedemployee(@report.Id)').addEventListener('click', function() {
+                    var button = document.getElementById('assignedemployee(@report.Id)');
+                    button.style.background = '#65f442';
+                    button.textContent = "Assigned to You!";
+                });
+
     </script>
 }
 
-
+@*this is the modal that appears when a user clicks on the reportnumber button. allows the user to change data for single pothole*@
 <div class="container">
     <div class="modal fade" id="employee-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">

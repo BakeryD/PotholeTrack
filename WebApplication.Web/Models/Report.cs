@@ -73,6 +73,11 @@ namespace WebApplication.Web.Models.Account
 	    /// The new and improved report number.
 	    /// </summary>
 	    public string ReportNumber { get; set; }
+
+	    /// <summary>
+	    /// The new and improved report number.
+	    /// </summary>
+	    public int AssignedEmployee { get; set; }
 	}
 
 

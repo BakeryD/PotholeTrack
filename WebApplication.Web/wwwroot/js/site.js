@@ -59,6 +59,7 @@ function saveData() {
     }
 
 }
+
 /**
  *  Gets a psuedo-random number to save as the Report Number
  * @returns {number}    a psuedo-random number
@@ -151,6 +152,35 @@ function updateReport() {
     };
 
     //Api call
+    fetch(url, settings)
+        .then(function (response) {
+            if (!response.ok) {
+                console.log(response.statusText);
+                //throw Error(response.statusText);
+            }
+            return response;
+        }).then(function (response) {
+            console.log("ok");
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+
+
+}
+
+function assignEmployee(reportId) {
+    var base = window.location.protocol + "//" + window.location.host;
+    var id = reportId;
+    var url = `${base}/api/record/assign/${id}`;
+   
+    var settings = {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
     fetch(url, settings)
         .then(function (response) {
             if (!response.ok) {

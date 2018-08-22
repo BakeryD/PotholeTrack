@@ -77,6 +77,16 @@ namespace WebApplication.Web.Controllers
         /// </summary>
         /// <param name="updatedReport"></param>
         /// <returns></returns>
+	    [HttpPost]
+	    [Route("assign/{id}")]
+	    public ActionResult AssignEmployee(int id)
+	    {
+		    var currentUser = auth.GetCurrentUser().Id;
+			dal.AssignEmployee(id, currentUser);
+
+		    return Ok();
+	    }
+	   
         [HttpPost]
         [Route("update")]
         public ActionResult UpdateReport(Report updatedReport)
@@ -108,7 +118,7 @@ namespace WebApplication.Web.Controllers
             {
                 existingReport.Status = updatedReport.Status;
             }
-
+			
             existingReport.Severity = updatedReport.Severity;
             //Save changes
             dal.UpdateReport(existingReport);

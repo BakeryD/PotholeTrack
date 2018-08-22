@@ -45,7 +45,14 @@ namespace WebApplication.Web.DAL
         /// </summary>
         /// <param name="id">The User's Id</param>
         /// <returns></returns>
-        IList<Report> GetReportsByUser(int id)
+        IList<Report> GetReportsByUser(int id);
+
+	    /// <summary>
+	    /// Updates a report.
+	    /// </summary>
+	    /// <param name="reportId"></param>
+	    /// <param name="employeeId"></param>
+	    void AssignEmployee(int reportId, int employeeId);
 
 
     }

@@ -8,8 +8,11 @@
 
 <p class="profile-welcome">Welcome back <strong id="user-name">@Model.User.FirstName @Model.User.LastName</strong></p>
 
+
+@*this table is filled with the users information they provided upon signing up*@
 <div>
     <table class="container user-data">
+<<<<<<< HEAD
         <tr>
             <td>Username : <strong id="user-data">@Model.User.Username</strong></td>
         </tr>
@@ -29,6 +32,7 @@
 </div>
 <hr />
 
+@*this table is a list of all the potholes that the user has submitted themselves*@
 <h3 style="text-align: center; color: aliceblue;">Here's all the reports you have submitted:</h3>
 <table id="pothole-table-profile" class="table table-bordered table-sm" cellspacing="0" width="100%" style="color: white;">
     <thead>
@@ -50,6 +54,8 @@
                 <i class="fa fa-sort float-right" aria-hidden="true"></i>
         </tr>
     </thead>
+
+    @*here we are talking to the database to retrieve all the information to each pothole based on the user.id*@
     <tbody id="table-data">
         @foreach (WebApplication.Web.Models.Account.Report report in Model.Reports)
         {
@@ -109,6 +115,7 @@
     </tbody>
 </table>
 
+@*this modal appears when the user clicks on the location (in the table) of each pothole*@
 <div class="modal fade" id="potholemap" tabindex="-1" role="dialog" aria-labelledby="Data!" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
