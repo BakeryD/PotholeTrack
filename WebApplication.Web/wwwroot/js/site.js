@@ -8,19 +8,27 @@ $(document).ready(function () {
     });
 });
 
+
+/**
+ * Saves the location of a map marker and the severity selected as a pothole report
+ * and gives it a unique Report Number
+ * @returns {void}
+ */
 function saveData() {
-    var reportNumber = getRndInteger();
-    var base = window.location.protocol + "//" + window.location.host;
-    var url = `${base}/api/record/create`;
-    var lat = marker.getPosition().lat();
-    var lng = marker.getPosition().lng();
-    var severity = parseInt(document.querySelector('#marker-severity').selectedOptions[0].value);
+    let reportNumber = getRndInteger();
+    // The start of the url for our api call
+    let base = window.location.protocol + "//" + window.location.host;
+    let url = `${base}/api/record/create`;
+    let lat = marker.getPosition().lat();
+    let lng = marker.getPosition().lng();
+    //Gets the severity of the pothole the user selected
+    let severity = parseInt(document.querySelector('#marker-severity').selectedOptions[0].value);
     if (lng >= -81.820158 &&
         lng <= -81.535962 &&
         lat <= 41.579773 &&
         lat >= 41.427390) {
 
-        var settings = {
+        let settings = {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify({
@@ -35,6 +43,7 @@ function saveData() {
             }
         };
 
+        //Api call
         fetch(url, settings)
             .then(function (response) {
                 if (!response.ok) {
@@ -50,23 +59,30 @@ function saveData() {
     }
 
 }
-
+/**
+ *  Gets a psuedo-random number to save as the Report Number
+ * @returns {number}    a psuedo-random number
+ */
 function getRndInteger() {
     return Math.floor(Math.random() * (80000 - 35000 + 1)) + 35000;
 }
 
-
-var button = $('#logout');
+//Logs the current user out when they click the log out button
+let button = $('#logout');
 button.on('click', () => {
     document.querySelector('form[name="logout"]').submit();
 });
 
-
+/**
+ * Gets the record id from a pothole marker and adds another user report
+ *  @returns {void}
+ */
 function incrementReportCount() {
-    var recordId = $('form[name="updateRecord"]').children('#p-id').val();
-    var base = window.location.protocol + "//" + window.location.host;
-    var url = `${base}/api/record/AddReport`;
-    var settings = {
+    let recordId = $('form[name="updateRecord"]').children('#p-id').val();
+        // The start of the url for our api call
+    let base = window.location.protocol + "//" + window.location.host;
+    let url = `${base}/api/record/AddReport`;
+    let settings = {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({
@@ -77,6 +93,7 @@ function incrementReportCount() {
         }
     };
 
+    //Api call
     fetch(url, settings)
         .then(function (response) {
             if (!response.ok) {
@@ -92,15 +109,18 @@ function incrementReportCount() {
 }
 
 function updateReport() {
-    var base = window.location.protocol + "//" + window.location.host;
-    var id = $('#report-id', $('#employee-modal')).val();
-    var url = `${base}/api/record/update`;
-    var dateInspected = $('#dateinspected', $('#employee-modal')).val();
-    var dateRepaired = $('#daterepaired', $('#employee-modal')).val();
-    var description = $('#description', $('#employee-modal')).val();
-    var status = $('#status', $('#employee-modal')).val();
-    var severity = $('#severity', $('#employee-modal')).val();
-    var d = new Date();
+
+        // The start of the url for our api call
+    let base = window.location.protocol + "//" + window.location.host;
+    let id = $('#report-id', $('#employee-modal')).val();
+    let url = `${base}/api/record/update`;
+    let dateInspected = $('#dateinspected', $('#employee-modal')).val();
+    let dateRepaired = $('#daterepaired', $('#employee-modal')).val();
+    let description = $('#description', $('#employee-modal')).val();
+    let status = $('#status', $('#employee-modal')).val();
+    let severity = $('#severity', $('#employee-modal')).val();
+    //Arbitrary date for handling when no dates are passed into the report info modal
+    let d = new Date();
     d.setDate(d.getDate() - 1);
 
     if (dateInspected === "") {
@@ -110,7 +130,7 @@ function updateReport() {
         dateRepaired = d;
     }
 
-    var settings = {
+    let settings = {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({
@@ -123,13 +143,14 @@ function updateReport() {
             Status: status,
             Description: description,
             DateInspected: dateInspected,
-            DateRepaired: dateRepaired,
+            DateRepaired: dateRepaired
         }),
         headers: {
             'Content-Type': 'application/json'
         }
     };
 
+    //Api call
     fetch(url, settings)
         .then(function (response) {
             if (!response.ok) {

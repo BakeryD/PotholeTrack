@@ -15,10 +15,15 @@ namespace WebApplication.Web.Controllers
     [ApiController]
     public class PotholeAPIController : ControllerBase
     {
-	    // Create our dependency variable
+	    // Create our dependency variables
 	    private readonly IPotholeDAL dal;
 	    private readonly IAuthProvider auth;
 
+        /// <summary>
+        /// When this api is instantiated, give it access to the reportDAL and our authorization provider via dependency injection
+        /// </summary>
+        /// <param name="dal"></param>
+        /// <param name="auth"></param>
 	    public PotholeAPIController(IPotholeDAL dal, IAuthProvider auth)
 	    {
 			this.dal = dal;
@@ -67,6 +72,11 @@ namespace WebApplication.Web.Controllers
 
         }
 
+        /// <summary>
+        /// Updates the status, dates of inspection/repair for an existing pothole report
+        /// </summary>
+        /// <param name="updatedReport"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("update")]
         public ActionResult UpdateReport(Report updatedReport)

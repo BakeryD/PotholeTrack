@@ -108,7 +108,7 @@ namespace WebApplication.Web.DAL
 
 
 		/// <summary>
-		/// Gets the user from the database.
+		/// Gets the user's record id's from the database.
 		/// </summary>
 		/// <param name="userid"></param>
 		/// <returns></returns>

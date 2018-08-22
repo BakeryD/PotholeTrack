@@ -19,7 +19,8 @@
     let lat;
     let long;
     let potholeData;
-    let currentUserID= @currentUserID;
+    let currentUserID = @currentUserID;
+    let point;
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -52,7 +53,7 @@
                 }
             }
         <text>
-            let point = new google.maps.LatLng(
+             point = new google.maps.LatLng(
                 parseFloat(@report.Lattitude),
                 parseFloat(@report.Longitude));
 
@@ -76,7 +77,6 @@
                                 $('#addReport').removeClass('hidden');
 
                             });
-                            // do something...
                           });
                     </text>
                     }

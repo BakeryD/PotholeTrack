@@ -40,6 +40,13 @@ namespace WebApplication.Web.DAL
         /// </summary>
         /// <returns></returns>
         IList<Report> GetAllReports();
+        /// <summary>
+        /// Returns a list of all the reports for a given user
+        /// </summary>
+        /// <param name="id">The User's Id</param>
+        /// <returns></returns>
+        IList<Report> GetReportsByUser(int id)
 
-	}
+
+    }
 }

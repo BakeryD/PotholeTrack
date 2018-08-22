@@ -22,7 +22,7 @@ namespace WebApplication.Web.Providers.Auth
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            var authProvider = context.HttpContext.RequestServices.GetService<IAuthProvider>();
+            IAuthProvider authProvider = context.HttpContext.RequestServices.GetService<IAuthProvider>();
 
             if (!authProvider.IsLoggedIn)
             {

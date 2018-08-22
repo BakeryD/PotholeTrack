@@ -6,24 +6,24 @@
 
 <h2 id="profile-title">Your Profile</h2>
 
-<p class="profile-welcome">Welcome back <strong id="user-name">@Model.user.FirstName @Model.user.LastName</strong></p>
+<p class="profile-welcome">Welcome back <strong id="user-name">@Model.User.FirstName @Model.User.LastName</strong></p>
 
 <div>
     <table class="container user-data">
         <tr>
-            <td>Username : <strong id="user-data">@Model.user.Username</strong></td>
+            <td>Username : <strong id="user-data">@Model.User.Username</strong></td>
         </tr>
         <tr>
-            <td>First Name : <strong id="user-data">@Model.user.FirstName</strong></td>
+            <td>First Name : <strong id="user-data">@Model.User.FirstName</strong></td>
         </tr>
         <tr>
-            <td>Last Name : <strong id="user-data">@Model.user.LastName</strong></td>
+            <td>Last Name : <strong id="user-data">@Model.User.LastName</strong></td>
         </tr>
         <tr>
-            <td>Email : <strong id="user-data">@Model.user.Email</strong></td>
+            <td>Email : <strong id="user-data">@Model.User.Email</strong></td>
         </tr>
         <tr>
-            <td>Phone Number : <strong id="user-data">@Model.user.PhoneNumber</strong></td>
+            <td>Phone Number : <strong id="user-data">@Model.User.PhoneNumber</strong></td>
         </tr>
     </table>
 </div>
@@ -51,9 +51,9 @@
         </tr>
     </thead>
     <tbody id="table-data">
-        @foreach (WebApplication.Web.Models.Account.Report report in Model.reports)
+        @foreach (WebApplication.Web.Models.Account.Report report in Model.Reports)
         {
-            if (report.Submitter == @Model.user.Id)
+            if (report.Submitter == @Model.User.Id)
             {
 
                 <tr id="profile-row@(report.Id)">
@@ -123,9 +123,9 @@
 
                         function potholeMap(lat, lng) {
 
-                            var pothole = { lat, lng };
-                            var markerimage = '/images/constructioncone2.png';
-                            var map = new google.maps.Map(
+                            let pothole = { lat, lng };
+                            let markerimage = '/images/constructioncone2.png';
+                            let map = new google.maps.Map(
                                 document.getElementById('map'),
                                 {
                                     zoom: 16,
@@ -140,7 +140,7 @@
                                     ]
                                 });
 
-                            var marker = new google.maps.Marker({ position: pothole, icon: markerimage, map: map });
+                            let marker = new google.maps.Marker({ position: pothole, icon: markerimage, map: map });
 
 
                         }

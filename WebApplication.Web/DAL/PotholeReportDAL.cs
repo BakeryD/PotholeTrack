@@ -14,11 +14,11 @@ namespace WebApplication.Web.DAL
 	public class PotholeReportDAL : IPotholeDAL
 	{
 
-		private readonly string connectionString;
+		private readonly string ConnectionString;
 
 		public PotholeReportDAL(string connectionString)
 		{
-			this.connectionString = connectionString;
+			this.ConnectionString = connectionString;
 		}
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace WebApplication.Web.DAL
             int newestId;
 			try
 			{
-				using (SqlConnection conn = new SqlConnection(connectionString))
+				using (SqlConnection conn = new SqlConnection(ConnectionString))
 				{
 					conn.Open();
 					SqlCommand cmd =
@@ -65,7 +65,7 @@ namespace WebApplication.Web.DAL
             string sql = "Select * From records;";
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(sql, conn);
@@ -84,6 +84,39 @@ namespace WebApplication.Web.DAL
             return reports;
         }
 
+        public IList<Report> GetReportsByUser(int id)
+        {
+            List<Report> reports = new List<Report>();
+            string sql = $"Select * From records " +
+                         $"Inner Join user_records on records.id = user_records.record_id " +
+                         $"Where user_id = @id;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        reports.Add(MapRowToReport(reader));
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+
+            return reports;
+        }
+
 		/// <summary>
 		/// Returns the report.
 		/// </summary>
@@ -93,7 +126,7 @@ namespace WebApplication.Web.DAL
 			Report report = null;
 			try
 			{
-				using (SqlConnection conn = new SqlConnection(connectionString))
+				using (SqlConnection conn = new SqlConnection(ConnectionString))
 				{
 					conn.Open();
 					SqlCommand cmd = new SqlCommand("SELECT * FROM records WHERE id = @reportid;", conn);
@@ -124,7 +157,7 @@ namespace WebApplication.Web.DAL
 		{
 			try
 			{
-				using (SqlConnection conn = new SqlConnection(connectionString))
+				using (SqlConnection conn = new SqlConnection(ConnectionString))
 				{
 					conn.Open();
 					SqlCommand cmd = new SqlCommand(
@@ -159,7 +192,7 @@ namespace WebApplication.Web.DAL
 		{
 			try
 			{
-				using (SqlConnection conn = new SqlConnection(connectionString))
+				using (SqlConnection conn = new SqlConnection(ConnectionString))
 				{
 					conn.Open();
 

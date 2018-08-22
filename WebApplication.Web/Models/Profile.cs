@@ -8,8 +8,8 @@ namespace WebApplication.Web.Models
 {
     public class Profile
     {
-		public User user { get; set; }
-		public IList<Report> reports { get; set; }
+		public User User { get; set; }
+		public IList<Report> Reports { get; set; }
 		
     }
 }

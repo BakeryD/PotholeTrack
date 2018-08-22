@@ -60,7 +60,7 @@
         </tr>
     </thead>
     <tbody id="table-data">
-        @foreach (var report in Model)
+        @foreach (WebApplication.Web.Models.Account.Report report in Model)
         {
             <tr>
                 <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.ReportNumber</button></td>
@@ -108,7 +108,7 @@
 <script>
     $(document).ready(function () {
         $("#myInput").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
+            let value = $(this).val().toLowerCase();
             $("#table-data tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
@@ -117,15 +117,15 @@
 </script>
 
 @{
-    var culture = new System.Globalization.CultureInfo("ja-JP");
+    System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("ja-JP");
 }
 
-@foreach (var report in Model)
+@foreach (WebApplication.Web.Models.Account.Report report in Model)
 {
     //Report cannot be marked as repaired before it is inspected
-    var minRepairDate = report.DateInspected.ToString("d", culture).Replace('/', '-');
+    string minRepairDate = report.DateInspected.ToString("d", culture).Replace('/', '-');
     //Report cannot be marked as inspected before it has been created
-    var minInspectDate = report.DateCreated.ToString("d", culture).Replace('/', '-');
+    string minInspectDate = report.DateCreated.ToString("d", culture).Replace('/', '-');
 
 
     <script>
@@ -213,9 +213,9 @@
 
                         function potholeMap(lat, lng) {
 
-                            var pothole = { lat, lng };
-                            var markerimage = '/images/testpothole2.png';
-                            var map = new google.maps.Map(
+                            let pothole = { lat, lng };
+                            let markerimage = '/images/testpothole2.png';
+                            let map = new google.maps.Map(
                                 document.getElementById('map'),
                                 {
                                     zoom: 16,
@@ -230,7 +230,7 @@
                                     ]
                                 });
 
-                            var marker = new google.maps.Marker({ position: pothole, icon: markerimage, map: map });
+                            let marker = new google.maps.Marker({ position: pothole, icon: markerimage, map: map });
 
                         }
                     </script>

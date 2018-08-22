@@ -15,18 +15,32 @@ namespace WebApplication.Web.Controllers
 	    private readonly IPotholeDAL dal;
         private readonly IAuthProvider authProvider;
 
+        /// <summary>
+        /// When this controller is instantiated, give it access to the DAL for records and our authorization provider
+        /// </summary>
+        /// <param name="authProvider"></param>
+        /// <param name="dal"></param>
         public AccountController(IAuthProvider authProvider, IPotholeDAL dal)
         {
             this.authProvider = authProvider;
 	        this.dal = dal;
         }
         
+        /// <summary>
+        /// Shows the user the log-in View?
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Login()
         {            
             return View();
         }
 
+        /// <summary>
+        /// Handles logging in
+        /// </summary>
+        /// <param name="loginViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Login(LoginViewModel loginViewModel)
@@ -55,7 +69,10 @@ namespace WebApplication.Web.Controllers
 			return View("Register");
 		}
 
-
+        /// <summary>
+        /// Handles logging-off
+        /// </summary>
+        /// <returns></returns>
 		[HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult LogOff()
@@ -67,7 +84,10 @@ namespace WebApplication.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        /// <summary>
+        /// Shows the standard registration page
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Register()
         {
@@ -76,6 +96,10 @@ namespace WebApplication.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Shows the "Employee Registration" page
+        /// </summary>
+        /// <returns></returns>
 		[HttpGet]
         public IActionResult EmployeeRegister()
         {
@@ -84,6 +108,11 @@ namespace WebApplication.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Handles registration
+        /// </summary>
+        /// <param name="registerViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register(RegisterViewModel registerViewModel)
@@ -111,8 +140,8 @@ namespace WebApplication.Web.Controllers
             User isLoggedIn = authProvider.GetCurrentUser();
             Profile profile = new Profile();
             User user = authProvider.GetCurrentUser();
-	        profile.user = user;
-	        profile.reports = dal.GetAllReports();
+	        profile.User = user;
+            profile.Reports = dal.GetReportsByUser(profile.User.Id);
             ViewData["loggedIn"] = (isLoggedIn != null);
             return View(profile);
         }
