@@ -7,16 +7,10 @@ body {
     cursor: default;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 5%;
-    padding-right: 5%;
-}
 
  /*Navigation Bar*/
  .navbar {
-     background: linear-gradient(rgb(78, 96, 106), rgb(0, 0, 0));
+     background: linear-gradient(rgba(78, 96, 106, 0.8), rgba(0, 0, 0, .8));
  }
 
 
@@ -84,6 +78,7 @@ li > #login, #logout {
 
 #p-about {
     text-align: center;
+    padding: 20px;
 }
 
 #report-title {
@@ -180,12 +175,11 @@ strong#user-name {
     color: goldenrod;
 }
 
-
 .user-data {
     color: aliceblue;
     font-weight: bold;
-    margin-top: 45px;
-    margin-bottom: 35px;
+    margin-top: 55px;
+    margin-bottom: 45px;
 }
 
 strong#user-data {
@@ -241,8 +235,8 @@ strong#user-data {
 /** Index page parallax start **/
 
 #parallax1 {
-    background-image: linear-gradient(to right bottom, rgba(78, 96, 106, 0.6), rgba(255, 255, 255, 0.6)), url(https://www.gannett-cdn.com/-mm-/38b2e6935d2caa4e96e963348fcbb385c228e98b/c=6-0-2994-1688/local/-/media/2018/02/20/USATODAY/USATODAY/636547270227322875-022018Pothole-michigan.jpg?width=3200&height=1680&fit=crop);
-    min-height: 500px;
+    background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0.6), rgba(78, 96, 106, 0.6)), url(https://media.nbc4i.com/nxs-wcmhtv-media-us-east-1/photo/2018/04/05/ohio%20pothole_1522961309544.jpg_39191170_ver1.0_1280_720.jpg);
+    min-height: 600px;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -250,8 +244,17 @@ strong#user-data {
 }
 
 #parallax2 {
+    background-image: linear-gradient(to right bottom, rgba(78, 96, 106, 0.6), rgba(255, 255, 255, 0.6)), url(https://www.gannett-cdn.com/-mm-/38b2e6935d2caa4e96e963348fcbb385c228e98b/c=6-0-2994-1688/local/-/media/2018/02/20/USATODAY/USATODAY/636547270227322875-022018Pothole-michigan.jpg?width=3200&height=1680&fit=crop);
+    min-height: 600px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#parallax3 {
     background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0.60), rgba(0, 0, 0, 0.55)), url(https://sproutnewmedia.com/wp-content/uploads/2018/03/pothole-sm.jpg);
-    min-height: 500px;
+    min-height: 600px;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -259,3 +262,66 @@ strong#user-data {
 }
 
 /** Index page parallax end **/
+
+/** Heading animation start **/
+
+.heading-primary {
+    text-align: center;
+    color: aliceblue;
+    text-transform: uppercase;
+    backface-visibility: hidden;
+    margin-bottom: 60px;
+    text-shadow: 2px 2px 4px black;
+}
+
+.heading-primary-main {
+    display: block;
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: 8px;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    margin-top: 100px;
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding-top: 20px;
+    animation: moveInRight 1s ease-out;
+}
+
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    80% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
