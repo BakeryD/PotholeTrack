@@ -51,6 +51,7 @@ function saveData() {
 
 }
 
+
 function getRndInteger() {
     return Math.floor(Math.random() * (80000 - 35000 + 1)) + 35000;
 }
@@ -122,8 +123,37 @@ function updateReport() {
             Status: status,
             Description: description,
             DateInspected: dateInspected,
-            DateRepaired: dateRepaired,
+            DateRepaired: dateRepaired
         }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    fetch(url, settings)
+        .then(function (response) {
+            if (!response.ok) {
+                console.log(response.statusText);
+                //throw Error(response.statusText);
+            }
+            return response;
+        }).then(function (response) {
+            console.log("ok");
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+
+
+}
+
+function assignEmployee(reportId) {
+    var base = window.location.protocol + "//" + window.location.host;
+    var id = reportId;
+    var url = `${base}/api/record/assign/${id}`;
+   
+    var settings = {
+        method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         }

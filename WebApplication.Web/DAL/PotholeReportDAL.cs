@@ -37,7 +37,7 @@ namespace WebApplication.Web.DAL
 					SqlCommand cmd =
 						new SqlCommand(
                             $"INSERT INTO records(submitter, datecreated, severity, lattitude, longitude, status, reportnumber)" +
-                            $" VALUES (@submitter, @datecreated, @severity, @lattitude, @longitude, @status, @reportnumber); Select Max(id) from records;",
+                            $" VALUES (@submitter, @datecreated, @severity, @lattitude, @longitude, @status, @reportnumber, @assignedemployee); Select Max(id) from records;",
 							conn);
 					cmd.Parameters.AddWithValue("@submitter", report.Submitter);
 					cmd.Parameters.AddWithValue("@datecreated", report.DateCreated);
@@ -46,6 +46,7 @@ namespace WebApplication.Web.DAL
 					cmd.Parameters.AddWithValue("@lattitude", report.Lattitude);
                     cmd.Parameters.AddWithValue("@status", report.Status);
 					cmd.Parameters.AddWithValue("@reportnumber", report.ReportNumber);
+					cmd.Parameters.AddWithValue("@assignedemployee", report.AssignedEmployee);
 
                      newestId= Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -149,7 +150,37 @@ namespace WebApplication.Web.DAL
 			}
 		}
 
+		/// <summary>
+		/// Updates the assigned employee.
+		/// </summary>
+		/// <param name="reportId"></param>
+		/// <param name="employeeId"></param>
+		public void AssignEmployee(int reportId, int employeeId)
+		{
+			try
+			{
+				using (SqlConnection conn = new SqlConnection(connectionString))
+				{
+					conn.Open();
 
+					SqlCommand cmd =
+						new SqlCommand(
+							$"UPDATE records SET assignedemployee = @assignedemployee WHERE id = @id",
+							conn);
+					cmd.Parameters.AddWithValue("@id", reportId);
+					cmd.Parameters.AddWithValue("@assignedemployee", employeeId);
+
+					cmd.ExecuteNonQuery();
+
+				}
+				return;
+			}
+			catch (SqlException ex)
+			{
+				throw ex;
+			}
+
+		}
 
 		/// <summary>
 		/// Updates the report.
@@ -231,6 +262,16 @@ namespace WebApplication.Web.DAL
             report.ReportCount = Convert.ToInt32(reader["reportcount"]);
             report.Description = Convert.ToString(reader["description"]);
             report.ReportNumber = Convert.ToString(reader["reportnumber"]);
+			if (reader["assignedemployee"] is DBNull)
+			{
+				report.AssignedEmployee = 0;
+			}
+			else
+			{
+				report.AssignedEmployee = Convert.ToInt32(reader["assignedemployee"]);
+
+			}
+			
 
             return report;
         }

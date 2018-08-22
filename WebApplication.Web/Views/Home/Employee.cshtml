@@ -33,77 +33,93 @@
 <br>
 <table id="pothole-table" class="table table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="color: white;">
     <thead>
-        <tr>
-            <th class="th-sm" style="text-align: center;">
-                Report ID#
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Location
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Date Created
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Report Count
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Severity
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-            </th>
-            <th class="th-sm" style="text-align: center;">
-                Status
-                <i class="fa fa-sort float-right" aria-hidden="true"></i>
-        </tr>
+    <tr>
+        <th class="th-sm" style="text-align: center;">
+            Report ID#
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Assigned To: 
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Location
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Date Created
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Report Count
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+            Severity
+            <i class="fa fa-sort float-right" aria-hidden="true"></i>
+        </th>
+        <th class="th-sm" style="text-align: center;">
+        Status
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </tr>
     </thead>
     <tbody id="table-data">
-        @foreach (var report in Model)
-        {
-            <tr>
-                <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.ReportNumber</button></td>
+    @foreach (var report in Model)
+    {
+        <tr>
+            <td style="text-align: center;"><button data-target="#employee-modal" data-toggle="modal" onclick="potholeMap(@report.Lattitude, @report.Longitude)" id="pothole@(report.Id)">@report.ReportNumber</button></td>
+
+            @if (report.AssignedEmployee != 0)
+            {
+                <td style="text-align: center;">Worker #@report.AssignedEmployee</td>
+            }
+            else
+            {
+                <td style="text-align: center;"><button onclick="assignEmployee(@report.Id)" id="assignedemployee(@report.Id)">Assign to Self</button></td>
+            }
+
+            <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
+            <td style="text-align: center;">@report.DateCreated</td>
+            <td style="text-align: center;">@report.ReportCount</td>
+
+            @if (report.Severity == 3)
+            {
+                <td style="background-color: red;"></td>
+            }
+            else if (report.Severity == 2)
+            {
+                <td style="background-color: orange;"></td>
+            }
+            else
+            {
+                <td style="background-color: green;"></td>
+            }
+
+            @if (report.Status == 4)
+            {
+                <td style="background-color: green;"></td>
+            }
+            else if (report.Status == 3)
+            {
+                <td style="background-color: blue;"></td>
+            }
+            else if (report.Status == 2)
+            {
+                <td style="background-color: orange;"></td>
+            }
+            else
+            {
+                <td style="background-color: red;"></td>
+            }
+        </tr>
 
 
-                <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
-                <td style="text-align: center;">@report.DateCreated</td>
-                <td style="text-align: center;">@report.ReportCount</td>
 
-                @if (report.Severity == 3)
-                {
-                    <td style="background-color: red;"></td>
-                }
-                else if (report.Severity == 2)
-                {
-                    <td style="background-color: orange;"></td>
-                }
-                else
-                {
-                    <td style="background-color: green;"></td>
-                }
-
-                @if (report.Status == 4)
-                {
-                    <td style="background-color: green;"></td>
-                }
-                else if (report.Status == 3)
-                {
-                    <td style="background-color: blue;"></td>
-                }
-                else if (report.Status == 2)
-                {
-                    <td style="background-color: orange;"></td>
-                }
-                else
-                {
-                    <td style="background-color: red;"></td>
-                }
-            </tr>
-
-        }
+    }
     </tbody>
 </table>
+
+
 
 <script>
     $(document).ready(function () {
@@ -132,24 +148,24 @@
                 $('#report-id', $('#employee-modal')).val(@report.Id);
                 @if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value) {
                     <text>
-                $('#dateinspected', $('#employee-modal')).val('');
+                        $('#dateinspected', $('#employee-modal')).val('');
                     </text>
                 }
                 else
                 {
                 <text>
-                  $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d",culture).Replace('/','-')');
+                    $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d",culture).Replace('/','-')');
                 </text>
                 }
                 @if (report.DateRepaired == System.Data.SqlTypes.SqlDateTime.MinValue.Value) {
                     <text>
-                $('#daterepaired', $('#employee-modal')).val('');
+                        $('#daterepaired', $('#employee-modal')).val('');
                     </text>
                 }
                 else
                 {
                 <text>
-                $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
+                    $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
                 </text>
                 }
                 $('#description', $('#employee-modal')).val('@report.Description');
@@ -157,8 +173,17 @@
                 $('#severity', $('#employee-modal')).val(@report.Severity);
                 document.querySelector('#daterepaired').setAttribute("min",'@minRepairDate');
                 document.querySelector('#dateinspected').setAttribute("min",'@minInspectDate');
+                
+            });
 
-    });
+        
+            
+                document.getElementById('assignedemployee(@report.Id)').addEventListener('click', function() {
+                    var button = document.getElementById('assignedemployee(@report.Id)');
+                    button.style.background = '#65f442';
+                    button.textContent = "Assigned to You!";
+                });
+            
     </script>
 }
 

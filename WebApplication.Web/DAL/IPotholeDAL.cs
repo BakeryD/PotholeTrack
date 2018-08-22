@@ -35,11 +35,18 @@ namespace WebApplication.Web.DAL
 		/// <param name="reportId"></param>
 		void UpdateReport(Report reportId);
 
-        /// <summary>
-        /// Returns a list of all recorded potholes
-        /// </summary>
-        /// <returns></returns>
-        IList<Report> GetAllReports();
+	    /// <summary>
+	    /// Updates a report.
+	    /// </summary>
+	    /// <param name="reportId"></param>
+	    /// <param name="employeeId"></param>
+	    void AssignEmployee(int reportId, int employeeId);
+
+		/// <summary>
+		/// Returns a list of all recorded potholes
+		/// </summary>
+		/// <returns></returns>
+		IList<Report> GetAllReports();
 
 	}
 }
