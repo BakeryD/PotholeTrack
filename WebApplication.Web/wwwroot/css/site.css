@@ -282,7 +282,7 @@ strong#user-data {
     animation-name: moveInLeft;
     animation-duration: 1s;
     animation-timing-function: ease-out;
-    margin-top: 100px;
+    margin-top: 200px;
 }
 
 .heading-primary-sub {
