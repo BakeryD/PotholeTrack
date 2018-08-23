@@ -235,7 +235,7 @@ strong#user-data {
 /** Index page parallax start **/
 
 #parallax1 {
-    background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0.6), rgba(78, 96, 106, 0.6)), url(https://media.nbc4i.com/nxs-wcmhtv-media-us-east-1/photo/2018/04/05/ohio%20pothole_1522961309544.jpg_39191170_ver1.0_1280_720.jpg);
+    background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0.6), rgba(78, 96, 106, 0.6)), url(../images/ohio-pothole.jpg);
     min-height: 600px;
     background-attachment: fixed;
     background-position: center;
@@ -244,7 +244,7 @@ strong#user-data {
 }
 
 #parallax2 {
-    background-image: linear-gradient(to right bottom, rgba(78, 96, 106, 0.6), rgba(255, 255, 255, 0.6)), url(https://www.gannett-cdn.com/-mm-/38b2e6935d2caa4e96e963348fcbb385c228e98b/c=6-0-2994-1688/local/-/media/2018/02/20/USATODAY/USATODAY/636547270227322875-022018Pothole-michigan.jpg?width=3200&height=1680&fit=crop);
+    background-image: linear-gradient(to right bottom, rgba(78, 96, 106, 0.6), rgba(255, 255, 255, 0.6)), url(../images/lots-of-potholes.jpg);
     min-height: 600px;
     background-attachment: fixed;
     background-position: center;
@@ -253,7 +253,7 @@ strong#user-data {
 }
 
 #parallax3 {
-    background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0.60), rgba(0, 0, 0, 0.55)), url(https://sproutnewmedia.com/wp-content/uploads/2018/03/pothole-sm.jpg);
+    background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0.60), rgba(0, 0, 0, 0.55)), url(../images/pothole-heart.jpg);
     min-height: 600px;
     background-attachment: fixed;
     background-position: center;
