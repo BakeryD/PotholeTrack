@@ -67,8 +67,11 @@ namespace WebApplication.Web.Controllers
 		public IActionResult Employee()
 		{
 			IList<Report> reports = pDal.GetAllReports();
+            User currentUser = authProvider.GetCurrentUser();
             ViewData["loggedIn"] = authProvider.IsLoggedIn;
-			return View(reports);
+            ViewData["currentUserID"] = currentUser.Id;
+
+            return View(reports);
 		}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

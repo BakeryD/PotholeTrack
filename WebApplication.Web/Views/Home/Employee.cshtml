@@ -78,7 +78,16 @@
 
                     @if (report.AssignedEmployee != 0)
                     {
-                        <td style="text-align: center;">Worker #@report.AssignedEmployee</td>
+                        if (report.AssignedEmployee == (int)ViewData["currentUserID"])
+                        {
+                            <td style="text-align: center;"><button disabled style="background-color:#65f442;" id="assignedemployee(@report.Id)">Assigned to You!</button></td>
+
+                        }
+                        else
+                        {
+                            <td style="text-align: center;">Worker #@report.AssignedEmployee</td>
+
+                        }
                     }
                     else
                     {
@@ -151,87 +160,86 @@
     //Report cannot be marked as inspected before it has been created
     string minInspectDate = report.DateCreated.ToString("d", culture).Replace('/', '-');
 
+    @if (report.AssignedEmployee != 0 &&
+         report.AssignedEmployee != (int)ViewData["currentUserID"])
+    {
+        <script>
+         document.querySelector('#pothole@(report.Id)').addEventListener('click', function() {
+            $('#report-id', $('#employee-modal')).val(@report.Id);
 
-    <script>
-        document.querySelector('#pothole@(report.Id)').addEventListener('click',
-            function() {
-                $('#report-id', $('#employee-modal')).val(@report.Id);
-                //If it hasn't been inspected, minnimum value should be today
-                @if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
-                {
+                        //If it hasn't been inspected, minnimum value should be today
+             @if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+             {
+               <text>
+                 $('#dateinspected', $('#employee-modal')).val('');
+                 document.querySelector('#dateinspected').setAttribute("min",'@DateTime.Today.ToString("d", culture).Replace('/', '-')');
 
-                    <text>
-                        $('#dateinspected', $('#employee-modal')).val('');
-                        document.querySelector('#dateinspected').setAttribute("min",
-                            '@DateTime.Today.ToString("d", culture).Replace('/', '-')');
-
-                    </text>
-                }
-                //Otherwise, minnimum value should be the last recorded date of inspection
-                else
-                {
-                    <text>
-                        $('#dateinspected', $('#employee-modal'))
-                            .val('@report.DateInspected.ToString("d", culture).Replace('/', '-')');
-                        document.querySelector('#dateinspected').setAttribute("min", '@minRepairDate');
-                    </text>
-                }
+               </text>
+             }
+              //Otherwise, minnimum value should be the last recorded date of inspection
+              else
+             {
+               <text>
+               $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d", culture).Replace('/', '-')');
+                   document.querySelector('#dateinspected').setAttribute("min", '@minRepairDate');
+               </text>
+             }
 
 
-                //If it hasn't been repaired, minnimum value should be the date of inspection
-                @if (report.DateRepaired == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
-                {
-                    //If it hasn't been inspected yet, wait for the user to enter a date
-                    if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
-                    {
-
+                             //If it hasn't been repaired, minnimum value should be the date of inspection
+              @if (report.DateRepaired == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+              {
+               //If it hasn't been inspected yet, wait for the user to enter a date
+                 if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+                {   
                         //And set said date as the minnimum
-                        <text>
-                            document.querySelector('#daterepaired').readOnly = true;
-                            $('#dateinspected').change((event) => {
+                     <text>
+                     document.querySelector('#daterepaired').readOnly = true;
+                     $('#dateinspected').change((event) => {
 
-                                let newMinVal = event.currentTarget.value;
-                                if (event.currentTarget.value !== '') {
-                                    document.querySelector('#daterepaired').readOnly = false;
+                         let newMinVal = event.currentTarget.value;
+                            if (event.currentTarget.value !== '') {
+                            document.querySelector('#daterepaired').readOnly = false;
+                            document.querySelector('#daterepaired').setAttribute("min", newMinVal);
 
-                                    document.querySelector('#daterepaired').setAttribute("min", newMinVal);
+                            } else {
+                                document.querySelector('#daterepaired').readOnly = true;
+                            }
+                      });
+                     </text>
 
-                                }
-                            });
-                        </text>
-
-                    }
-                    <text>
-                        $('#daterepaired', $('#employee-modal')).val('');
-                        document.querySelector('#daterepaired').setAttribute("min", '@minRepairDate');
-                    </text>
                 }
-                //Otherwise, minnimum value should be last recorded date of repair
-                else
-                {
-                    <text>
-                        $('#daterepaired', $('#employee-modal'))
-                            .val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
-                        document.querySelector('#daterepaired').setAttribute("min",
-                            '@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
-                    </text>
-                }
+                     <text>
+                     $('#daterepaired', $('#employee-modal')).val('');
+                     document.querySelector('#daterepaired').setAttribute("min", '@minRepairDate');
+                     </text>
+              }
+               //Otherwise, minnimum value should be last recorded date of repair
+               else
+              {
+                <text>
+                $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
+                document.querySelector('#daterepaired').setAttribute("min",'@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
+                </text>
+              }
 
-                $('#description', $('#employee-modal')).html('@report.Description');
-                $('#status', $('#employee-modal')).val(@report.Status);
-                $('#severity', $('#employee-modal')).val(@report.Severity);
+            $('#description', $('#employee-modal')).html('@report.Description');
+            $('#status', $('#employee-modal')).val(@report.Status);
+            $('#severity', $('#employee-modal')).val(@report.Severity);
 
-                document.getElementById('assignedemployee(@report.Id)').addEventListener('click',
-                    function() {
-                        var button = document.getElementById('assignedemployee(@report.Id)');
-                        button.style.background = '#65f442';
-                        button.textContent = "Assigned to You!";
-                    });
+            document.getElementById('assignedemployee(@report.Id)').addEventListener('click', function () {
 
+              var button = document.getElementById('assignedemployee(@report.Id)');
+              button.style.background = '#65f442';
+              button.textContent = "Assigned to You!";
             });
 
-    </script>
+         });
+
+        </script>
+    }
 }
+
 
 @*this is the modal that appears when a user clicks on the reportnumber button. allows the user to change data for single pothole*@
 <div class="container-fluid">
