@@ -97,6 +97,14 @@
                     {
                             <text>
                     $('#potholedata').on('shown.bs.modal', function (e) {
+                        document.querySelector('#addReport').setAttribute('style', 'display:block;');
+                        document.querySelector('#addReport').addEventListener('click', (event) => {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            $('#addReport').click();
+                            document.querySelector('#addReport').remove();
+
+                        });
                         $('#addReport').removeClass('hidden');
 
                     });
@@ -228,7 +236,7 @@
             <div class="modal-footer">
                 @if ((bool)ViewData["loggedIn"] && (!userFlag))
                 {
-                    <button id="addReport" type="button" onclick="incrementReportCount()" class="btn btn-primary btn-default" data-dismiss="modal">Add your Report</button>
+                    <button style="display:none;" id="addReport" type="button" onclick="incrementReportCount()" class="btn btn-primary btn-default" data-toggle="modal" data-target="#reportsaved" data-dismiss="modal">Add your Report</button>
                 }
 
                 <button type="button" class="btn btn-danger btn-default pull-left" data-dismiss="modal">Close</button>

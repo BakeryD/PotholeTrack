@@ -32,14 +32,14 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a id="profile" asp-area="" asp-controller="Account" asp-action="ViewProfile">Profile</a></li>
-                    <li><a id="employee-btn" asp-area="" asp-controller="Home" asp-action="Employee">Employee</a></li>
+                    <li><a id="profile" style="display:none;" asp-area="" asp-controller="Account" asp-action="ViewProfile">Profile</a></li>
+                    <li><a id="employee-btn" style="display:none;" asp-area="" asp-controller="Home" asp-action="Employee">Employee</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a id="logout"><span class="glyphicon glyphicon-log-out"></span><strong> Log-Out</strong></a></li>
-                    <li><a id="nav-register" asp-controller="Account" asp-action="Register"><span class="glyphicon glyphicon-user"></span><strong> Sign Up</strong></a></li>
-                    <li><a id="login" data-toggle="modal" data-target="#loginmodal"><span class="glyphicon glyphicon-log-in"></span><strong> Login</strong></a></li>
+                    <li><a style="display:none;" id="logout"><span class="glyphicon glyphicon-log-out"></span><strong> Log-Out</strong></a></li>
+                    <li><a style="display:none;" id="nav-register" asp-controller="Account" asp-action="Register"><span class="glyphicon glyphicon-user"></span><strong> Sign Up</strong></a></li>
+                    <li><a style="display:none;" id="login" data-toggle="modal" data-target="#loginmodal"><span class="glyphicon glyphicon-log-in"></span><strong> Login</strong></a></li>
                 </ul>
             </div>
 
@@ -88,6 +88,9 @@
             if ((bool)ViewData["loggedIn"])//IF YOU ARE LOGGED IN
             {
                 <script>
+                    document.querySelector('#logout').setAttribute('style', 'display:block;');
+                    document.querySelector('#profile').setAttribute('style', 'display:block;');
+
                     $('#login').remove();
                     $('#nav-register').remove();
                     $(document).ready(function () {
@@ -101,8 +104,10 @@
             else//OTHERWISE
             {
                 <script>
-                    $('#employee-btn').attr('href', '#');
-                    $('#employee-btn').remove('#employee-btn');
+                    document.querySelector('#nav-register').setAttribute('style', 'display:block;');
+                    document.querySelector('#login').setAttribute('style', 'display:block;');
+
+                    $('#employee-btn').remove();
                     $('#logout').remove();
                     $('#profile').remove();
                 </script>
@@ -113,7 +118,20 @@
         <footer>
             <p style="text-align: center; color: aliceblue;">&copy; 2018 - WebApplication.Web</p>
         </footer>
-        <a id="employee-signup" class="btn btn-dark pull-right" asp-action="employeeregister" asp-controller="account">Employee Sign Up</a>
+        <a style="display:none;" id="employee-signup" class="btn btn-dark pull-right" asp-action="employeeregister" asp-controller="account">Employee Sign Up</a>
+        @if ((bool)ViewData["loggedIn"])
+        {
+            <script>
+                document.querySelector('#employee-btn').setAttribute('style', 'display:block;');
+            </script>
+        }
+        else
+        {
+                <script>
+                    document.querySelector('#employee-signup').setAttribute('style', 'display:block;');
+
+                </script>
+        }
     </div>
 
     <environment include="Development">

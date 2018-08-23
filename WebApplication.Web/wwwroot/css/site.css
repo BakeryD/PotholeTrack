@@ -325,3 +325,14 @@ strong#user-data {
         transform: translate(0);
     }
 }
+@media screen and (max-width: 768px) {
+
+    #th-lat-long,
+    #th-date-created,
+    #th-report-count,
+    .table-lat-long,
+    .table-date-created,
+    .table-report-count {
+        display: none;
+    }
+}

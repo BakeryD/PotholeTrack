@@ -49,15 +49,15 @@
                     Assigned To:
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
-                <th class="th-sm" style="text-align: center;">
+                <th id="th-lat-long" class="th-sm" style="text-align: center;">
                     Location
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
-                <th class="th-sm" style="text-align: center;">
+                <th id="th-date-created" class="th-sm" style="text-align: center;">
                     Date Created
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
-                <th class="th-sm" style="text-align: center;">
+                <th id="th-report-count" class="th-sm" style="text-align: center;">
                     Report Count
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
@@ -91,12 +91,12 @@
                     }
                     else
                     {
-                        <td style="text-align: center;"><button onclick="assignEmployee(@report.Id)" id="assignedemployee(@report.Id)">Assign to Self</button></td>
+                        <td style="text-align: center;"><button onClick="assignEmployee(@report.Id); window.location.reload();" id="assignedemployee(@report.Id)">Assign to Self</button></td>
                     }
 
-                    <td style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
-                    <td style="text-align: center;">@report.DateCreated</td>
-                    <td style="text-align: center;">@report.ReportCount</td>
+                    <td class="table-lat-long" style="text-align: center;">@report.Lattitude,  @report.Longitude</td>
+                    <td class="table-date-created" style="text-align: center;">@report.DateCreated</td>
+                    <td class="table-report-count" style="text-align: center;">@report.ReportCount</td>
 
                     @if (report.Severity == 3)
                     {
@@ -160,84 +160,128 @@
     //Report cannot be marked as inspected before it has been created
     string minInspectDate = report.DateCreated.ToString("d", culture).Replace('/', '-');
 
-    @if (report.AssignedEmployee != 0 &&
-         report.AssignedEmployee != (int)ViewData["currentUserID"])
-    {
-        <script>
-         document.querySelector('#pothole@(report.Id)').addEventListener('click', function() {
-            $('#report-id', $('#employee-modal')).val(@report.Id);
 
-                        //If it hasn't been inspected, minnimum value should be today
-             @if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
-             {
-               <text>
-                 $('#dateinspected', $('#employee-modal')).val('');
-                 document.querySelector('#dateinspected').setAttribute("min",'@DateTime.Today.ToString("d", culture).Replace('/', '-')');
+    <script>
+            document.querySelector('#pothole@(report.Id)').addEventListener('click', function () {
+                $('#report-id', $('#employee-modal')).val(@report.Id);
 
-               </text>
-             }
-              //Otherwise, minnimum value should be the last recorded date of inspection
-              else
-             {
-               <text>
-               $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d", culture).Replace('/', '-')');
+      @if (report.AssignedEmployee == 0 ||
+     report.AssignedEmployee == (int)ViewData["currentUserID"])
+      {
+          //If the employee clicks on a report id, show the update button, then hide it after the modal is closed
+                 <text>
+                $('#update-btn').css('display', 'block');
+                $('#employee-modal').on('hidden.bs.modal', () => {
+                    $('#update-btn').css('display', 'none');
+                });
+                 </text>
+                //If it hasn't been inspected, minnimum value should be today
+                @if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+                {
+                  <text>
+                   $('#dateinspected', $('#employee-modal')).val('');
+                   document.querySelector('#dateinspected').setAttribute("min", '@DateTime.Today.ToString("d", culture).Replace('/', '-')');
+
+                  </text>
+                }
+                 //Otherwise, minnimum value should be the last recorded date of inspection
+                 else
+                {
+                  <text>
+                   $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d", culture).Replace('/', '-')');
                    document.querySelector('#dateinspected').setAttribute("min", '@minRepairDate');
-               </text>
-             }
+                  </text>
+                }
 
 
-                             //If it hasn't been repaired, minnimum value should be the date of inspection
-              @if (report.DateRepaired == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
-              {
-               //If it hasn't been inspected yet, wait for the user to enter a date
-                 if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
-                {   
-                        //And set said date as the minnimum
-                     <text>
-                     document.querySelector('#daterepaired').readOnly = true;
-                     $('#dateinspected').change((event) => {
+                  //If it hasn't been repaired, minnimum value should be the date of inspection
+                @if (report.DateRepaired == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+                {
+                        //If it hasn't been inspected yet, wait for the user to enter a date
+                     if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+                    {
+                            //And set said date as the minnimum
+                         <text>
+                        document.querySelector('#daterepaired').readOnly = true;
+                        $('#dateinspected').change((event) => {
 
-                         let newMinVal = event.currentTarget.value;
+                            let newMinVal = event.currentTarget.value;
                             if (event.currentTarget.value !== '') {
-                            document.querySelector('#daterepaired').readOnly = false;
-                            document.querySelector('#daterepaired').setAttribute("min", newMinVal);
+                                document.querySelector('#daterepaired').readOnly = false;
+                                document.querySelector('#daterepaired').setAttribute("min", newMinVal);
 
                             } else {
                                 document.querySelector('#daterepaired').readOnly = true;
                             }
-                      });
-                     </text>
+                        });
+                         </text>
 
+                    }
+                       <text>
+                  $('#daterepaired', $('#employee-modal')).val('');
+                  document.querySelector('#daterepaired').setAttribute("min", '@minRepairDate');
+                       </text>
                 }
-                     <text>
-                     $('#daterepaired', $('#employee-modal')).val('');
-                     document.querySelector('#daterepaired').setAttribute("min", '@minRepairDate');
-                     </text>
-              }
-               //Otherwise, minnimum value should be last recorded date of repair
-               else
-              {
-                <text>
-                $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
-                document.querySelector('#daterepaired').setAttribute("min",'@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
-                </text>
-              }
+                 //Otherwise, minnimum value should be last recorded date of repair
+                 else
+                {
+                  <text>
+                  $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
+                  document.querySelector('#daterepaired').setAttribute("min", '@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
+                  </text>
+                }
 
-            $('#description', $('#employee-modal')).html('@report.Description');
-            $('#status', $('#employee-modal')).val(@report.Status);
-            $('#severity', $('#employee-modal')).val(@report.Severity);
+      }
+      //If a user clicks on a report that is not registered to them, make all fields read-only
+      else
+      {
+                @if (report.DateInspected == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+                 {
+                   <text>
+                    $('#dateinspected', $('#employee-modal')).val('');
+                    document.querySelector('#dateinspected').readOnly = true;
 
-            document.getElementById('assignedemployee(@report.Id)').addEventListener('click', function () {
+                   </text>
+                 }
+                  else
+                 {
+                   <text>
+                    $('#dateinspected', $('#employee-modal')).val('@report.DateInspected.ToString("d", culture).Replace('/', '-')');
+                    document.querySelector('#dateinspected').readOnly = true;
+                   </text>
+                 }
 
-              var button = document.getElementById('assignedemployee(@report.Id)');
-              button.style.background = '#65f442';
-              button.textContent = "Assigned to You!";
+                 @if (report.DateRepaired == System.Data.SqlTypes.SqlDateTime.MinValue.Value)
+                 {
+                   <text>
+
+                   $('#daterepaired', $('#employee-modal')).val('');
+                document.querySelector('#daterepaired').readOnly = true;
+                   </text>
+                 }
+                  else
+                 {
+                   <text>
+                   $('#daterepaired', $('#employee-modal')).val('@report.DateRepaired.ToString("d", culture).Replace('/', '-')');
+                   document.querySelector('#daterepaired').readOnly = true;
+                   </text>
+                 }
+      }
+
+                $('#description', $('#employee-modal')).html('@report.Description');
+                $('#status', $('#employee-modal')).val(@report.Status);
+                $('#severity', $('#employee-modal')).val(@report.Severity);
+
+                document.getElementById('assignedemployee(@report.Id)').addEventListener('click', function () {
+
+                  var button = document.getElementById('assignedemployee(@report.Id)');
+                  button.style.background = '#65f442';
+                  button.textContent = "Assigned to You!";
+                });
             });
 
-         });
+    </script>
 
-        </script>
-    }
 }
 
 
@@ -288,7 +332,7 @@
                         <p><span style="font-weight: bold">Date Inspected:  </span><input type="date" id="dateinspected" style="border: none; color: black;" /></p>
                         <p><span style="font-weight: bold">Date Repaired:  </span> <input type="date" id="daterepaired" style="border: none; color: black;" /></p>
                         <p><span style="font-weight: bold">Inspection/Repair Notes</span> <textarea id="description" style="border: none; color: black; margin: 0px; width: 515px; height: 157px;"></textarea></p>
-                        <button type="submit" class="btn btn-success btn-default" data-dismiss="modal" onClick="updateReport()" style="text-align: center;"><span class="glyphicon glyphicon-check"></span> Update Record</button>
+                        <button id="update-btn" type="submit" class="btn btn-success btn-default" data-dismiss="modal" onClick="updateReport(); window.location.reload();" style="text-align: center; display:none;"><span class="glyphicon glyphicon-check"></span> Update Record</button>
                     </form>
                 </div>
                 <div class="modal-footer">
