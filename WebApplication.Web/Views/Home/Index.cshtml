@@ -69,7 +69,7 @@
                 parseFloat(@report.Lattitude),
                 parseFloat(@report.Longitude));
 
-            if (@report.Status === 2) {
+            if (@report.Status === 2 || @report.Status === 3) {
 
                 let pothole@(report.Id) = new google.maps.Marker({
                     map: map,

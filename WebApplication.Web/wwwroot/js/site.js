@@ -128,7 +128,7 @@ function updateReport() {
     }
 
     //Today's date for handling when dates are set to today's date
-    let thisDay = defaultDate.getDate();
+    let thisDay = defaultDate.getDate() +1;
     let thisYr = defaultDate.getFullYear();
     let thisMonth = defaultDate.getMonth() + 1;
     if (thisDay < 10) {
