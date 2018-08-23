@@ -32,6 +32,10 @@ body {
     margin-right: 5%;
 }
 
+#map-break {
+    padding-top: 50px;
+}
+
 /** Map Section End **/
 
 /**  Register.cshtml  **/
