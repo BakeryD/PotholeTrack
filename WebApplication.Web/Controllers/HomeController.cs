@@ -5,7 +5,7 @@ using WebApplication.Web.Models;
 using WebApplication.Web.DAL;
 using WebApplication.Web.Models.Account;
 using WebApplication.Web.Providers.Auth;
-
+using System;
 
 namespace WebApplication.Web.Controllers
 {
@@ -40,7 +40,13 @@ namespace WebApplication.Web.Controllers
             IList<Report> reports = pDal.GetAllReports();
             User currentUser = authProvider.GetCurrentUser();
 	        ViewData["loggedIn"] = (currentUser != null);
-
+            var now = DateTime.Now;
+            var thisYr = now.Year;
+            bool test;
+            foreach (var report in reports)
+            {
+                test = thisYr == report.DateRepaired.Year;
+            }
             //If someone is currently logged in
             if (currentUser!=null)
             {

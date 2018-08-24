@@ -102,7 +102,7 @@ namespace WebApplication.Web.Controllers
             if (updatedReport.DateRepaired != existingReport.DateRepaired &&
                 updatedReport.DateRepaired > DateTime.Today &&
                 updatedReport.DateRepaired != existingReport.DateCreated &&
-                updatedReport.DateRepaired > updatedReport.DateInspected)
+                updatedReport.DateRepaired >= updatedReport.DateInspected)
             {
                 existingReport.DateRepaired = updatedReport.DateRepaired;
             }

@@ -56,12 +56,12 @@
             {
                 totalCount++;
 
-                if (report.DateRepaired.Year.Equals(DateTime.Now.Year))
+                if (report.DateRepaired.Year == (DateTime.Now.Year))
                 {
                     yearCount++;
                 }
 
-                if (report.DateRepaired.Year.Equals(DateTime.Now.Year) && report.DateRepaired.Month.Equals(DateTime.Now.Month))
+                if (report.DateRepaired.Year == (DateTime.Now.Year) && report.DateRepaired.Month == (DateTime.Now.Month))
                 {
                     monthCount++;
                 }
