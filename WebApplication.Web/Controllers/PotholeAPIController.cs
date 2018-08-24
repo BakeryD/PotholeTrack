@@ -11,9 +11,9 @@ namespace WebApplication.Web.Controllers
     [ApiController]
     public class PotholeAPIController : ControllerBase
     {
-	    // Create our dependency variables
-	    private readonly IPotholeDAL dal;
-	    private readonly IAuthProvider auth;
+        // Create our dependency variables
+        private readonly IPotholeDAL dal;
+        private readonly IAuthProvider auth;
 
         /// <summary>
         /// When this api is instantiated, give it access to the reportDAL and our authorization provider via dependency injection
@@ -21,29 +21,29 @@ namespace WebApplication.Web.Controllers
         /// <param name="dal"></param>
         /// <param name="auth"></param>
 	    public PotholeAPIController(IPotholeDAL dal, IAuthProvider auth)
-	    {
-			this.dal = dal;
-		    this.auth = auth;
-	    }
+        {
+            this.dal = dal;
+            this.auth = auth;
+        }
 
-	    /// <summary>
-	    /// Creates a new report in the system.
-	    /// </summary>
-	    /// <param name="report"></param>
-	    /// <returns></returns>
-	    [HttpPost]
+        /// <summary>
+        /// Creates a new report in the system.
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
+        [HttpPost]
         [Route("create")]
-	    public ActionResult Create(Report report)
-	    {
-		    report.Submitter = auth.GetCurrentUser().Id;
-            report.DateCreated = DateTime.Now;
-		   int id= dal.CreateReport(report);
+        public ActionResult Create(Report report)
+        {
+            report.Submitter = auth.GetCurrentUser().Id;
+            report.DateCreated = DateTimeWithZone.LocalTime(DateTime.Now);
+            int id = dal.CreateReport(report);
             report = dal.GetReport(id);
             dal.AddReport(report);
 
 
             return Ok();
-	    }
+        }
 
         /// <summary>
         /// Increments the report count of a report in the system.
@@ -68,15 +68,15 @@ namespace WebApplication.Web.Controllers
 
         }
 
-	    [HttpPost]
-	    [Route("assign/{id}")]
-	    public ActionResult AssignEmployee(int id)
-	    {
-		    var currentUser = auth.GetCurrentUser().Id;
-			dal.AssignEmployee(id, currentUser);
+        [HttpPost]
+        [Route("assign/{id}")]
+        public ActionResult AssignEmployee(int id)
+        {
+            var currentUser = auth.GetCurrentUser().Id;
+            dal.AssignEmployee(id, currentUser);
 
-		    return Ok();
-	    }
+            return Ok();
+        }
 
         /// <summary>
         /// Updates the status, dates of inspection/repair for an existing pothole report
@@ -96,6 +96,7 @@ namespace WebApplication.Web.Controllers
             if (updatedReport.DateInspected != existingReport.DateInspected &&
                 updatedReport.DateInspected > DateTime.Today)
             {
+
                 existingReport.DateInspected = updatedReport.DateInspected;
             }
             if (updatedReport.DateRepaired != existingReport.DateRepaired &&
@@ -114,11 +115,27 @@ namespace WebApplication.Web.Controllers
             {
                 existingReport.Status = updatedReport.Status;
             }
-			
+
             existingReport.Severity = updatedReport.Severity;
             //Save changes
             dal.UpdateReport(existingReport);
             return Ok();
+        }
+    }
+
+    public static class DateTimeWithZone
+    {
+
+        private static readonly TimeZoneInfo timeZone;
+
+        static DateTimeWithZone()
+        {
+            timeZone = TimeZoneInfo.FindSystemTimeZoneById("US Eastern Standard Time");
+        }
+
+        public static DateTime LocalTime(this DateTime t)
+        {
+            return TimeZoneInfo.ConvertTime(t, timeZone);
         }
     }
 }
